@@ -7,6 +7,7 @@ public class HelloWorld
 		System.out.println("Please enter your name: ");
 		String name = scan.nextLine();
 		System.out.println("Hello " + name);
+		System.out.println("Hello github");
 		
 		
 	}
