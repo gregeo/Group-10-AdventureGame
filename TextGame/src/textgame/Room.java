@@ -38,7 +38,7 @@ public class Room {
     public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player) {
         this(isDoor, enemyRef, player);
         this.item = item;
-        
+
     }
 
     /**
@@ -94,6 +94,22 @@ public class Room {
         this.player = player;
         doableActions.add("search room");
 
+    }
+
+    public void doAction(String input) {
+        boolean isInDoableActions = false;
+        for (String s : doableActions) {
+            if (s.contains(input.toLowerCase())) {
+                isInDoableActions = true;
+            }
+
+        }
+
+        if (isInDoableActions) {
+            
+        } else {
+            System.out.println("oops. invalide input");
+        }
     }
 
     public void attackEnemy(Player p) {
