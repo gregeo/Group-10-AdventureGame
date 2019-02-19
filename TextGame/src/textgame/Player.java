@@ -13,7 +13,7 @@ public class Player {
     private int health;
     private int posX;
     private int posY;
-    private ArrayList<Item> pouch;
+    private ArrayList<String> pouch;
 
     public void setInitPos(int x, int y) {
         this.posX = x;
@@ -72,11 +72,15 @@ public class Player {
         this.health -= dmgTaken;
     }
 
-    public void pickUpItem(Item toTake) {
+    public void pickUpItem(String toTake) {
         this.pouch.add(toTake);
     }
 
     public void useItem(String itemToUse) {
+        
+        // to be redone with String items...
+        
+        /*
         Item item = new Item();
         for (int i = 0; i <= pouch.size(); i++) {
             Item tempItem = this.pouch.get(i);
@@ -86,6 +90,7 @@ public class Player {
             }
         }
         item.use();
+     */
     }
 
     public String toString() {
@@ -100,14 +105,14 @@ public class Player {
     }
 
     public Player() {
-        this.pouch = new ArrayList<Item>();
+        this.pouch = new ArrayList<String>();
     }
 
     public Player(int health, int x, int y) {
         this.health = health;
         this.posX = x;
         this.posY = y;
-        this.pouch = new ArrayList<Item>();
+        this.pouch = new ArrayList<String>();
     }
 
 }
