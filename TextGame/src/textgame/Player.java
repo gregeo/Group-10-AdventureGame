@@ -109,4 +109,5 @@ public class Player {
         this.posY = y;
         this.pouch = new ArrayList<Item>();
     }
+
 }
