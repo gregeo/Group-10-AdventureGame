@@ -7,6 +7,8 @@ package textgame;
 
 /**
  *
+ * a class to contain a room[][] array and methods to work a game map
+ * 
  * @author George Smith
  */
 public class Map {

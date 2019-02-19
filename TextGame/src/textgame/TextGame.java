@@ -7,6 +7,9 @@ package textgame;
 
 /**
  *
+ * a cmain method to run the game 
+ * there will likly be a private print out method for ese of reading
+ * 
  * @author George Smith
  */
 public class TextGame {

@@ -7,7 +7,7 @@ package textgame;
 
 /**
  *
- * a class to handle a ArrayList<En>
+ * a class to handle a ArrayList<Enemy>
  * 
  * @author George Smith
  */
