@@ -7,7 +7,7 @@ package textgame;
 
 import java.util.ArrayList;
 
-/** 
+/**
  * a class that will run a room and its dissision making
  *
  * @author George Smith
@@ -23,39 +23,22 @@ public class Room {
     0 = north
     1 = east
     
-    */
+     */
     private Player player;
-    
 
     /**
      * for a room with all fetures
      *
-     * 
+     *
      * @param isDoor
      * @param enemyRef
      * @param item
      * @param player
      */
     public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player) {
-        
-        if (isDoor.length == 4) {
-            this.isDoor = isDoor;
-        } else {
-            System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
-        }
-        
-        this.enemyRef = enemyRef;
+        this(isDoor, enemyRef, player);
         this.item = item;
-        this.player = player;
-        for(int i = 0;i < isDoor.length; i++){
-            if(isDoor[i]){
-                String s = "m" + i;
-                doableActions.add(s);
-            }
-        }
-     {
-            
-        }
+        
     }
 
     /**
@@ -66,14 +49,8 @@ public class Room {
      * @param player
      */
     public Room(boolean[] isDoor, String item, Player player) {
-        if (isDoor.length == 4) {
-            this.isDoor = isDoor;
-        } else {
-            System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
-        }
+        this(isDoor, player);
         this.item = item;
-        this.player = player;
-
     }
 
     /**
@@ -84,13 +61,9 @@ public class Room {
      * @param player
      */
     public Room(boolean[] isDoor, Enemy enemyRef, Player player) {
-        if (isDoor.length == 4) {
-            this.isDoor = isDoor;
-        } else {
-            System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
-        }
-        this.item = item;
-        this.player = player;
+        this(isDoor, player);
+        this.enemyRef = enemyRef;
+        doableActions.add("attack enemy");
 
     }
 
@@ -106,7 +79,20 @@ public class Room {
         } else {
             System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
         }
+        if (isDoor[0]) {
+            doableActions.add("move north");
+        }
+        if (isDoor[1]) {
+            doableActions.add("move east");
+        }
+        if (isDoor[2]) {
+            doableActions.add("move south");
+        }
+        if (isDoor[3]) {
+            doableActions.add("move west");
+        }
         this.player = player;
+        doableActions.add("search room");
 
     }
 
