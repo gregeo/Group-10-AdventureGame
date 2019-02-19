@@ -97,27 +97,60 @@ public class Room {
     }
 
     public void doAction(String input) {
-        boolean isInDoableActions = false;
-        for (String s : doableActions) {
-            if (s.contains(input.toLowerCase())) {
-                isInDoableActions = true;
-            }
+        input = input.toLowerCase();
 
-        }
-
-        if (isInDoableActions) {
-            
-        } else {
-            System.out.println("oops. invalide input");
+        if (input.contains("move")) {
+            this.move(input);
+        } else if (input.contains("attack")) {
+            this.attackEnemy();
+        } else if (input.contains("search")) {
+            this.search();
+        } else if (input.contains("use")) {
+            this.useItem();
         }
     }
 
-    public void attackEnemy(Player p) {
+    private void attackEnemy() {
 
+    }
+
+    private void move(String actionToDo) {
+        if (actionToDo.contains("north")) {
+            
+        } else if (actionToDo.contains("east")) {
+            
+        } else if (actionToDo.contains("south")) {
+            
+        } else if (actionToDo.contains("west")) {
+            
+        }
+    }
+
+    private void useItem() {
+        player.useItem(item);
+    }
+
+    private void search() {
+        if (item != null){
+            player.pickUpItem(item);
+            item = null;
+        }
     }
 
     public Enemy getEnemy() {
         return this.enemyRef;
+    }
+
+    public boolean[] getIsDoor() {
+        return this.isDoor;
+    }
+
+    public String getItem() {
+        return this.item;
+    }
+
+    public ArrayList<String> getDoableActions() {
+        return this.doableActions;
     }
 
 }
