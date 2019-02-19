@@ -76,8 +76,15 @@ public class Player {
         this.pouch.add(toTake);
     }
 
-    public void useItem(String itemToUse) {
-        
+    public int useItem(String itemToUse) {
+        for (int i = 0; i <= this.pouch.size(); i++) {
+            String itemReference = this.pouch.get(i);
+            if (itemReference.isEqauals(itemToUse)){
+                this.pouch.remove(i);
+                return 1;
+            }
+        }
+        return -1;
         // to be redone with String items...
         
         /*
