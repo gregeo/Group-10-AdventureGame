@@ -77,6 +77,7 @@ public class Player {
     }
 
     public int useItem(String itemToUse) {
+        /*
         for (int i = 0; i <= this.pouch.size(); i++) {
             String itemReference = this.pouch.get(i);
             if (itemReference.isEqauals(itemToUse)){
@@ -86,7 +87,7 @@ public class Player {
         }
         return -1;
         // to be redone with String items...
-        
+        */
         /*
         Item item = new Item();
         for (int i = 0; i <= pouch.size(); i++) {
@@ -98,6 +99,7 @@ public class Player {
         }
         item.use();
      */
+        return -1;
     }
 
     public String toString() {

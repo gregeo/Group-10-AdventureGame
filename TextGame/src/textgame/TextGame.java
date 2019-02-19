@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.Scanner;
+
 
 package textgame;
+
+import java.util.Scanner;
+import textgame.Map;
 
 /**
  *
@@ -20,6 +23,14 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Map m = new Map(4,4);
+        
+        System.out.print(m.printMap());
+        
+        
+        
+        /*
+    }
         boolean gameRunning = true;
 		Scanner prompt = new Scanner(System.in);
 		Scanner choiceScan = new Scanner();
@@ -52,7 +63,7 @@ public class TextGame {
 				3. attack enemy
 				4. use item
 			*/
-			
+			/*
 			player.displayChoice();
 			
 			System.out.println("Select a choice");
@@ -94,6 +105,7 @@ public class TextGame {
 					player.useItem()
 					break;
 			}
+                        */
     }
     
 }

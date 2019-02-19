@@ -96,7 +96,7 @@ public class Room {
 
     }
 
-    public void doAction(String input) {
+    public int doAction(String input) {
         input = input.toLowerCase();
 
         if (input.contains("move")) {
@@ -107,33 +107,46 @@ public class Room {
             this.search();
         } else if (input.contains("use")) {
             this.useItem();
+        } else {
+            System.out.println("oopy not a valid command");
+            return -1;
         }
+        return 1;
     }
 
     private void attackEnemy() {
 
     }
 
-    private void move(String actionToDo) {
+    private int move(String actionToDo) {
+        int dir = -1;
         if (actionToDo.contains("north")) {
-            
+            dir = 10;
         } else if (actionToDo.contains("east")) {
-            
+            dir = 11;
         } else if (actionToDo.contains("south")) {
-            
+            dir = 12;
         } else if (actionToDo.contains("west")) {
-            
+            dir = 13;
+        } else {
+            System.out.println("oopy not a valid direction");
         }
+        
+        return dir;
     }
 
-    private void useItem() {
-        player.useItem(item);
+    private int useItem() {
+        return player.useItem(item);
     }
 
-    private void search() {
-        if (item != null){
+    private int search() {
+        if (item != null) {
             player.pickUpItem(item);
             item = null;
+            return 1;
+        } else {
+            System.out.println("no item found");
+            return -1;
         }
     }
 
