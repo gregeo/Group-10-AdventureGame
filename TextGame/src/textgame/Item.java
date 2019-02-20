@@ -23,6 +23,9 @@ public class Item {
 
     public void use(Player player)
     {
+        
+        /*
+        Not sure if this is what we are thining but I thought I would do it and just leave it as a comment
         if(showName == "Health Potion")
         {
             player.heal(2);
@@ -31,7 +34,7 @@ public class Item {
         {
             player.attackEnemy(2);
         }
-
+        */
     }
 
     public String getName() {
