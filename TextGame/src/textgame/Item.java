@@ -21,8 +21,17 @@ public class Item {
         type 2: seeing orb
     */
 
-    public void use() {
-        
+    public void use(Player player)
+    {
+        if(showName == "Health Potion")
+        {
+            player.heal(2);
+        }
+        if(showName == "Weapon")
+        {
+            player.attackEnemy(2);
+        }
+
     }
 
     public String getName() {
