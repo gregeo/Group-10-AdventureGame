@@ -108,7 +108,7 @@ public class Room {
         } else if (input.contains("use")) {
             this.useItem();
         } else {
-            System.out.println("oopy not a valid command");
+            System.out.println("oops not a valid command");
             return -1;
         }
         return 1;
