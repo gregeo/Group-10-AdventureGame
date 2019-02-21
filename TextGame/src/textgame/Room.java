@@ -176,5 +176,31 @@ public class Room {
     public ArrayList<String> getDoableActions() {
         return this.doableActions;
     }
+    public String toString(){
+        String s = "";
+        
+        if (this.enemyRef != null){
+            s =s + "enemy in room: \n \t";
+            s = s + this.enemyRef.toString() + "\n";
+        }else{
+            s = s + "no enemy in room \n"; 
+        }
+        
+        
+        if (this.item != null){
+            s =s + "enemy in room: \n \t" + this.item + "\n";
+            
+        }else{
+            s = s + "no item in room \n"; 
+        }
+        s = s + "doable actions in room \n \t " ;
+        //for(){
+            
+        //}
+        
+        
+        
+        return s;
+    }
 
 }
