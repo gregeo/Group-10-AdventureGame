@@ -18,12 +18,6 @@ public class Room {
     private Enemy enemyRef;
     private String item;
     private ArrayList<String> doableActions;
-    /*
-    table for doableActions:
-    0 = north
-    1 = east
-    
-     */
     private Player player;
 
     /**
@@ -96,6 +90,11 @@ public class Room {
 
     }
 
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     public int doAction(String input) {
         input = input.toLowerCase();
 
@@ -117,7 +116,11 @@ public class Room {
     private void attackEnemy() {
 
     }
-
+/**
+ * 
+ * @param actionToDo
+ * @return 
+ */
     private int move(String actionToDo) {
         int dir = -1;
         if (actionToDo.contains("north")) {
@@ -134,10 +137,18 @@ public class Room {
         
         return dir;
     }
+    /**
+     * 
+     * @return 
+     */
 
     private int useItem() {
         return player.useItem(item);
     }
+    /**
+     * 
+     * @return 
+     */
 
     private int search() {
         if (item != null) {

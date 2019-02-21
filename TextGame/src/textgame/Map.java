@@ -57,38 +57,49 @@ public class Map {
     }
 
     public String printMap() {
-        String map = "";
-        for (int j = 0; j < rooms.length; j++) {
-            for (int r = 0; r < 2; r++) {
-                if (r == 1) {
+        String s = "";
+        for (int row = 0; row < (rooms.length * 2 )+ 1; row++) {
+            s = s + this.printRow(row) + "\n";
+        }
+        return s;
+    }
 
-                    for (int i = 0; i < rooms[0].length + 1; i++) {
-                        for (int t = 0; t < 2; t++) {
-                            if (t == 1) {
-                                map = map + " ";
-                            } else {
-                                map = map + "|";
-                            }
-
-                        }
-                        //map = map + "\n";
-
-                    }
-                } else {
-                    for (int i = 0; i < 2*(rooms[0].length + 1); i++) {
-                        map = map + "-";
-
-                    }
-                                            map = map + "\n";
-
-                }
-
-            }
-            map = map + "\n";
-
+    private String printRow(int rowNumber) {
+        String s = "";
+        if (rowNumber % 2 == 1) {
+            s = s + this.printCellInter(rooms[0].length, rowNumber );
+        } else {
+            s = s + this.printLine(rooms[0].length);
         }
 
-        return map;
+        return s;
+    }
+
+    private String printLine(int numberOfNodes) {
+        String s = "";
+        for (int i = 0; i < (numberOfNodes * 2) + 1; i++) {
+            s = s + "-";
+        }
+
+        return s;
+    }
+
+    private String printCellInter(int numberOfNodes, int row) {
+        String s = "";
+        for (int i = 0; i < numberOfNodes; i++) {
+            s = s + "|";
+            s = s + " ";//more logic is still requierd here
+        }
+        s = s + "|";
+        return s;
+
+    }
+
+    public static void main(String[] args) {
+        Map m = new Map(4, 3);
+
+        System.out.print(m.printMap());
+
     }
 
 }
