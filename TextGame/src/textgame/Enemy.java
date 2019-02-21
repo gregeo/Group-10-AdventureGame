@@ -52,4 +52,10 @@ public class Enemy {
         int dmg = 10;
         target.takeDamage(dmg);
     }
+    public String toString(){
+        String s = "";
+        
+        
+        return s;
+    }
 }
