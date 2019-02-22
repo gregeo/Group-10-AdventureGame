@@ -99,7 +99,7 @@ public class Map {
         if (rooms.length - 1 > row && rooms[0].length - 1 > columb && columb >= 0 && row >= 0 && rooms[row][columb]!= null) {
             return rooms[row][columb].toString();
         } else {
-            return "no room ecists there";
+            return "no room exists there";
         }
     }
 
