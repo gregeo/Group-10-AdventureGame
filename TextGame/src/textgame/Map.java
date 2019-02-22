@@ -26,7 +26,7 @@ public class Map {
     }
 
     public int addRoom(Room room, int x, int y) {
-        if (rooms.length - 1 < y && rooms[0].length - 1 < x && x >= 0 && y >= 0) {
+        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
             rooms[y][x] = room;
             return 1;
         }
@@ -34,7 +34,7 @@ public class Map {
     }
 
     public Room getRoom(int x, int y) {
-        if (rooms.length - 1 < y && rooms[0].length - 1 < x && x >= 0 && y >= 0) {
+        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
             return rooms[y][x];
         }
         return null;
@@ -58,7 +58,7 @@ public class Map {
 
     public String printMap() {
         String s = "";
-        for (int row = 0; row < (rooms.length * 2 )+ 1; row++) {
+        for (int row = 0; row < (rooms.length * 2) + 1; row++) {
             s = s + this.printRow(row) + "\n";
         }
         return s;
@@ -67,7 +67,7 @@ public class Map {
     private String printRow(int rowNumber) {
         String s = "";
         if (rowNumber % 2 == 1) {
-            s = s + this.printCellInter(rooms[0].length, rowNumber );
+            s = s + this.printCellInter(rooms[0].length, rowNumber);
         } else {
             s = s + this.printLine(rooms[0].length);
         }
@@ -95,10 +95,22 @@ public class Map {
 
     }
 
+    public String toRoomString(int row, int columb) {
+        if (rooms.length - 1 > row && rooms[0].length - 1 > columb && columb >= 0 && row >= 0 && rooms[row][columb]!= null) {
+            return rooms[row][columb].toString();
+        } else {
+            return "no room ecists there";
+        }
+    }
+
     public static void main(String[] args) {
         Map m = new Map(4, 3);
-
         System.out.print(m.printMap());
+        Player p = new Player(6,0,0);
+        boolean b[] = {true,false,true,false};
+        Room r = new Room(b /*, Enemy enemyRef*/, "ping pong ball", p);
+        System.out.println(m.addRoom(r, 0, 0));
+        System.out.println(m.toRoomString(0, 0));
 
     }
 

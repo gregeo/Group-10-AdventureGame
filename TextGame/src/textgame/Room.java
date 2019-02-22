@@ -68,6 +68,7 @@ public class Room {
      * @param player
      */
     public Room(boolean[] isDoor, Player player) {
+        doableActions = new ArrayList<>();
         if (isDoor.length == 4) {
             this.isDoor = isDoor;
         } else {
@@ -91,9 +92,9 @@ public class Room {
     }
 
     /**
-     * 
+     *
      * @param input
-     * @return 
+     * @return
      */
     public int doAction(String input) {
         input = input.toLowerCase();
@@ -116,11 +117,12 @@ public class Room {
     private void attackEnemy() {
 
     }
-/**
- * 
- * @param actionToDo
- * @return 
- */
+
+    /**
+     *
+     * @param actionToDo
+     * @return
+     */
     private int move(String actionToDo) {
         int dir = -1;
         if (actionToDo.contains("north")) {
@@ -134,20 +136,22 @@ public class Room {
         } else {
             System.out.println("oopy not a valid direction");
         }
-        
+
         return dir;
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
 
     private int useItem() {
         return player.useItem(item);
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
 
     private int search() {
@@ -176,30 +180,49 @@ public class Room {
     public ArrayList<String> getDoableActions() {
         return this.doableActions;
     }
-    public String toString(){
+
+    public String toString() {
         String s = "";
-        
-        if (this.enemyRef != null){
-            s =s + "enemy in room: \n \t";
+
+        if (this.enemyRef != null) {
+            s = s + "enemy in room: \n \t";
             s = s + this.enemyRef.toString() + "\n";
-        }else{
-            s = s + "no enemy in room \n"; 
+        } else {
+            s = s + "no enemy in room \n";
         }
-        
-        
-        if (this.item != null){
-            s =s + "enemy in room: \n \t" + this.item + "\n";
-            
-        }else{
-            s = s + "no item in room \n"; 
+
+        if (this.item != null) {
+            s = s + "item in room: \n \t" + this.item + "\n";
+
+        } else {
+            s = s + "no item in room \n";
         }
-        s = s + "doable actions in room \n \t " ;
-        //for(){
-            
-        //}
-        
-        
-        
+        s = s + "doable actions in room \n \t ";
+        for (String a : doableActions) {
+            s = s + a + "\n";
+        }
+        if (this.player != null) {
+            s = s + "contains player : \n\t" + this.player.toString();
+        }
+        s = s + " door arr: ";
+        for (boolean b : this.isDoor) {
+            s = s + b + " ";
+        }
+        s = s + "\n";
+        s = s + "meaning there is a door on the: ";
+        if (this.isDoor[0]) {
+            s = s + "north ";
+        }
+        if (this.isDoor[1]) {
+            s = s + "east ";
+        }
+        if (this.isDoor[2]) {
+            s = s + "south ";
+        }
+        if (this.isDoor[3]) {
+            s = s + "west ";
+        }
+
         return s;
     }
 
