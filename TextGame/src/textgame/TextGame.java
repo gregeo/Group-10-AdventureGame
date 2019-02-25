@@ -38,11 +38,14 @@ public class TextGame {
         
         System.out.print(m.printMap());
         
-		boolean gameRunning = true;
-		
-		while(gameRunning)
+		while(true)
 		{
-			System.out.println(m.printMap());
+			Room current = map.getRoom(0 , 0);
+			ArrayList<String> doableActions = current.getDoableActions();
+			for (int i = 0; i < doableActions.size(); i++) {
+				String tempLine = doableActions.get(i);
+				System.out.println(tempLine);
+			}
 			
 			
 			
