@@ -99,6 +99,13 @@ public class Player {
         }
         item.use();
      */
+        for (int i = 0; i < this.pouch.size(); i++) {
+            String tempItem = this.pouch.get(i);
+            if (itemToUse.equals(tempItem)) {
+                this.pouch.remove(i);
+                break;
+            }
+        }
     for (int i = 0; i <= this.pouch.size(); i++) {
         String tempItem = this.pouch.get(i);
         if (tempItem.equals(itemToUse)) {
