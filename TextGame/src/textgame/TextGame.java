@@ -38,6 +38,15 @@ public class TextGame {
         
         System.out.print(m.printMap());
         
+		boolean gameRunning = true;
+		
+		while(gameRunning)
+		{
+			System.out.println(m.printMap());
+			
+			
+			
+		}
         
         
         /*
