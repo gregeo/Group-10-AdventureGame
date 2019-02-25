@@ -26,9 +26,9 @@ public class TextGame {
 		
 		System.out.println("Dungeon Hero!");
 		
-		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King. The hero, ‘The chosen one’ has answered the call to save the princess and to receive large sum of wealth. Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers…");
+		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King. The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth. Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
 		System.out.println("");
-		System.out.println("Upon leaving the town, he is assailed by goblins! And he must fight to find his way to the dungeon that the Shadow King inhabits. There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the “Evil Shadow King” is waiting, and the princess needs to be saved! Save the princess and the kingdom!");
+		System.out.println("Upon leaving the town, he is assailed by goblins! And he must fight to find his way to the dungeon that the Shadow King inhabits. There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved! Save the princess and the kingdom!");
         Map m = new Map(4,4);
         
         System.out.print(m.printMap());
