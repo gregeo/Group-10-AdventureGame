@@ -8,12 +8,13 @@ package textgame;
 import java.util.ArrayList;
 
 /**
- * a class that will run a room and its dissision making
+ * a class that will run a room and its decision making
  *
  * @author George Smith
  */
 public class Room {
-
+	
+	//declare and intialize class members 
     private boolean[] isDoor;//denoted nesw
     private Enemy enemyRef;
     private String item;
@@ -21,59 +22,80 @@ public class Room {
     private Player player;
 
     /**
-     * for a room with all fetures
+     * Constructor with all parameters specified
      *
      *
-     * @param isDoor
-     * @param enemyRef
-     * @param item
-     * @param player
+     * @param isDoor boolean array to show which dirrections have doors
+     * @param enemyRef enemy object represetning the enemy in the room 
+     * @param item item represeted as a just a string
+     * @param player The player object in that room 
+	 *
+	 * @return new Room object with specified class members
      */
     public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player) {
-        this(isDoor, enemyRef, player);
+        //call three parameter constructor
+		this(isDoor, enemyRef, player);
+		//intialize item
         this.item = item;
 
     }
 
     /**
-     * for a room with only an item and doors
+     * constructor for a room with only an item and doors
      *
-     * @param isDoor
-     * @param item
-     * @param player
+     * @param isDoor boolean array to show which dirrections have doors
+     * @param item item represeted as a just a string
+     * @param player The player object in that room 
+	 *
+	 * @return new Room object with specified class members
      */
     public Room(boolean[] isDoor, String item, Player player) {
-        this(isDoor, player);
+        //call two parameter constructor to set doable actions
+		this(isDoor, player);
+		//intialize item 
         this.item = item;
     }
 
     /**
-     * for a room with only an enemy and doors
+     * constructor for a room with only enemies and doors
      *
-     * @param isDoor
-     * @param enemyRef
-     * @param player
+     * @param isDoor boolean array to show which dirrections have doors
+     * @param enemyRef enemy object represetning the enemy in the room 
+     * @param player The player object in that room 
+	 *
+	 * @return a new Room object with specified class members
      */
     public Room(boolean[] isDoor, Enemy enemyRef, Player player) {
+		//call two parameter constructor to set doable actions 
         this(isDoor, player);
+		//intialize enemy in room 
         this.enemyRef = enemyRef;
+		//add attacking enemy as an action
         doableActions.add("attack enemy");
 
     }
 
     /**
-     * for a room with only doors
+     * constructor for a room with only doors
      *
-     * @param isDoor
-     * @param player
+	 * @param isDoor boolean array to show which dirrections have doors
+     * @param player The player object in that room 
+	 *
+	 * @return a new Room object with specified class members
      */
     public Room(boolean[] isDoor, Player player) {
+		
+		//create a new arrayList for doable actions
         doableActions = new ArrayList<>();
+		
+		//check if the number of doors is correct intialize the doors array 
         if (isDoor.length == 4) {
             this.isDoor = isDoor;
         } else {
             System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
         }
+		
+		//add actions to doableActions based on if there is a door in that direction 
         if (isDoor[0]) {
             doableActions.add("move north");
         }
@@ -86,19 +108,23 @@ public class Room {
         if (isDoor[3]) {
             doableActions.add("move west");
         }
+		//intialize player and add "search room" to doable actions because that is always an option
         this.player = player;
         doableActions.add("search room");
 
     }
 
     /**
-     *
-     * @param input
-     * @return
+     * Method to carry out the players chosen action in the room 
+	 *
+     * @param input users action choice
+	 *
+     * @return a number used for testing if the method has completed the intented task 
      */
     public int doAction(String input) {
         input = input.toLowerCase();
 
+		//call coresponding method for the user's action choice 
         if (input.contains("move")) {
             this.move(input);
         } else if (input.contains("attack")) {
@@ -114,17 +140,26 @@ public class Room {
         return 1;
     }
 
+	/**
+	*	Method to carry out combat 
+	*
+	*
+	*/
     private void attackEnemy() {
 
     }
 
     /**
-     *
-     * @param actionToDo
-     * @return
+     * Method to carr out the movement action 
+	 *
+     * @param actionToDo User's movement dirrection
+	 *
+     * @return dir the direction the user want's the player to go
      */
     private int move(String actionToDo) {
         int dir = -1;
+		
+		//check which direction the user wants the player to go and set dir value to coresponding integer value
         if (actionToDo.contains("north")) {
             dir = 10;
         } else if (actionToDo.contains("east")) {
@@ -141,19 +176,21 @@ public class Room {
     }
 
     /**
-     *
+     * Method for player to use item from their inventory 
+	 *
+	 *
      * @return
      */
-
     private int useItem() {
         return player.useItem(item);
     }
 
     /**
-     *
-     * @return
+     * Method to search the room for any items 
+	 *
+	 *
+     * @return an int value used for testing to check if intented result was done
      */
-
     private int search() {
         if (item != null) {
             player.pickUpItem(item);
@@ -165,25 +202,52 @@ public class Room {
         }
     }
 
+	
+	/**
+	* Method to return the enemy  in the room
+	*
+	* @return the enemy in the room
+	*/
     public Enemy getEnemy() {
         return this.enemyRef;
     }
 
+	/**
+	* Method to return the doors in the room
+	*
+	* @return all of the doors in the room
+	*/
     public boolean[] getIsDoor() {
         return this.isDoor;
     }
 
+	/**
+	* Method to get the item in the room if there is one
+	*
+	* @return the item in the room or null if there is no item
+	*/
     public String getItem() {
         return this.item;
     }
-
+	
+	/**
+	* Method to get all of the doable actions in the room
+	*
+	* @return the arrayList coresponding to all of the actions possible in the room
+	*/
     public ArrayList<String> getDoableActions() {
         return this.doableActions;
     }
 
+	/**
+	* toString method to print all of the information about the room
+	*
+	* @return a printout of all of the information about the room 
+	*/
     public String toString() {
         String s = "";
 
+		//check for enemy in room 
         if (this.enemyRef != null) {
             s = s + "enemy in room: \n \t";
             s = s + this.enemyRef.toString() + "\n";
@@ -191,19 +255,26 @@ public class Room {
             s = s + "no enemy in room \n";
         }
 
+		//check if item in room
         if (this.item != null) {
             s = s + "item in room: \n \t" + this.item + "\n";
 
         } else {
             s = s + "no item in room \n";
         }
+		
+		//return all actions possible in the room
         s = s + "doable actions in room \n \t ";
         for (String a : doableActions) {
             s = s + a + "\n";
         }
+		
+		//check for player in room
         if (this.player != null) {
             s = s + "contains player : \n\t" + this.player.toString();
         }
+		
+		//check for all of the doors in the room and which direction they are in
         s = s + " door arr: ";
         for (boolean b : this.isDoor) {
             s = s + b + " ";
