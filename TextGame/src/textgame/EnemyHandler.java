@@ -6,7 +6,7 @@
 package textgame;
 import java.util.ArrayList;
 
-import demo1.Enemy;
+//import demo1.Enemy;
 /**
  *
  * a class to handle a ArrayList<Enemy>
@@ -41,7 +41,7 @@ public class EnemyHandler {
         enemyList.remove(enemy);
     }
 
-    public addEnemy(Enemy enemy)
+    public void addEnemy(Enemy enemy)
     {
         enemyList.add(enemy);
     }

@@ -12,6 +12,25 @@ package textgame;
  * @author George Smith
  */
 public class Map {
+    
+        public static void main(String[] args) {
+
+        //testing commands for this class
+        Map m = new Map(3, 3);
+        System.out.print(m.printMap());
+        Player p = new Player(6, 0, 0);
+        boolean b[] = {true, false, true, false};
+        Room r1 = new Room(b /*, Enemy enemyRef*/, "ping pong ball", p);
+        Room r2 = new Room(b /*, Enemy enemyRef*/, p);
+        Room r3 = new Room(b /*, Enemy enemyRef*/, p);
+
+        System.out.println(m.addRoom(r1, 0, 0));
+        System.out.println(m.addRoom(r2, 1, 0));
+        System.out.println(m.addRoom(r2, 1, 1));
+        System.out.println(m.toString(0, 0));
+        System.out.print(m.printMap());
+
+    }
 
     //declare and intialize class members
     Room rooms[][];
@@ -226,23 +245,6 @@ public class Map {
         }
     }
 
-    public static void main(String[] args) {
 
-        //testing commands for this class
-        Map m = new Map(3, 3);
-        System.out.print(m.printMap());
-        Player p = new Player(6, 0, 0);
-        boolean b[] = {true, false, true, false};
-        Room r1 = new Room(b /*, Enemy enemyRef*/, "ping pong ball", p);
-        Room r2 = new Room(b /*, Enemy enemyRef*/, p);
-        Room r3 = new Room(b /*, Enemy enemyRef*/, p);
-
-        System.out.println(m.addRoom(r1, 0, 0));
-        System.out.println(m.addRoom(r2, 1, 0));
-        System.out.println(m.addRoom(r2, 1, 1));
-        System.out.println(m.toString(0, 0));
-        System.out.print(m.printMap());
-
-    }
 
 }
