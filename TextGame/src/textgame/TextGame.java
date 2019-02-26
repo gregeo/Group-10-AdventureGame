@@ -23,6 +23,8 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+		Scanner keyboard = new Scanner(System.in);
 		
 		System.out.println("Dungeon Hero!");
 		
@@ -46,7 +48,17 @@ public class TextGame {
 				String tempLine = doableActions.get(i);
 				System.out.println(tempLine);
 			}
-			
+			String response = keyboard.nextLine();
+
+			if (response = 1) {
+
+			} else if (response = 2) {
+
+			} else if (response = 3) {
+
+			} else if (response = 4) {
+
+			}
 			
 			
 		}
