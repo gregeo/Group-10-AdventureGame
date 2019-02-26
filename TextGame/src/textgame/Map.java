@@ -26,7 +26,7 @@ public class Map {
 
         System.out.println(m.addRoom(r1, 0, 0));
         System.out.println(m.addRoom(r2, 1, 0));
-        System.out.println(m.addRoom(r2, 1, 1));
+        System.out.println(m.addRoom(r3, 1, 1));
         System.out.println(m.toString(0, 0));
         System.out.print(m.printMap());
 

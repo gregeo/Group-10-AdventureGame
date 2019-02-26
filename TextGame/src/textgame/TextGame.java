@@ -7,6 +7,7 @@
 
 package textgame;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import textgame.Map;
 
@@ -40,7 +41,7 @@ public class TextGame {
         
 		while(true)
 		{
-			Room current = map.getRoom(0 , 0);
+			Room current = m.getRoom(0 , 0);
 			ArrayList<String> doableActions = current.getDoableActions();
 			for (int i = 0; i < doableActions.size(); i++) {
 				String tempLine = doableActions.get(i);
