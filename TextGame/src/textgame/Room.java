@@ -126,7 +126,7 @@ public class Room {
 
 		//call coresponding method for the user's action choice 
         if (input.contains("move")) {
-            this.move(input);
+            return this.move(input);
         } else if (input.contains("attack")) {
             this.attackEnemy();
         } else if (input.contains("search")) {

@@ -11,17 +11,15 @@ package textgame;
  *
  * @author George Smith
  */
-
-
 public class Map {
-    
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
 
         //testing commands for this class
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
         Player p = new Player(6, 0, 0);
-        boolean b[] = {true, false, true, false};
+        boolean b[] = {true, true, true, true};
         Room r1 = new Room(b /*, Enemy enemyRef*/, "ping pong ball", p);
         Room r2 = new Room(b /*, Enemy enemyRef*/, p);
         Room r3 = new Room(b /*, Enemy enemyRef*/, p);
@@ -29,8 +27,10 @@ public class Map {
         System.out.println(m.addRoom(r1, 0, 0));
         System.out.println(m.addRoom(r2, 1, 0));
         System.out.println(m.addRoom(r3, 1, 1));
-        System.out.println(m.toString(0, 0));
-        System.out.print(m.printMap());
+        //System.out.println(m.toString(0, 0));
+        System.out.println(m.printMap());
+        m.runAction("move east");
+        System.out.println(m.printMap());
 
     }
 
@@ -172,14 +172,14 @@ public class Map {
     private String printLine(int numberOfNodes, int row) {
         String s = "";
         for (int i = 0; i < (numberOfNodes); i++) {
-            if(row < this.rooms.length && this.rooms[(row)][i] != null ||
-                    (row > 0 && this.rooms[(row - 1)][i] != null)){
+            if (row < this.rooms.length && this.rooms[(row)][i] != null
+                    || (row > 0 && this.rooms[(row - 1)][i] != null)) {
                 s = s + "--";
-            }else{
-               s = s + "  "; 
+            } else {
+                s = s + "  ";
             }
-                
-/*
+
+            /*
             if (row < this.rooms.length && this.rooms[(row)][i] == null) {
                 s = s + "  ";
             } else if (row>0 && this.rooms[(row-1)][i] == null) {
@@ -189,7 +189,7 @@ public class Map {
             } else {
                 s = s + "--";
             }
-*/
+             */
         }
 
         return s;
@@ -246,7 +246,5 @@ public class Map {
             return "no room exists there";
         }
     }
-
-
 
 }
