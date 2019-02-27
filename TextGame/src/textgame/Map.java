@@ -5,6 +5,8 @@
  */
 package textgame;
 
+import java.util.Scanner;
+
 /**
  *
  * a class to contain a room[][] array and methods to work a game map
@@ -19,18 +21,35 @@ public class Map {
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
         Player p = new Player(6, 0, 0);
-        boolean b[] = {true, true, true, true};
-        Room r1 = new Room(b /*, Enemy enemyRef*/, "ping pong ball", p);
-        Room r2 = new Room(b /*, Enemy enemyRef*/, p);
-        Room r3 = new Room(b /*, Enemy enemyRef*/, p);
+        boolean b1[] = {false, true, false, false};
+        Room r1 = new Room(b1 /*, Enemy enemyRef*/, "ping pong ball", p, "a deralect table tennis area, you consider how competative Shulic students may have once been");
+        boolean b2[] = {false, false, true, true};
+        Room r2 = new Room(b2 /*, Enemy enemyRef*/, p, "an empty room");
+        boolean b3[] = {true, false, false, false};
+        Room r3 = new Room(b3 /*, Enemy enemyRef*/, p, "an even empter room");
 
         System.out.println(m.addRoom(r1, 0, 0));
         System.out.println(m.addRoom(r2, 1, 0));
         System.out.println(m.addRoom(r3, 1, 1));
         //System.out.println(m.toString(0, 0));
         System.out.println(m.printMap());
-        m.runAction("move east");
-        System.out.println(m.printMap());
+
+        Scanner scanner = new Scanner(System.in);
+        boolean t = true;
+        while (t) {
+            System.out.println(m.printMap());
+            System.out.println(m.getRoom(m.playerX, m.playerY).getText());
+            System.out.println("you can: " + m.getRoom(m.playerX, m.playerY).getDoableActions());
+            String action = scanner.nextLine();
+            if (action.equalsIgnoreCase("end")) {
+                t = false;
+            } else {
+                System.out.println(action);
+                m.runAction(action);
+
+            }
+
+        }
 
     }
 
@@ -81,7 +100,7 @@ public class Map {
     public int addRoom(Room room, int x, int y) {
         //check if valid room placement on map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
-            rooms[y][x] = room;
+            rooms[x][y] = room;
             return 1;
         }
         return -1;
@@ -98,7 +117,7 @@ public class Map {
     public Room getRoom(int x, int y) {
         //check if the room is on the map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
-            return rooms[y][x];
+            return rooms[x][y];
         }
         return null;
     }
@@ -114,18 +133,27 @@ public class Map {
      */
     public int runAction(String input) {
         //get the action the player chose
-        int i = rooms[playerY][playerX].doAction(input);
+        int i = rooms[playerX][playerY].doAction(input);
 
         //if doAction returns one of these values the player chose to move
         //else they chose a diffretn command 
         if (i == 10) {
-            playerY++;
-        } else if (i == 11) {
-            playerX++;
-        } else if (i == 12) {
+            Player p = this.getRoom(playerX, playerY).removePlayer();
             playerY--;
+            this.getRoom(playerX, playerY).addPlayer(p);
+        } else if (i == 11) {
+            Player p = this.getRoom(playerX, playerY).removePlayer();
+            playerX++;
+            this.getRoom(playerX, playerY).addPlayer(p);
+        } else if (i == 12) {
+            Player p = this.getRoom(playerX, playerY).removePlayer();
+            playerY++;
+            this.getRoom(playerX, playerY).addPlayer(p);
         } else if (i == 13) {
+            Player p = this.getRoom(playerX, playerY).removePlayer();
             playerX--;
+            this.getRoom(playerX, playerY).addPlayer(p);
+
         }
 
         return i;
@@ -172,8 +200,8 @@ public class Map {
     private String printLine(int numberOfNodes, int row) {
         String s = "";
         for (int i = 0; i < (numberOfNodes); i++) {
-            if (row < this.rooms.length && this.rooms[(row)][i] != null
-                    || (row > 0 && this.rooms[(row - 1)][i] != null)) {
+            if (row < this.rooms[0].length && this.rooms[(i)][row] != null
+                    || (row > 0 && this.rooms[(i)][row - 1] != null)) {
                 s = s + "--";
             } else {
                 s = s + "  ";
@@ -207,7 +235,7 @@ public class Map {
         String s = "";
         boolean wasLastRoom = false;
         for (int i = 0; i < numberOfNodes; i++) {
-            if (this.rooms[row][i] == null) {
+            if (this.rooms[i][row] == null) {
 
                 if (wasLastRoom) {
                     s = s + "|";
@@ -240,8 +268,8 @@ public class Map {
      * @return the information about the room to the user
      */
     public String toString(int row, int column) {
-        if (rooms.length - 1 > row && rooms[0].length - 1 > column && column >= 0 && row >= 0 && rooms[row][column] != null) {
-            return rooms[row][column].toString();
+        if (rooms[0].length - 1 > row && rooms.length - 1 > column && column >= 0 && row >= 0 && rooms[column][row] != null) {
+            return rooms[column][row].toString();
         } else {
             return "no room exists there";
         }
