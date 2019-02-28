@@ -143,9 +143,9 @@ public class Room {
     }
 
 	/**
-	*	Method to carry out combat 
-	*
-	*
+	* Method to carry out combat 
+	*	
+	* Needs work
 	*/
     private void attackEnemy() {
 
@@ -171,7 +171,7 @@ public class Room {
         } else if (actionToDo.contains("west")&& this.isDoor[3] == true ) {
             dir = 13;
         } else {
-            System.out.println("oopy not a valid direction");
+            System.out.println("oops not a valid direction");
         }
 
         return dir;
@@ -241,6 +241,11 @@ public class Room {
         return this.doableActions;
     }
 
+	/**
+	* Method to get the room description 
+	*
+	* @return the current room object's description
+	*/
     public String getText() {
         return text;
     }
@@ -304,6 +309,12 @@ public class Room {
 
         return s;
     }
+	
+	/**
+	* Method to remove a player from this room object
+	*
+	* @return a player object in this room object that is equal to null
+	*/
     public Player removePlayer(){
         Player p = this.player;
         this.player = null;
@@ -311,6 +322,11 @@ public class Room {
            
     }
     
+	/**
+	* Method to add a player to this room object
+	*
+	* @param the current player object to be added to the room
+	*/
     public void addPlayer(Player p){
         this.player = p;
     }
