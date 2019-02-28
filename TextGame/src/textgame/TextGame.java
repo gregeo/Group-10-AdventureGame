@@ -25,6 +25,7 @@ public class TextGame {
      */
     public static void main(String[] args) {
 		
+		//game story
 		System.out.println("Dungeon Hero!");
 		
 		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
@@ -35,10 +36,15 @@ public class TextGame {
 		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
 		System.out.println("Save the princess and the kingdom!");
 
+		
+		//create map object
         Map m = new Map(4,4);
         
+		//print map 
         System.out.print(m.printMap());
         
+		//game loop
+		//not finished
 		while(true)
 		{
 			Room current = m.getRoom(0 , 0);
