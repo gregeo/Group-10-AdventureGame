@@ -31,8 +31,9 @@ public class Map {
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
         Player p = new Player(6, 0, 0);
+		Enemy enemyRef = new Enemy(6, 0, 0);
         boolean b1[] = {false, true, false, false};
-        Room r1 = new Room(b1 /*, Enemy enemyRef*/, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat.");
+        Room r1 = new Room(b1, enemyRef, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat.");
         boolean b2[] = {false, false, true, true};
         Room r2 = new Room(b2 /*, Enemy enemyRef*/, p, "Another empty room, this one much bigger with a long corridor. Although empty you can still hear the Shadow Kings minions plotting");
         boolean b3[] = {true, false, false, false};
@@ -62,7 +63,7 @@ public class Map {
         }
 		
     }
-    //declare and intialize class members
+    //declare and initialize class members
     Room rooms[][];
     int playerX;
     int playerY;
@@ -94,6 +95,8 @@ public class Map {
      */
     public Map(int length, int height, int playerX, int playerY) {
         rooms = new Room[length][height];
+		this.playerX = playerX;
+		this.playerY = playerY;
     }
 
     /**
@@ -101,7 +104,7 @@ public class Map {
      * rooms
      *
      * @param room room object to be added to the array
-     * @param x the rooms horizontal postion
+     * @param x the rooms horizontal position
      * @param y the rooms vertical position on the map
      *
      * @return a 1 or -1 used to show if the room has been added
@@ -118,10 +121,10 @@ public class Map {
     /**
      * This method gets the room in the specified position
      *
-     * @param x the rooms horizontal postion
+     * @param x the rooms horizontal position
      * @param y the rooms vertical position on the map
      *
-     * @return the room object in that postion
+     * @return the room object in that position
      */
     public Room getRoom(int x, int y) {
         //check if the room is on the map
@@ -145,7 +148,7 @@ public class Map {
         int i = rooms[playerX][playerY].doAction(input);
 
         //if doAction returns one of these values the player chose to move
-        //else they chose a diffretn command 
+        //else they chose a different command 
         if (i == 10) {
             Player p = this.getRoom(playerX, playerY).removePlayer();
             playerY--;
@@ -162,6 +165,13 @@ public class Map {
             Player p = this.getRoom(playerX, playerY).removePlayer();
             playerX--;
             this.getRoom(playerX, playerY).addPlayer(p);
+		} else if (i == 14) {
+			Player p = this.getRoom(playerX, playerY).getPlayer();
+			Enemy e = this.getRoom(playerX, playerY).getEnemy();
+			p.attackEnemy(e);
+			p.takeDamage(1);
+			System.out.print(p.toString());
+				
 
         }
 

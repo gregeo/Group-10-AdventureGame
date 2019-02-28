@@ -18,6 +18,14 @@ public class Enemy {
     private int posX;
     private int posY;
 
+	
+	public Enemy(int health, int posX, int posY)
+	{
+		setHealth(health);
+		setInitPos(posX, posY);
+		
+	}
+	
 	/**
 	* method to set an enemys intial postion
 	*

@@ -55,13 +55,14 @@ public class Room {
 		this(isDoor, player, text);
 		//intialize item 
         this.item = item;
+		//this.enemyRef = enemyRef;
     }
 
     /**
      * constructor for a room with only enemies and doors
      *
-     * @param isDoor boolean array to show which dirrections have doors
-     * @param enemyRef enemy object represetning the enemy in the room 
+     * @param isDoor boolean array to show which directions have doors
+     * @param enemyRef enemy object representing the enemy in the room 
      * @param player The player object in that room 
 	 *
 	 * @return a new Room object with specified class members
@@ -69,7 +70,7 @@ public class Room {
     public Room(boolean[] isDoor, Enemy enemyRef, Player player, String text) {
 		//call two parameter constructor to set doable actions 
         this(isDoor, player, text);
-		//intialize enemy in room 
+		//initialize enemy in room 
         this.enemyRef = enemyRef;
 		//add attacking enemy as an action
         doableActions.add("attack enemy");
@@ -79,7 +80,7 @@ public class Room {
     /**
      * constructor for a room with only doors
      *
-	 * @param isDoor boolean array to show which dirrections have doors
+	 * @param isDoor boolean array to show which directions have doors
      * @param player The player object in that room 
 	 *
 	 * @return a new Room object with specified class members
@@ -130,7 +131,7 @@ public class Room {
         if (input.contains("move")) {
             return this.move(input);
         } else if (input.contains("attack")) {
-            this.attackEnemy();
+            return this.attackEnemy();
         } else if (input.contains("search")) {
             this.search();
         } else if (input.contains("use")) {
@@ -147,8 +148,10 @@ public class Room {
 	*	
 	* Needs work
 	*/
-    private void attackEnemy() {
-
+    private int attackEnemy()
+	{
+		int reference = 14;
+		return reference;
     }
 
     /**
@@ -321,6 +324,13 @@ public class Room {
         return p;
            
     }
+	
+	public Player getPlayer()
+	{
+		return this.player;
+	}
+	
+
     
 	/**
 	* Method to add a player to this room object
