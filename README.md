@@ -1,4 +1,11 @@
 # Group-10-AdventureGame
+to run version 0.1.0 of the game:
+go to:
+Group-10-AdventureGame/TextGame/src/textgame/
+and run map.class
+
+
+
 
 TODO:
 
