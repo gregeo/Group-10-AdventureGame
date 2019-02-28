@@ -17,16 +17,26 @@ public class Map {
 
     public static void main(String[] args) {
 
-        //testing commands for this class
+        //hard coded testing commands for this class
+		System.out.println("Dungeon Hero!");
+		
+		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
+		System.out.println("The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.");
+		System.out.println(" Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
+		System.out.println("Upon leaving the town, he is assailed by goblins!");
+		System.out.println("He must fight to find his way to the dungeon that the Shadow King inhabits.");
+		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
+		System.out.println("Save the princess and the kingdom!");
+
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
         Player p = new Player(6, 0, 0);
         boolean b1[] = {false, true, false, false};
-        Room r1 = new Room(b1 /*, Enemy enemyRef*/, "ping pong ball", p, "a deralect table tennis area, you consider how competative Shulic students may have once been");
+        Room r1 = new Room(b1 /*, Enemy enemyRef*/, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat.");
         boolean b2[] = {false, false, true, true};
-        Room r2 = new Room(b2 /*, Enemy enemyRef*/, p, "an empty room");
+        Room r2 = new Room(b2 /*, Enemy enemyRef*/, p, "Another empty room, this one much bigger with a long corridor. Although empty you can still hear the Shadow Kings minions plotting");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3 /*, Enemy enemyRef*/, p, "an even empter room");
+        Room r3 = new Room(b3 /*, Enemy enemyRef*/, p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
 
         System.out.println(m.addRoom(r1, 0, 0));
         System.out.println(m.addRoom(r2, 1, 0));
@@ -50,9 +60,8 @@ public class Map {
             }
 
         }
-
+		
     }
-
     //declare and intialize class members
     Room rooms[][];
     int playerX;
