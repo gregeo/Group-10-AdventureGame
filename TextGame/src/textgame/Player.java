@@ -73,6 +73,7 @@ public class Player {
     }
 
     public void pickUpItem(String toTake) {
+        System.out.println("you found: " + toTake + ". its added to your stuff");
         this.pouch.add(toTake);
     }
 

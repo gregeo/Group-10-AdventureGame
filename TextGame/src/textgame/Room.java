@@ -20,6 +20,7 @@ public class Room {
     private String item;
     private ArrayList<String> doableActions;
     private Player player;
+    private String text;
 
     /**
      * Constructor with all parameters specified
@@ -32,9 +33,9 @@ public class Room {
 	 *
 	 * @return new Room object with specified class members
      */
-    public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player) {
+    public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player, String text) {
         //call three parameter constructor
-		this(isDoor, enemyRef, player);
+		this(isDoor, enemyRef, player, text);
 		//intialize item
         this.item = item;
 
@@ -49,9 +50,9 @@ public class Room {
 	 *
 	 * @return new Room object with specified class members
      */
-    public Room(boolean[] isDoor, String item, Player player) {
+    public Room(boolean[] isDoor, String item, Player player, String text) {
         //call two parameter constructor to set doable actions
-		this(isDoor, player);
+		this(isDoor, player, text);
 		//intialize item 
         this.item = item;
     }
@@ -65,9 +66,9 @@ public class Room {
 	 *
 	 * @return a new Room object with specified class members
      */
-    public Room(boolean[] isDoor, Enemy enemyRef, Player player) {
+    public Room(boolean[] isDoor, Enemy enemyRef, Player player, String text) {
 		//call two parameter constructor to set doable actions 
-        this(isDoor, player);
+        this(isDoor, player, text);
 		//intialize enemy in room 
         this.enemyRef = enemyRef;
 		//add attacking enemy as an action
@@ -83,7 +84,7 @@ public class Room {
 	 *
 	 * @return a new Room object with specified class members
      */
-    public Room(boolean[] isDoor, Player player) {
+    public Room(boolean[] isDoor, Player player,String text) {
 		
 		//create a new arrayList for doable actions
         doableActions = new ArrayList<>();
@@ -110,6 +111,7 @@ public class Room {
         }
 		//intialize player and add "search room" to doable actions because that is always an option
         this.player = player;
+        this.text = text;
         doableActions.add("search room");
 
     }
@@ -126,7 +128,7 @@ public class Room {
 
 		//call coresponding method for the user's action choice 
         if (input.contains("move")) {
-            this.move(input);
+            return this.move(input);
         } else if (input.contains("attack")) {
             this.attackEnemy();
         } else if (input.contains("search")) {
@@ -160,13 +162,13 @@ public class Room {
         int dir = -1;
 		
 		//check which direction the user wants the player to go and set dir value to coresponding integer value
-        if (actionToDo.contains("north")) {
+        if (actionToDo.contains("north") && this.isDoor[0] == true ) {
             dir = 10;
-        } else if (actionToDo.contains("east")) {
+        } else if (actionToDo.contains("east")&& this.isDoor[1] == true ) {
             dir = 11;
-        } else if (actionToDo.contains("south")) {
+        } else if (actionToDo.contains("south")&& this.isDoor[2] == true ) {
             dir = 12;
-        } else if (actionToDo.contains("west")) {
+        } else if (actionToDo.contains("west")&& this.isDoor[3] == true ) {
             dir = 13;
         } else {
             System.out.println("oopy not a valid direction");
@@ -239,6 +241,12 @@ public class Room {
         return this.doableActions;
     }
 
+    public String getText() {
+        return text;
+    }
+    
+    
+
 	/**
 	* toString method to print all of the information about the room
 	*
@@ -295,6 +303,16 @@ public class Room {
         }
 
         return s;
+    }
+    public Player removePlayer(){
+        Player p = this.player;
+        this.player = null;
+        return p;
+           
+    }
+    
+    public void addPlayer(Player p){
+        this.player = p;
     }
 
 }
