@@ -73,8 +73,7 @@ public class Room {
 		//initialize enemy in room 
         this.enemyRef = enemyRef;
 		//add attacking enemy as an action
-        doableActions.add("attack enemy");
-
+		doableActions.add("attack enemy");
     }
 
     /**
@@ -240,7 +239,8 @@ public class Room {
 	*
 	* @return the arrayList coresponding to all of the actions possible in the room
 	*/
-    public ArrayList<String> getDoableActions() {
+    public ArrayList<String> getDoableActions() 
+	{
         return this.doableActions;
     }
 
@@ -330,6 +330,13 @@ public class Room {
 		return this.player;
 	}
 	
+	public Enemy removeEnemy(){
+        Enemy e = this.enemyRef;
+        this.enemyRef = null;
+		doableActions.remove("attack enemy");
+        return enemyRef;
+           
+    }
 
     
 	/**

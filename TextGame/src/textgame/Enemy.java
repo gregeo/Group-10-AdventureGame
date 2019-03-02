@@ -5,6 +5,8 @@
  */
 package textgame;
 
+import java.lang.Math;
+
 /**
  *a class to handle spesific enemys
  *
@@ -87,15 +89,20 @@ public class Enemy {
         }
     }
 
+	
+    public void attack(Player target) {
+        double randomDouble = Math.random();
+		randomDouble = randomDouble * 10 + 1;
+		int attackStrength = (int)randomDouble;
+		System.out.println(attackStrength);
+		target.takeDamage(attackStrength);
+    }
+	
 	/**
 	* toString method for enemy's information
 	*
 	* @return methodReturn enemy's information (position and health)
 	*/
-    public void attack(Player target) {
-        int dmg = 10;
-        target.takeDamage(dmg);
-    }
     public String toString(){
         String s = "";
         

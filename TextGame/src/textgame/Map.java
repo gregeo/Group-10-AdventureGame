@@ -55,8 +55,12 @@ public class Map {
             if (action.equalsIgnoreCase("end")) {
                 t = false;
             } else {
-                System.out.println(action);
-                m.runAction(action);
+                //System.out.println(action);
+                int i = m.runAction(action);
+				if(i == 0)
+				{
+					break;
+				}
 
             }
 
@@ -149,31 +153,51 @@ public class Map {
 
         //if doAction returns one of these values the player chose to move
         //else they chose a different command 
-        if (i == 10) {
-            Player p = this.getRoom(playerX, playerY).removePlayer();
-            playerY--;
-            this.getRoom(playerX, playerY).addPlayer(p);
-        } else if (i == 11) {
-            Player p = this.getRoom(playerX, playerY).removePlayer();
-            playerX++;
-            this.getRoom(playerX, playerY).addPlayer(p);
-        } else if (i == 12) {
-            Player p = this.getRoom(playerX, playerY).removePlayer();
-            playerY++;
-            this.getRoom(playerX, playerY).addPlayer(p);
-        } else if (i == 13) {
-            Player p = this.getRoom(playerX, playerY).removePlayer();
-            playerX--;
-            this.getRoom(playerX, playerY).addPlayer(p);
-		} else if (i == 14) {
-			Player p = this.getRoom(playerX, playerY).getPlayer();
-			Enemy e = this.getRoom(playerX, playerY).getEnemy();
-			p.attackEnemy(e);
-			p.takeDamage(1);
-			System.out.print(p.toString());
+        Player pMain = this.getRoom(playerX, playerY).getPlayer(); 
+	
+		if(pMain.getHealth() > 0)
+		{
+			if (i == 10) {
+				Player p = this.getRoom(playerX, playerY).removePlayer();
+				playerY--;
+				this.getRoom(playerX, playerY).addPlayer(p);
+			} else if (i == 11) {
+				Player p = this.getRoom(playerX, playerY).removePlayer();
+				playerX++;
+				this.getRoom(playerX, playerY).addPlayer(p);
+			} else if (i == 12) {
+				Player p = this.getRoom(playerX, playerY).removePlayer();
+				playerY++;
+				this.getRoom(playerX, playerY).addPlayer(p);
+			} else if (i == 13) {
+				Player p = this.getRoom(playerX, playerY).removePlayer();
+				playerX--;
+				this.getRoom(playerX, playerY).addPlayer(p);
+			} else if (i == 14) {
+				Player p = this.getRoom(playerX, playerY).getPlayer();
+				Enemy e = this.getRoom(playerX, playerY).getEnemy();
+				p.attackEnemy(e);
+				//p.takeDamage(1);
+				e.attack(p);
+				System.out.print(p.toString() + "\n");
+				
+				if(e.getHealth() <= 0)
+				{
+					e = this.getRoom(playerX, playerY).removeEnemy();
+					System.out.print("Enemy dead \n");
+
+				}
+			if(pMain.getHealth() <= 0)
+			{
+				System.out.print("Game Over. You have been slain \n");
+				return 0;
+			}
+		}
+			
 				
 
         }
+		
 
         return i;
     }
