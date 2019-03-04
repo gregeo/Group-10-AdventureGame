@@ -92,9 +92,9 @@ public class Enemy {
 	
     public void attack(Player target) {
         double randomDouble = Math.random();
-		randomDouble = randomDouble * 10 + 1;
+		randomDouble = randomDouble * 3 + 1;
 		int attackStrength = (int)randomDouble;
-		System.out.println(attackStrength);
+		System.out.println("Enemies attack Strength: " + attackStrength);
 		target.takeDamage(attackStrength);
     }
 	
@@ -104,9 +104,13 @@ public class Enemy {
 	* @return methodReturn enemy's information (position and health)
 	*/
     public String toString(){
-        String s = "";
-        
-        
-        return s;
+		int tempHealth = this.health;
+        int tempPosX = this.posX;
+        int tempPosY = this.posY;
+        String health = Integer.toString(tempHealth);
+        String posX = Integer.toString(tempPosX);
+        String posY = Integer.toString(tempPosY);
+        String methodReturn = "Enemy information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
+        return methodReturn;
     }
 }

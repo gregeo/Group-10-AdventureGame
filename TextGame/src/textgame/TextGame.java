@@ -24,7 +24,7 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-		
+		/*
 		//game story
 		System.out.println("Dungeon Hero!");
 		
@@ -56,8 +56,58 @@ public class TextGame {
 			
 			
 			
-		}
+		}*/
         
+        //hard coded testing commands for this class
+		System.out.println("Dungeon Hero!");
+		
+		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
+		System.out.println("The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.");
+		System.out.println(" Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
+		System.out.println("Upon leaving the town, he is assailed by goblins!");
+		System.out.println("He must fight to find his way to the dungeon that the Shadow King inhabits.");
+		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
+		System.out.println("Save the princess and the kingdom!");
+
+        Map m = new Map(3, 3);
+        System.out.print(m.printMap());
+        Player p = new Player(6, 0, 0);
+		Enemy enemyRef = new Enemy(6, 0, 0);
+        boolean b1[] = {false, true, false, false};
+        Room r1 = new Room(b1, enemyRef, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat. Then out of the darkness a skeleton knight is coming towards you!");
+        boolean b2[] = {false, false, true, true};
+        Room r2 = new Room(b2 /*, Enemy enemyRef*/, p, "Another empty room, this one much bigger with a long corridor. Although empty you can still hear the Shadow Kings minions plotting");
+        boolean b3[] = {true, false, false, false};
+        Room r3 = new Room(b3 /*, Enemy enemyRef*/, p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
+
+        m.addRoom(r1, 0, 0);
+		m.addRoom(r2, 1, 0);
+        m.addRoom(r3, 1, 1);
+        //System.out.println(m.toString(0, 0));
+        //System.out.println(m.printMap());
+
+        Scanner scanner = new Scanner(System.in);
+        boolean gameRunning = true;
+        while (gameRunning) {
+            System.out.println(m.printMap());
+            System.out.println(m.getRoom(m.playerX, m.playerY).getText());
+            System.out.println("you can: " + m.getRoom(m.playerX, m.playerY).getDoableActions());
+            String action = scanner.nextLine();
+            if (action.equalsIgnoreCase("end")) {
+                gameRunning = false;
+            } else {
+                //System.out.println(action);
+                int i = m.runAction(action);
+				if(i == 0)
+				{
+					break;
+				}
+
+            }
+
+        }
+		
+    }
         
         /*
     }
@@ -138,4 +188,4 @@ public class TextGame {
                         */
     }
     
-}
+

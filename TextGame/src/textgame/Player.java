@@ -207,19 +207,30 @@ public class Player {
         return -1;
     }
 
+	
+	public ArrayList<String> getPouch()
+	{
+		return this.pouch;
+	}	
 	/**
 	* toString method for player's information
 	*
 	* @return methodReturn player's information (position and health)
 	*/
     public String toString() {
-        int tempHealth = this.health;
-        int tempPosX = this.posX;
+		int tempPosX = this.posX;
         int tempPosY = this.posY;
+		int tempHealth = this.health;
+		
+		if(this.health < 0)
+		{
+			tempHealth = 0;
+		}
+      
         String health = Integer.toString(tempHealth);
         String posX = Integer.toString(tempPosX);
         String posY = Integer.toString(tempPosY);
-        String methodReturn = "'" + health + ";" + posX + ";" + posY + "''";
+        String methodReturn = "Your information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
         return methodReturn;
     }
 

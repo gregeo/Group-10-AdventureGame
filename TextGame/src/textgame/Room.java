@@ -241,6 +241,10 @@ public class Room {
 	*/
     public ArrayList<String> getDoableActions() 
 	{
+		if(player.getPouch().size() != 0)
+		{
+			doableActions.add("Use Item");
+		}
         return this.doableActions;
     }
 
