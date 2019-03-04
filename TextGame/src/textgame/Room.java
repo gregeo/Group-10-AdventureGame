@@ -134,7 +134,7 @@ public class Room {
         } else if (input.contains("search")) {
             this.search();
         } else if (input.contains("use")) {
-            this.useItem();
+            return this.useItem();
         } else {
             System.out.println("oops not a valid command");
             return -1;
@@ -186,7 +186,9 @@ public class Room {
      * @return
      */
     private int useItem() {
-        return player.useItem(item);
+        //return player.useItem(item);
+		int reference = 15;
+		return reference;
     }
 
     /**
@@ -241,10 +243,15 @@ public class Room {
 	*/
     public ArrayList<String> getDoableActions() 
 	{
+		if(doableActions.contains("Use Item"))
+		{
+			return this.doableActions;
+		}
 		if(player.getPouch().size() != 0)
 		{
 			doableActions.add("Use Item");
 		}
+		
         return this.doableActions;
     }
 

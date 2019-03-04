@@ -6,6 +6,8 @@
 package textgame;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -150,7 +152,16 @@ public class Map {
 				return 0;
 			}
 		}
-			
+			else if (i == 15) {
+				Player p = this.getRoom(playerX, playerY).getPlayer();
+				ArrayList<String> inventory = p.getPouch();
+				for(String item: inventory)
+				{
+					int numItems = 1;
+					System.out.println(numItems + ". " + item);
+					numItems++;
+				}
+			}
 				
 
         }
