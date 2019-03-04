@@ -155,12 +155,16 @@ public class Map {
 			else if (i == 15) {
 				Player p = this.getRoom(playerX, playerY).getPlayer();
 				ArrayList<String> inventory = p.getPouch();
+				int numItems = 1;
 				for(String item: inventory)
 				{
-					int numItems = 1;
 					System.out.println(numItems + ". " + item);
 					numItems++;
 				}
+				Scanner itemScanner = new Scanner(System.in);
+				String itemSelection = itemScanner.nextLine();
+				
+				int item = p.useItem(itemSelection);
 			}
 				
 

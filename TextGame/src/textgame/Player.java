@@ -15,6 +15,7 @@ public class Player {
     private int health;
     private int posX;
     private int posY;
+	private int attackStrength = 2;
     private ArrayList<String> pouch;
 	
 	/**
@@ -135,8 +136,7 @@ public class Player {
 	* @param current enemy in the room
 	*/
     public void attackEnemy(Enemy target) {
-        int dmg = 2;
-        target.takeDamage(dmg);
+        target.takeDamage(attackStrength);
     }
 	
 	/**
@@ -197,13 +197,21 @@ public class Player {
             }
         }
 		
-		//more logic required but will be used to find the item and to carry out the correct action 
+		if(itemToUse.equals("heal potion"))
+		{
+			this.setHealth(this.getHealth() + 2);
+		}
+		if(itemToUse.equals("Attack potion"))
+		{
+			this.attackStrength += 2;
+		}
+		/*more logic required but will be used to find the item and to carry out the correct action 
 		for (int i = 0; i <= this.pouch.size(); i++) {
 			String tempItem = this.pouch.get(i);
 			if (tempItem.equals(itemToUse)) {
 				return 1;
-        }
-    }
+        }*/
+    
         return -1;
     }
 

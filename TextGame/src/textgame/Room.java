@@ -243,8 +243,16 @@ public class Room {
 	*/
     public ArrayList<String> getDoableActions() 
 	{
+		if(player.getPouch().size() == 0)
+		{
+			if(doableActions.contains("Use Item"))
+			{
+				doableActions.remove("Use Item");
+			}
+		}
 		if(doableActions.contains("Use Item"))
 		{
+			//doableActions.remove("Use Item");
 			return this.doableActions;
 		}
 		if(player.getPouch().size() != 0)
