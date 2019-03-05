@@ -72,13 +72,15 @@ public class TextGame {
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
         Player p = new Player(6, 0, 0);
-		Enemy enemyRef = new Enemy(6, 0, 0);
+		Enemy enemyRoomOne = new Enemy(0, 0);
+		Enemy enemyRoomTwo = new Enemy(1, 0);
+		Enemy enemyRoomThree = new Enemy(1, 1);
         boolean b1[] = {false, true, false, false};
-        Room r1 = new Room(b1, enemyRef, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat. Then out of the darkness a skeleton knight is coming towards you!");
+        Room r1 = new Room(b1, enemyRoomOne, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat. Then out of the darkness a skeleton knight is coming towards you!");
         boolean b2[] = {false, false, true, true};
-        Room r2 = new Room(b2 /*, Enemy enemyRef*/, "attack potion", p, "Another empty room, this one much bigger with a long corridor. Although empty you can still hear the Shadow Kings minions plotting");
+        Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3 /*, Enemy enemyRef*/, p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
 
         m.addRoom(r1, 0, 0);
 		m.addRoom(r2, 1, 0);

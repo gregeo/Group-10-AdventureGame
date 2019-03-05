@@ -113,18 +113,22 @@ public class Map {
 			if (i == 10) {
 				Player p = this.getRoom(playerX, playerY).removePlayer();
 				playerY--;
+				p.setY(playerY);
 				this.getRoom(playerX, playerY).addPlayer(p);
 			} else if (i == 11) {
 				Player p = this.getRoom(playerX, playerY).removePlayer();
 				playerX++;
+				p.setX(playerX);
 				this.getRoom(playerX, playerY).addPlayer(p);
 			} else if (i == 12) {
 				Player p = this.getRoom(playerX, playerY).removePlayer();
 				playerY++;
+				p.setY(playerY);
 				this.getRoom(playerX, playerY).addPlayer(p);
 			} else if (i == 13) {
 				Player p = this.getRoom(playerX, playerY).removePlayer();
 				playerX--;
+				p.setX(playerX);
 				this.getRoom(playerX, playerY).addPlayer(p);
 			} else if (i == 14) {
 				Player p = this.getRoom(playerX, playerY).getPlayer();

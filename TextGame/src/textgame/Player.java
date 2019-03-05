@@ -109,6 +109,16 @@ public class Player {
             System.out.println("INVALID VALUE");
         }
     }
+	
+	public void setX(int x)
+	{
+		this.posX = x;
+	}
+	
+	public void setY(int y)
+	{
+		this.posY = y;
+	}
 
 	
 	/**
@@ -136,6 +146,7 @@ public class Player {
 	* @param current enemy in the room
 	*/
     public void attackEnemy(Enemy target) {
+		System.out.println("Player's attack Strength: " + attackStrength);
         target.takeDamage(attackStrength);
     }
 	
@@ -201,7 +212,7 @@ public class Player {
 		{
 			this.setHealth(this.getHealth() + 2);
 		}
-		if(itemToUse.equals("Attack potion"))
+		if(itemToUse.equals("attack potion"))
 		{
 			this.attackStrength += 2;
 		}

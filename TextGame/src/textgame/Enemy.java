@@ -21,9 +21,9 @@ public class Enemy {
     private int posY;
 
 	
-	public Enemy(int health, int posX, int posY)
+	public Enemy(int posX, int posY)
 	{
-		setHealth(health);
+		setHealth();
 		setInitPos(posX, posY);
 		
 	}
@@ -43,8 +43,11 @@ public class Enemy {
 	*
 	* @param health enemy's health
 	*/
-    public void setHealth(int initHealth) {
-        this.health = initHealth;
+    public void setHealth() {
+        double randomHealth = Math.random();
+		randomHealth = randomHealth * 6 + 1;
+		int health = (int)randomHealth;
+		this.health = health;
     }
 
 	/**
@@ -85,15 +88,22 @@ public class Enemy {
     public void takeDamage(int dmg) {
         if (dmg >= 0) {
             int tempHealth = this.health - dmg;
-            this.health = tempHealth;
+			if(tempHealth >= 0)
+			{
+				this.health = tempHealth;
+			}
+			else
+			{
+				this.health = 0;
+			}
         }
     }
 
 	
     public void attack(Player target) {
-        double randomDouble = Math.random();
-		randomDouble = randomDouble * 3 + 1;
-		int attackStrength = (int)randomDouble;
+        double randomAttack = Math.random();
+		randomAttack = randomAttack * 3 + 1;
+		int attackStrength = (int)randomAttack;
 		System.out.println("Enemies attack Strength: " + attackStrength);
 		target.takeDamage(attackStrength);
     }
