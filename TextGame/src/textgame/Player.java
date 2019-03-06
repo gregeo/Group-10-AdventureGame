@@ -15,6 +15,7 @@ public class Player {
     private int health;
     private int posX;
     private int posY;
+	private int attackStrength = 2;
     private ArrayList<String> pouch;
 	
 	/**
@@ -108,6 +109,16 @@ public class Player {
             System.out.println("INVALID VALUE");
         }
     }
+	
+	public void setX(int x)
+	{
+		this.posX = x;
+	}
+	
+	public void setY(int y)
+	{
+		this.posY = y;
+	}
 
 	
 	/**
@@ -135,8 +146,8 @@ public class Player {
 	* @param current enemy in the room
 	*/
     public void attackEnemy(Enemy target) {
-        int dmg = 2;
-        target.takeDamage(dmg);
+		System.out.println("Player's attack Strength: " + attackStrength);
+        target.takeDamage(attackStrength);
     }
 	
 	/**
@@ -197,29 +208,48 @@ public class Player {
             }
         }
 		
-		//more logic required but will be used to find the item and to carry out the correct action 
+		if(itemToUse.equals("heal potion"))
+		{
+			this.setHealth(this.getHealth() + 2);
+		}
+		if(itemToUse.equals("attack potion"))
+		{
+			this.attackStrength += 2;
+		}
+		/*more logic required but will be used to find the item and to carry out the correct action 
 		for (int i = 0; i <= this.pouch.size(); i++) {
 			String tempItem = this.pouch.get(i);
 			if (tempItem.equals(itemToUse)) {
 				return 1;
-        }
-    }
+        }*/
+    
         return -1;
     }
 
+	
+	public ArrayList<String> getPouch()
+	{
+		return this.pouch;
+	}	
 	/**
 	* toString method for player's information
 	*
 	* @return methodReturn player's information (position and health)
 	*/
     public String toString() {
-        int tempHealth = this.health;
-        int tempPosX = this.posX;
+		int tempPosX = this.posX;
         int tempPosY = this.posY;
+		int tempHealth = this.health;
+		
+		if(this.health < 0)
+		{
+			tempHealth = 0;
+		}
+      
         String health = Integer.toString(tempHealth);
         String posX = Integer.toString(tempPosX);
         String posY = Integer.toString(tempPosY);
-        String methodReturn = "'" + health + ";" + posX + ";" + posY + "''";
+        String methodReturn = "Your information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
         return methodReturn;
     }
 

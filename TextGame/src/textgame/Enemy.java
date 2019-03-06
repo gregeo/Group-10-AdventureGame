@@ -5,6 +5,8 @@
  */
 package textgame;
 
+import java.lang.Math;
+
 /**
  *a class to handle spesific enemys
  *
@@ -18,6 +20,14 @@ public class Enemy {
     private int posX;
     private int posY;
 
+	
+	public Enemy(int posX, int posY)
+	{
+		setHealth();
+		setInitPos(posX, posY);
+		
+	}
+	
 	/**
 	* method to set an enemys intial postion
 	*
@@ -33,8 +43,11 @@ public class Enemy {
 	*
 	* @param health enemy's health
 	*/
-    public void setHealth(int initHealth) {
-        this.health = initHealth;
+    public void setHealth() {
+        double randomHealth = Math.random();
+		randomHealth = randomHealth * 6 + 1;
+		int health = (int)randomHealth;
+		this.health = health;
     }
 
 	/**
@@ -75,23 +88,39 @@ public class Enemy {
     public void takeDamage(int dmg) {
         if (dmg >= 0) {
             int tempHealth = this.health - dmg;
-            this.health = tempHealth;
+			if(tempHealth >= 0)
+			{
+				this.health = tempHealth;
+			}
+			else
+			{
+				this.health = 0;
+			}
         }
     }
 
+	
+    public void attack(Player target) {
+        double randomAttack = Math.random();
+		randomAttack = randomAttack * 3 + 1;
+		int attackStrength = (int)randomAttack;
+		System.out.println("Enemies attack Strength: " + attackStrength);
+		target.takeDamage(attackStrength);
+    }
+	
 	/**
 	* toString method for enemy's information
 	*
 	* @return methodReturn enemy's information (position and health)
 	*/
-    public void attack(Player target) {
-        int dmg = 10;
-        target.takeDamage(dmg);
-    }
     public String toString(){
-        String s = "";
-        
-        
-        return s;
+		int tempHealth = this.health;
+        int tempPosX = this.posX;
+        int tempPosY = this.posY;
+        String health = Integer.toString(tempHealth);
+        String posX = Integer.toString(tempPosX);
+        String posY = Integer.toString(tempPosY);
+        String methodReturn = "Enemy information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
+        return methodReturn;
     }
 }

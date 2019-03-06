@@ -55,13 +55,14 @@ public class Room {
 		this(isDoor, player, text);
 		//intialize item 
         this.item = item;
+		//this.enemyRef = enemyRef;
     }
 
     /**
      * constructor for a room with only enemies and doors
      *
-     * @param isDoor boolean array to show which dirrections have doors
-     * @param enemyRef enemy object represetning the enemy in the room 
+     * @param isDoor boolean array to show which directions have doors
+     * @param enemyRef enemy object representing the enemy in the room 
      * @param player The player object in that room 
 	 *
 	 * @return a new Room object with specified class members
@@ -69,17 +70,16 @@ public class Room {
     public Room(boolean[] isDoor, Enemy enemyRef, Player player, String text) {
 		//call two parameter constructor to set doable actions 
         this(isDoor, player, text);
-		//intialize enemy in room 
+		//initialize enemy in room 
         this.enemyRef = enemyRef;
 		//add attacking enemy as an action
-        doableActions.add("attack enemy");
-
+		doableActions.add("attack enemy");
     }
 
     /**
      * constructor for a room with only doors
      *
-	 * @param isDoor boolean array to show which dirrections have doors
+	 * @param isDoor boolean array to show which directions have doors
      * @param player The player object in that room 
 	 *
 	 * @return a new Room object with specified class members
@@ -130,11 +130,11 @@ public class Room {
         if (input.contains("move")) {
             return this.move(input);
         } else if (input.contains("attack")) {
-            this.attackEnemy();
+            return this.attackEnemy();
         } else if (input.contains("search")) {
             this.search();
         } else if (input.contains("use")) {
-            this.useItem();
+            return this.useItem();
         } else {
             System.out.println("oops not a valid command");
             return -1;
@@ -147,8 +147,10 @@ public class Room {
 	*	
 	* Needs work
 	*/
-    private void attackEnemy() {
-
+    private int attackEnemy()
+	{
+		int reference = 14;
+		return reference;
     }
 
     /**
@@ -184,7 +186,9 @@ public class Room {
      * @return
      */
     private int useItem() {
-        return player.useItem(item);
+        //return player.useItem(item);
+		int reference = 15;
+		return reference;
     }
 
     /**
@@ -237,7 +241,66 @@ public class Room {
 	*
 	* @return the arrayList coresponding to all of the actions possible in the room
 	*/
-    public ArrayList<String> getDoableActions() {
+    public ArrayList<String> getDoableActions() 
+	{
+		if(player.getPouch().size() == 0)
+		{
+			if(doableActions.contains("Use Item"))
+			{
+				doableActions.remove("Use Item");
+			}
+		}
+		if(doableActions.contains("Use Item"))
+		{
+			//doableActions.remove("Use Item");
+			return this.doableActions;
+		}
+		if(player.getPouch().size() != 0)
+		{
+			doableActions.add("Use Item");
+		}
+		
+		if(enemyRef != null)
+		{
+			for(String s: doableActions)
+			{
+				if(s.contains("move"))
+				{
+					doableActions.remove(s);
+					return this.doableActions;
+				}
+			}
+					
+		}
+		if(enemyRef == null)
+		{
+			if (isDoor[0]) {
+				if(!doableActions.contains("move north"))
+				{
+					doableActions.add("move north");
+				}
+			}
+			if (isDoor[1]) {
+				
+				if(!doableActions.contains("move east"))
+				{
+					doableActions.add("move east");
+				}			
+			}
+			if (isDoor[2]) {
+				if(!doableActions.contains("move south"))
+				{
+					doableActions.add("move south");
+				}			
+			}
+			if (isDoor[3]) {
+				if(!doableActions.contains("move west"))
+				{
+					doableActions.add("move west");
+				}			
+			}
+		}
+		
         return this.doableActions;
     }
 
@@ -321,6 +384,20 @@ public class Room {
         return p;
            
     }
+	
+	public Player getPlayer()
+	{
+		return this.player;
+	}
+	
+	public Enemy removeEnemy(){
+        Enemy e = this.enemyRef;
+        this.enemyRef = null;
+		doableActions.remove("attack enemy");
+        return enemyRef;
+           
+    }
+
     
 	/**
 	* Method to add a player to this room object
