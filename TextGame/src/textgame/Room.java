@@ -260,6 +260,47 @@ public class Room {
 			doableActions.add("Use Item");
 		}
 		
+		if(enemyRef != null)
+		{
+			for(String s: doableActions)
+			{
+				if(s.contains("move"))
+				{
+					doableActions.remove(s);
+					return this.doableActions;
+				}
+			}
+					
+		}
+		if(enemyRef == null)
+		{
+			if (isDoor[0]) {
+				if(!doableActions.contains("move north"))
+				{
+					doableActions.add("move north");
+				}
+			}
+			if (isDoor[1]) {
+				
+				if(!doableActions.contains("move east"))
+				{
+					doableActions.add("move east");
+				}			
+			}
+			if (isDoor[2]) {
+				if(!doableActions.contains("move south"))
+				{
+					doableActions.add("move south");
+				}			
+			}
+			if (isDoor[3]) {
+				if(!doableActions.contains("move west"))
+				{
+					doableActions.add("move west");
+				}			
+			}
+		}
+		
         return this.doableActions;
     }
 
