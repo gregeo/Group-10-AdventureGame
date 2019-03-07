@@ -24,40 +24,6 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-		/*
-		//game story
-		System.out.println("Dungeon Hero!");
-		
-		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
-		System.out.println("The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.");
-		System.out.println(" Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
-		System.out.println("Upon leaving the town, he is assailed by goblins!");
-		System.out.println("He must fight to find his way to the dungeon that the Shadow King inhabits.");
-		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
-		System.out.println("Save the princess and the kingdom!");
-
-		
-		//create map object
-        Map m = new Map(4,4);
-        
-		//print map 
-        System.out.print(m.printMap());
-        
-		//game loop
-		//not finished
-		while(true)
-		{
-			Room current = m.getRoom(0 , 0);
-			ArrayList<String> doableActions = current.getDoableActions();
-			for (int i = 0; i < doableActions.size(); i++) {
-				String tempLine = doableActions.get(i);
-				System.out.println(tempLine);
-			}
-			
-			
-			
-		}*/
-        
         //hard coded testing commands for this class
 		System.out.println("Dungeon Hero!");
 		
@@ -90,23 +56,30 @@ public class TextGame {
 
         Scanner scanner = new Scanner(System.in);
         boolean gameRunning = true;
+		System.out.println(m.allRoomsCleared());
         while (gameRunning) {
-            System.out.println(m.printMap());
-            System.out.println(m.getRoom(m.playerX, m.playerY).getText());
-            System.out.println("you can: " + m.getRoom(m.playerX, m.playerY).getDoableActions());
-            String action = scanner.nextLine();
-            if (action.equalsIgnoreCase("end")) {
-                gameRunning = false;
-            } else {
-                //System.out.println(action);
-                int i = m.runAction(action);
-				if(i == 0)
-				{
-					break;
+			while(!m.allRoomsCleared())
+			{
+				System.out.println(m.printMap());
+				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
+				System.out.println("you can: " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
+				String action = scanner.nextLine();
+				if (action.equalsIgnoreCase("end")) {
+					gameRunning = false;
+				} else {
+					//System.out.println(action);
+					int i = m.runAction(action);
+					if(i == 0)
+					{
+						break;
+					}
+
 				}
-
-            }
-
+			}
+			
+			System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+			break;
+			
         }
 		
     }

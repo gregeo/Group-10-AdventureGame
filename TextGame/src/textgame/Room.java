@@ -272,7 +272,8 @@ public class Room {
 			}
 					
 		}
-		if(enemyRef == null)
+		//if(enemyRef == null)
+		else
 		{
 			if (isDoor[0]) {
 				if(!doableActions.contains("move north"))

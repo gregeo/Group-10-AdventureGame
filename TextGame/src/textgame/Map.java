@@ -21,9 +21,10 @@ public class Map {
 
     }
     //declare and initialize class members
-    Room rooms[][];
-    int playerX;
-    int playerY;
+    private Room rooms[][];
+    private int playerX;
+    private int playerY;
+	private ArrayList<Room> roomList = new ArrayList<Room>();
 
     /**
      * This constructor creates a new map object that represents a map with a
@@ -55,7 +56,16 @@ public class Map {
 		this.playerX = playerX;
 		this.playerY = playerY;
     }
+	
+	public int getPlayerX()
+	{
+		return playerX;
+	}
 
+	public int getPlayerY()
+	{
+		return playerY;
+	}
     /**
      * This method adds a new room to the map, by adding it to the 2d array
      * rooms
@@ -70,12 +80,13 @@ public class Map {
         //check if valid room placement on map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
             rooms[x][y] = room;
+			roomList.add(room);
             return 1;
         }
         return -1;
     }
 
-    /**
+    /*
      * This method gets the room in the specified position
      *
      * @param x the rooms horizontal position
@@ -90,6 +101,31 @@ public class Map {
         }
         return null;
     }
+	
+	
+	public ArrayList<Room> getAllRooms()
+	{
+		ArrayList<Room> roomListTemp = new ArrayList<Room>();
+		
+		for(Room rm: roomList)
+		{
+			roomListTemp.add(rm);
+		}
+		return roomListTemp;
+	}
+	public boolean allRoomsCleared()
+	{
+		for(Room room: roomList)
+		{
+			if(room.getEnemy() != null)
+			{
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
 
     /**
      * This method completes the action chosen by the player for a movement on
