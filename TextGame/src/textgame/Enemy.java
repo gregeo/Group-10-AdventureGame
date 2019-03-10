@@ -8,10 +8,9 @@ package textgame;
 import java.lang.Math;
 
 /**
- *a class to handle spesific enemys
+ *a class to handle specific enemy
  *
  * 
- * @author Jarred Hilao
  */
 public class Enemy {
 	

@@ -7,7 +7,6 @@ package textgame;
 import java.util.ArrayList;
 /**
  *
- * @author Jarred Hilao
  */
 public class Player {
 	

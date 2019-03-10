@@ -15,8 +15,6 @@ import textgame.Map;
  *
  * a cmain method to run the game 
  * there will likly be a private print out method for ese of reading
- * 
- * @author George Smith
  */
 public class TextGame {
 
@@ -46,7 +44,7 @@ public class TextGame {
         boolean b2[] = {false, false, true, true};
         Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
 
         m.addRoom(r1, 0, 0);
 		m.addRoom(r2, 1, 0);
@@ -56,16 +54,17 @@ public class TextGame {
 
         Scanner scanner = new Scanner(System.in);
         boolean gameRunning = true;
-		System.out.println(m.allRoomsCleared());
+		boolean roomsCleared = false;
+		String action = "";
         while (gameRunning) {
-			while(!m.allRoomsCleared())
+			/*while(!roomsCleared)
 			{
 				System.out.println(m.printMap());
 				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
 				System.out.println("you can: " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
-				String action = scanner.nextLine();
+				action = scanner.nextLine();
 				if (action.equalsIgnoreCase("end")) {
-					gameRunning = false;
+					break;
 				} else {
 					//System.out.println(action);
 					int i = m.runAction(action);
@@ -75,9 +74,17 @@ public class TextGame {
 					}
 
 				}
+				roomsCleared = m.allRoomsCleared();
 			}
-			
-			System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+			if (action.equalsIgnoreCase("end")) {
+					break;
+				} 
+			if(m.allRoomsCleared())*/
+			{
+				System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+				BossLevel bossLevel = new BossLevel();
+				bossLevel.printEnemyGrid();
+			}
 			break;
 			
         }
