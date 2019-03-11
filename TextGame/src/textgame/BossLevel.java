@@ -2,6 +2,8 @@ package textgame;
 
 import java.util.Random;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BossLevel
 {
@@ -9,13 +11,16 @@ public class BossLevel
 	private String[][] playerGrid = new String[1][3];
 	private int bossX;
 	private int bossY;
-	private int playerX;
-	private int playerY;
+	private int playerX = 0;
+	private int playerY = 1;
 	private Player player;
 	private Boss boss;
+	private ArrayList<String> actions = new ArrayList<String>();
 	
-	public BossLevel()
+	public BossLevel(Player player, Boss boss)
 	{
+		this.boss =  new Boss(boss);
+		this.player = new Player(player);
 		this.setBossX();
 		this.setBossY();
 		for(int i = 0; i < enemyGird.length; i++)
@@ -36,7 +41,14 @@ public class BossLevel
 		{
 			for(int j = 0; j < playerGrid[i].length; j++)
 			{
-				enemyGird[i][j] = "-";
+				if(i == 0 && j == 1)
+				{
+					playerGrid[i][j] = "P";
+				}
+				else
+				{
+					playerGrid[i][j] = "-";
+				}
 			}
 		}
 	}
@@ -46,7 +58,6 @@ public class BossLevel
 		double randomX = Math.random();
 		randomX = randomX * 2 + 1;
 		int x = (int)randomX;
-		System.out.println(x);
 		this.bossX = x;
 
 	}
@@ -56,7 +67,6 @@ public class BossLevel
 		double randomY = Math.random();
 		randomY = randomY * 2 + 1;
 		int y = (int)randomY;
-		System.out.println(y);
 		this.bossY = y;
 
 	}
@@ -93,6 +103,8 @@ public class BossLevel
 	
 	public void updateEnemyGrid()
 	{
+		setBossX();
+		setBossY();
 		for(int i = 0; i < enemyGird.length; i++)
 		{
 			for(int j = 0; j < enemyGird[i].length; j++)
@@ -112,6 +124,7 @@ public class BossLevel
 	
 	public void printEnemyGrid()
 	{
+		System.out.println("Enemy Position\n");
 		for(int i = 0; i < enemyGird.length; i++)
 		{
 			for(int j = 0; j < enemyGird[i].length; j++)
@@ -127,6 +140,102 @@ public class BossLevel
 				
 			}
 		}
+	}
+	
+	public void updatePlayerGrid()
+	{
+		for(int i = 0; i < playerGrid.length; i++)
+		{
+			for(int j = 0; j < playerGrid[i].length; j++)
+			{
+				if(this.getPlayerX() == j && this.getPlayerY() == i)
+				{
+					playerGrid[i][j] = "P";
+				}
+				else
+				{
+					playerGrid[i][j] = "-";
+				}
+				
+			}
+		}
+	}
+	
+	public void printPlayerGrid()
+	{
+		System.out.println("\nPlayer Position\n");
+		for(int i = 0; i < playerGrid.length; i++)
+		{
+			for(int j = 0; j < playerGrid[i].length; j++)
+			{
+
+				System.out.print(playerGrid[i][j]);
+			
+				
+			}
+		}
+	}
+	
+	public ArrayList<String> getActions()
+	{
+		if(player.getPouch().size() != 0 && !actions.contains("Use Item"))
+		{
+			actions.add("Use Item");
+		}
+		if(boss.getHealth() > 0 && !actions.contains("Use Item") && !actions.contains("Attack") )
+		{
+			actions.add("Attack");
+		}
+		return actions;
+	}
+	
+	public int selectedAction(String action)
+	{
+		action = action.toLowerCase();
+		
+		if(action.contains("attack"))
+		{
+			this.attack(player);
+		}
+		if(actions.contains("use item"))
+		{
+			this.useItem();
+		}
+		return -1;
+	}
+	
+	public void attack(Player target)
+	{
+		this.updateEnemyGrid();
+		Scanner xScan = new Scanner(System.in);
+		Scanner yScan = new Scanner(System.in);
+		System.out.println("Which x coordinate do you want to attack?");
+		int x = xScan.nextInt();
+		System.out.println("Which y coordinate do you want to attack?");
+		int y = yScan.nextInt();
+		boolean hit = false;
+		if(y == this.getBossX() && x == this.getBossY())
+		{
+			System.out.println("here");
+			player.attackEnemy(boss);
+		}
+		System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
+		target.takeDamage(boss.getAttackStrength());
+    }
+	
+	public void useItem()
+	{
+		ArrayList<String> inventory = player.getPouch();
+		int numItems = 1;
+		for(String item: inventory)
+		{
+			System.out.println(numItems + ". " + item);
+			numItems++;
+		}
+		Scanner itemScanner = new Scanner(System.in);
+		String itemSelection = itemScanner.nextLine();
+		
+		int item = player.useItem(itemSelection);
 	}
 }
 	

@@ -20,6 +20,14 @@ public class Enemy {
     private int posY;
 
 	
+	public Enemy(Enemy enemyToCopy)
+	{
+		this.health = enemyToCopy.health;
+	}
+	public Enemy(int health)
+	{
+		this.health = health;
+	}
 	public Enemy(int posX, int posY)
 	{
 		setHealth();
