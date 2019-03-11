@@ -7,7 +7,6 @@ package textgame;
 import java.util.ArrayList;
 /**
  *
- * @author Jarred Hilao
  */
 public class Player {
 	
@@ -18,6 +17,13 @@ public class Player {
 	private int attackStrength = 2;
     private ArrayList<String> pouch;
 	
+	
+	public Player(Player playerToCopy)
+	{
+		this.health = playerToCopy.health;
+		this.pouch = playerToCopy.pouch;
+		this.attackStrength = playerToCopy.attackStrength;
+	}
 	/**
 	* constructor to create a player's inventory and no position 
 	*
@@ -146,7 +152,8 @@ public class Player {
 	* @param current enemy in the room
 	*/
     public void attackEnemy(Enemy target) {
-		System.out.println("Player's attack Strength: " + attackStrength);
+		System.out.println("Player's attack Strength: " + this.attackStrength);
+		System.out.println(target.toString());
         target.takeDamage(attackStrength);
     }
 	
@@ -176,29 +183,9 @@ public class Player {
 	*
 	* @return int value used for testing
 	*/
-    public int useItem(String itemToUse) {
-    /*
-        for (int i = 0; i <= this.pouch.size(); i++) {
-            String itemReference = this.pouch.get(i);
-            if (itemReference.isEqauals(itemToUse)){
-                this.pouch.remove(i);
-                return 1;
-            }
-        }
-        return -1;
-        // to be redone with String items...
-        */
-        /*
-        Item item = new Item();
-        for (int i = 0; i <= pouch.size(); i++) {
-            Item tempItem = this.pouch.get(i);
-            if (tempItem.getName() == itemToUse) {
-                item = tempItem;
-                this.pouch.remove(i);
-            }
-        }
-        item.use();
-     */
+    public int useItem(String itemToUse)
+	{
+  
 		//find the item they would like to use and remove it from their inventory 
         for (int i = 0; i < this.pouch.size(); i++) {
             String tempItem = this.pouch.get(i);
@@ -216,12 +203,6 @@ public class Player {
 		{
 			this.attackStrength += 2;
 		}
-		/*more logic required but will be used to find the item and to carry out the correct action 
-		for (int i = 0; i <= this.pouch.size(); i++) {
-			String tempItem = this.pouch.get(i);
-			if (tempItem.equals(itemToUse)) {
-				return 1;
-        }*/
     
         return -1;
     }

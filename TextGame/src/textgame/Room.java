@@ -10,7 +10,6 @@ import java.util.ArrayList;
 /**
  * a class that will run a room and its decision making
  *
- * @author George Smith
  */
 public class Room {
 	
@@ -126,7 +125,7 @@ public class Room {
     public int doAction(String input) {
         input = input.toLowerCase();
 
-		//call coresponding method for the user's action choice 
+		//call corresponding method for the user's action choice 
         if (input.contains("move")) {
             return this.move(input);
         } else if (input.contains("attack")) {
@@ -239,27 +238,14 @@ public class Room {
 	/**
 	* Method to get all of the doable actions in the room
 	*
-	* @return the arrayList coresponding to all of the actions possible in the room
+	* @return the arrayList corresponding to all of the actions possible in the room
 	*/
     public ArrayList<String> getDoableActions() 
 	{
-		if(player.getPouch().size() == 0)
-		{
-			if(doableActions.contains("Use Item"))
-			{
-				doableActions.remove("Use Item");
-			}
-		}
-		if(doableActions.contains("Use Item"))
-		{
-			//doableActions.remove("Use Item");
-			return this.doableActions;
-		}
-		if(player.getPouch().size() != 0)
+		if(player.getPouch().size() != 0 && !doableActions.contains("Use Item"))
 		{
 			doableActions.add("Use Item");
 		}
-		
 		if(enemyRef != null)
 		{
 			for(String s: doableActions)
@@ -300,6 +286,24 @@ public class Room {
 				}			
 			}
 		}
+		if(player.getPouch().size() == 0)
+		{
+			if(doableActions.contains("Use Item"))
+			{
+				doableActions.remove("Use Item");
+			}
+		}
+		if(doableActions.contains("Use Item"))
+		{
+			//doableActions.remove("Use Item");
+			return this.doableActions;
+		}
+		/*if(player.getPouch().size() != 0)
+		{
+			doableActions.add("Use Item");
+		}*/
+		
+		
 		
         return this.doableActions;
     }

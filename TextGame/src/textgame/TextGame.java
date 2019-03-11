@@ -15,8 +15,6 @@ import textgame.Map;
  *
  * a cmain method to run the game 
  * there will likly be a private print out method for ese of reading
- * 
- * @author George Smith
  */
 public class TextGame {
 
@@ -24,6 +22,7 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
 
 		Scanner keyboard = new Scanner(System.in);
 		/*
@@ -71,6 +70,8 @@ public class TextGame {
 			
 		}*/
         
+=======
+>>>>>>> 42dceb694e7f4ceb70fc9adee2b7e2777e341cf3
         //hard coded testing commands for this class
 		System.out.println("Dungeon Hero!");
 		
@@ -93,7 +94,7 @@ public class TextGame {
         boolean b2[] = {false, false, true, true};
         Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "This room is also empty, you feel very uneasy and decide to turn away and come back when there is more activity...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
 
         m.addRoom(r1, 0, 0);
 		m.addRoom(r2, 1, 0);
@@ -103,104 +104,55 @@ public class TextGame {
 
         Scanner scanner = new Scanner(System.in);
         boolean gameRunning = true;
+		boolean roomsCleared = false;
+		String action = "";
+		int actionResult = 0;
+		Boss boss = new Boss(15, 15);
+		BossLevel bossLevel = new BossLevel(p, boss);
         while (gameRunning) {
-            System.out.println(m.printMap());
-            System.out.println(m.getRoom(m.playerX, m.playerY).getText());
-            System.out.println("you can: " + m.getRoom(m.playerX, m.playerY).getDoableActions());
-            String action = scanner.nextLine();
-            if (action.equalsIgnoreCase("end")) {
-                gameRunning = false;
-            } else {
-                //System.out.println(action);
-                int i = m.runAction(action);
-				if(i == 0)
-				{
+			/*while(!roomsCleared)
+			{
+				System.out.println(m.printMap());
+				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
+				System.out.println("you can: " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
+				action = scanner.nextLine();
+				if (action.equalsIgnoreCase("end")) {
 					break;
+				} else {
+					//System.out.println(action);
+					int i = m.runAction(action);
+					if(i == 0)
+					{
+						break;
+					}
+
 				}
-
-            }
-
+				roomsCleared = m.allRoomsCleared();
+			}
+			if (action.equalsIgnoreCase("end")) {
+					break;
+				} 
+				
+			if(m.allRoomsCleared())*/
+			{
+				System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+				System.out.println("The evil shadow king moves in the shadows meaning you never know where he is. When attacking him you must use your best guess to strike your attack and hope he is in that position.");
+				bossLevel.printEnemyGrid();
+				bossLevel.printPlayerGrid();
+				System.out.println("\n \nYou can: " + bossLevel.getActions());
+				action = scanner.nextLine();
+				actionResult = bossLevel.selectedAction(action);
+				if(actionResult == 0)
+				{
+					gameRunning = false;
+				}
+				
+			}
+			//break;
+			
         }
 		
     }
-        
-        /*
-    }
-        boolean gameRunning = true;
-		Scanner prompt = new Scanner(System.in);
-		Scanner choiceScan = new Scanner();
-		
-		Player player;
-		Map map;
-		Room room;
-		Enemy enemy;
-		
-		
-		System.out.println("Title");
-	
-		System.out.println("Back Story");
-	
-		System.out.println("Press enter to begin");
-				
-		String userInput = prompt.nextLine();
-		
-		player  = new Player(100, 0, 0);
-		Room = new room();
-		room.showRoom();
-		
-		while(gameRunning)
-		{
-			
-			/*
-				1. move x in room
-				2. move y in room
-				2. pickup item0
-				3. attack enemy
-				4. use item
-			*/
-			/*
-			player.displayChoice();
-			
-			System.out.println("Select a choice");
-			int choice = choiceScan.nextInt();
-			
-			
-			switch(choice)
-			{
-				case 1:
-				
-					player.moveX();
-					room.updateRoom();
-					room.showRoom();
-					break;
-					
-				case 2:
-				
-					player.moveY();
-					room.updateRoom();
-					room.showRoom();
-					break;
-				
-				case 3:
-				
-					player.pickUpItem();
-					room.updateRoom();
-					room.showRoom();
-					break;
-					
-				case 4:
-				
-					player.attack();
-					room.updateRoom();
-					room.showRoom();
-					break;
-				
-				case 5:
-					
-					player.useItem()
-					break;
-			}
-                        */
-    }
+}
     
 
