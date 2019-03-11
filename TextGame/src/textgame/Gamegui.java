@@ -14,6 +14,30 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Gamegui extends Application {
+    private ArrayList<String> refActions;
+    private ArrayList<Button> actionArray;
+    private Room refRoom;
+    private Boolean gameRun;
+
+    public ArrayList<String> getRefActions() {
+        ArrayList<String> tempRef = this.refActions;
+        return tempRef;
+    }
+
+    public getRefRoom() {
+        Room tempRoom = this.refRoom;
+        return refRoom;
+    }
+
+    public Boolean getGameRun() {
+        Boolean tempGameRun = this.gameRun;
+        return tempGameRun;
+    }
+
+    public void setGameRun(Boolean runValue) {
+        this.gameRun = runValue;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         Group root = new Group();
@@ -24,9 +48,9 @@ public class Gamegui extends Application {
         VBox doableActions = new VBox();
 
         //While (GET TEXT GAME RUN VALUE) {
-            Room refRoom = new Room();
-            ArrayList<String> refActions = refRoom.getDoableActions();
-            ArrayList<Button> actionArray = new ArrayList();
+            //refRoom = Copy Constructor for  room player is in.
+            refActions = refRoom.getDoableActions();
+            actionArray = new ArrayList();
 
             for (int i = 0; i < refActions.size(); i++) {
                 actionArray.add(new Button(refActions.get(i)));
