@@ -125,7 +125,7 @@ public class Room {
     public int doAction(String input) {
         input = input.toLowerCase();
 
-		//call coresponding method for the user's action choice 
+		//call corresponding method for the user's action choice 
         if (input.contains("move")) {
             return this.move(input);
         } else if (input.contains("attack")) {

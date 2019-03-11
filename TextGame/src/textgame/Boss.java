@@ -3,7 +3,7 @@ package textgame;
 
 public class Boss extends Enemy
 {
-	private int health;
+	//private int health;
 	private int attackStrength;
 	
 	public Boss(Boss bossToCopy)
@@ -22,11 +22,6 @@ public class Boss extends Enemy
 	public void setAttackStrength(int attackStrength)
 	{
 		this.attackStrength = attackStrength;
-	}
-	
-	public void setHealth(int health)
-	{
-		this.health = 15;
 	}
 	
 	public int getAttackStrength()
@@ -54,15 +49,25 @@ public class Boss extends Enemy
 
 	public void takeDamage(int dmg) {
         if (dmg >= 0) {
-            int tempHealth = this.health - dmg;
+            int tempHealth = this.getHealth() - dmg;
+			System.out.println(tempHealth);
 			if(tempHealth >= 0)
 			{
-				this.health = tempHealth;
+				this.setNonRandomHealth(tempHealth);
 			}
 			else
 			{
-				this.health = 0;
+				this.setNonRandomHealth(0);
 			}
         }
-    } 
+    }
+
+	public String toString(){
+		int tempHealth = this.getHealth();
+		int tempAttackStrength = getAttackStrength();
+        String health = Integer.toString(tempHealth);
+        String attackStrength = Integer.toString(tempAttackStrength);
+        String methodReturn = "Boss information (health, attackStrength): (" + health + ";" + attackStrength + ")";
+        return methodReturn;
+    }
 }

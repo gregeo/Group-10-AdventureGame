@@ -152,7 +152,8 @@ public class Player {
 	* @param current enemy in the room
 	*/
     public void attackEnemy(Enemy target) {
-		System.out.println("Player's attack Strength: " + attackStrength);
+		System.out.println("Player's attack Strength: " + this.attackStrength);
+		System.out.println(target.toString());
         target.takeDamage(attackStrength);
     }
 	

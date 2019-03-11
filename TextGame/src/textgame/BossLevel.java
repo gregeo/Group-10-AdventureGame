@@ -195,7 +195,7 @@ public class BossLevel
 		
 		if(action.contains("attack"))
 		{
-			this.attack(player);
+			this.attack();
 		}
 		if(actions.contains("use item"))
 		{
@@ -204,9 +204,9 @@ public class BossLevel
 		return -1;
 	}
 	
-	public void attack(Player target)
+	public void attack()
 	{
-		this.updateEnemyGrid();
+		//this.updateEnemyGrid();
 		Scanner xScan = new Scanner(System.in);
 		Scanner yScan = new Scanner(System.in);
 		System.out.println("Which x coordinate do you want to attack?");
@@ -214,13 +214,14 @@ public class BossLevel
 		System.out.println("Which y coordinate do you want to attack?");
 		int y = yScan.nextInt();
 		boolean hit = false;
-		if(y == this.getBossX() && x == this.getBossY())
+		if(x == this.getBossX() && y == this.getBossY())
 		{
-			System.out.println("here");
 			player.attackEnemy(boss);
+			System.out.println(player.toString());
+			System.out.println(boss.toString());
 		}
-		System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
-		target.takeDamage(boss.getAttackStrength());
+		//System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
+		//target.takeDamage(boss.getAttackStrength());
     }
 	
 	public void useItem()

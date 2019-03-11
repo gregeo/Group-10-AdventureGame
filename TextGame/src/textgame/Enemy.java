@@ -26,6 +26,7 @@ public class Enemy {
 	}
 	public Enemy(int health)
 	{
+		
 		this.health = health;
 	}
 	public Enemy(int posX, int posY)
@@ -56,6 +57,11 @@ public class Enemy {
 		int health = (int)randomHealth;
 		this.health = health;
     }
+	
+	public void setNonRandomHealth(int health)
+	{
+		this.health = health;
+	}
 
 	/**
 	* method to get an enemy's x postion
@@ -95,6 +101,7 @@ public class Enemy {
     public void takeDamage(int dmg) {
         if (dmg >= 0) {
             int tempHealth = this.health - dmg;
+			
 			if(tempHealth >= 0)
 			{
 				this.health = tempHealth;
