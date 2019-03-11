@@ -195,7 +195,7 @@ public class BossLevel
 		
 		if(action.contains("attack"))
 		{
-			this.attack();
+			return this.attack();
 		}
 		if(actions.contains("use item"))
 		{
@@ -204,7 +204,7 @@ public class BossLevel
 		return -1;
 	}
 	
-	public void attack()
+	public int attack()
 	{
 		//this.updateEnemyGrid();
 		Scanner xScan = new Scanner(System.in);
@@ -220,6 +220,12 @@ public class BossLevel
 			System.out.println(player.toString());
 			System.out.println(boss.toString());
 		}
+		if(boss.getHealth() <= 0)
+		{
+			return 0;
+		}
+		
+		return 1;
 		//System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
 		//target.takeDamage(boss.getAttackStrength());
     }
