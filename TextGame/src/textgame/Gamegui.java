@@ -31,10 +31,28 @@ public class Gamegui extends Application {
             for (int i = 0; i < refActions.size(); i++) {
                 actionArray.add(new Button(refActions.get(i)));
             }
+
+            for (int i = 0; i < actionArray.size(); i++) {
+                if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
+                    //Do something about moving north
+                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
+                    //Do ___
+                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
+                    //Do ___
+                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
+                    //Do ___
+                } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
+                    //Do ___
+                } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
+                    //Do ___
+                }
+            }
+            /*
             Button move = new Button("MOVE");
             Button attack = new Button("ATTACK");
             doableActions.getChildren().add(move);
             doableActions.getChildren().add(attack);
+            */
 
             posRoot.setLeft(doableActions);
 

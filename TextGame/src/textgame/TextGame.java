@@ -22,7 +22,6 @@ public class TextGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-<<<<<<< HEAD
 
 		Scanner keyboard = new Scanner(System.in);
 		/*
@@ -70,8 +69,6 @@ public class TextGame {
 			
 		}*/
         
-=======
->>>>>>> 42dceb694e7f4ceb70fc9adee2b7e2777e341cf3
         //hard coded testing commands for this class
 		System.out.println("Dungeon Hero!");
 		
