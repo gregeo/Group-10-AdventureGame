@@ -50,7 +50,6 @@ public class Boss extends Enemy
 	public void takeDamage(int dmg) {
         if (dmg >= 0) {
             int tempHealth = this.getHealth() - dmg;
-			System.out.println(tempHealth);
 			if(tempHealth >= 0)
 			{
 				this.setNonRandomHealth(tempHealth);
