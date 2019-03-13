@@ -108,7 +108,7 @@ public class TextGame {
 		BossLevel bossLevel = new BossLevel(p, boss);
 		int displayCount = 0;
         while (gameRunning) {
-			/*while(!roomsCleared)
+			while(!roomsCleared)
 			{
 				System.out.println(m.printMap());
 				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
@@ -131,7 +131,7 @@ public class TextGame {
 					break;
 				} 
 				
-			if(m.allRoomsCleared())*/
+			if(m.allRoomsCleared())
 			{
 				if(displayCount == 0)
 				{

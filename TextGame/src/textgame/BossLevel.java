@@ -183,7 +183,7 @@ public class BossLevel
 		{
 			actions.add("Use Item");
 		}
-		if(boss.getHealth() > 0 && !actions.contains("Use Item") && !actions.contains("Attack") )
+		if(boss.getHealth() > 0 && !actions.contains("Attack") )
 		{
 			actions.add("Attack");
 		}
@@ -272,6 +272,7 @@ public class BossLevel
 		this.updatePlayerGrid();
 		if(attackLocation == this.getPlayerX())
 		{
+			System.out.println("You have been hit!");
 			boss.attack(player);
 		}
 		else
