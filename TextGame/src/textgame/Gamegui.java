@@ -3,6 +3,8 @@ package textgame;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 public class Gamegui extends Application {
     private ArrayList<String> refActions;
     private ArrayList<Button> actionArray;
-    private Room refRoom;
+    private Room refRoom = new Room(TextGame.m.getRoom(TextGame.Player.getX(),TextGame.Player.getY()));
     private Boolean gameRun;
 
     public ArrayList<String> getRefActions() {
@@ -49,8 +51,8 @@ public class Gamegui extends Application {
 
         //While (GET TEXT GAME RUN VALUE) {
             //refRoom = Copy Constructor for  room player is in.
-            refActions = refRoom.getDoableActions();
-            actionArray = new ArrayList();
+            this.refActions = refRoom.getDoableActions();
+            this.actionArray = new ArrayList();
 
             for (int i = 0; i < refActions.size(); i++) {
                 actionArray.add(new Button(refActions.get(i)));
@@ -58,17 +60,58 @@ public class Gamegui extends Application {
 
             for (int i = 0; i < actionArray.size(); i++) {
                 if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about moving north
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
-                    //Do ___
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
+                    //Do something about moving south
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
-                    //Do ___
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
+                    //Do something about moving west
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
-                    //Do ___
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
+                    //Do something about moving east
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
-                    //Do ___
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
+                    //Do something about attacking
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
-                    //Do ___
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
+                    //Do something about using an item
+                    //while (Something about making a choice) {
+                        //choice 1:  ...
+                        //choice ...: ...
+                        //Choise n: exit
+                    //}
                 }
             }
             /*
