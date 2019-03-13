@@ -3,6 +3,8 @@ package textgame;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -58,6 +60,12 @@ public class Gamegui extends Application {
 
             for (int i = 0; i < actionArray.size(); i++) {
                 if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about moving north
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
                     //Do something about moving south
