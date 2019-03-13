@@ -8,7 +8,6 @@ package textgame;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
 /**
  *
  * a class to contain a room[][] array and methods to work a game map
@@ -23,7 +22,7 @@ public class Map {
     private Room rooms[][];
     private int playerX;
     private int playerY;
-	private ArrayList<Room> roomList = new ArrayList<Room>();
+    private ArrayList<Room> roomList = new ArrayList<Room>();
 
     /**
      * This constructor creates a new map object that represents a map with a
@@ -52,19 +51,18 @@ public class Map {
      */
     public Map(int length, int height, int playerX, int playerY) {
         rooms = new Room[length][height];
-		this.playerX = playerX;
-		this.playerY = playerY;
+        this.playerX = playerX;
+        this.playerY = playerY;
     }
-	
-	public int getPlayerX()
-	{
-		return playerX;
-	}
 
-	public int getPlayerY()
-	{
-		return playerY;
-	}
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
     /**
      * This method adds a new room to the map, by adding it to the 2d array
      * rooms
@@ -79,7 +77,7 @@ public class Map {
         //check if valid room placement on map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
             rooms[x][y] = room;
-			roomList.add(room);
+            roomList.add(room);
             return 1;
         }
         return -1;
@@ -100,31 +98,57 @@ public class Map {
         }
         return null;
     }
-	
-	
-	public ArrayList<Room> getAllRooms()
-	{
-		ArrayList<Room> roomListTemp = new ArrayList<Room>();
-		
-		for(Room rm: roomList)
-		{
-			roomListTemp.add(rm);
-		}
-		return roomListTemp;
-	}
-	public boolean allRoomsCleared()
-	{
-		for(Room room: roomList)
-		{
-			if(room.getEnemy() != null)
-			{
-				return false;
-			}
-		}
-		return true;
-		
-	}
-	
+
+    /**
+     *
+     * converts the two domentional room map to 1 dimenton then returns it
+     *
+     * @return a one dimentiaonal list
+     */
+    public ArrayList<Room> getAllRooms() {
+        ArrayList<Room> roomListTemp = new ArrayList<Room>();
+
+        for (Room rm : roomList) {
+            roomListTemp.add(rm);
+        }
+        return roomListTemp;
+    }
+
+    public boolean allRoomsCleared() {
+        for (Room room : roomList) {
+            if (room.getEnemy() != null) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+/**
+ * 
+ * 
+ */
+    public void fixRoomDoors() {//untested
+        int roomY = 0;
+        for (Room[] room1d : rooms) {
+            int roomX = 0;
+            for (Room r : room1d) {
+                if (r.getIsDoor()[0] == true && roomX - 1 >= 0 && this.getRoom(roomX, roomY) == null) {
+                    r.getIsDoor()[0] = false;
+                } else if (r.getIsDoor()[1] == true && roomY + 1 < this.rooms.length && this.getRoom(roomX, roomY) == null) {
+                    r.getIsDoor()[1] = false;
+                } else if (r.getIsDoor()[2] == true && roomX + 1 < this.rooms[0].length && this.getRoom(roomX, roomY) == null) {
+                    r.getIsDoor()[2] = false;
+                } else if (r.getIsDoor()[3] == true && roomY - 1 >= 0 && this.getRoom(roomX, roomY) == null) {
+                    r.getIsDoor()[3] = false;
+                }
+                roomX++;
+            }
+            roomY++;
+        }
+
+    }
+    
+    
 
     /**
      * This method completes the action chosen by the player for a movement on
@@ -141,74 +165,65 @@ public class Map {
 
         //if doAction returns one of these values the player chose to move
         //else they chose a different command 
-        Player pMain = this.getRoom(playerX, playerY).getPlayer(); 
-	
-		if(pMain.getHealth() > 0)
-		{
-			if (i == 10) {
-				Player p = this.getRoom(playerX, playerY).removePlayer();
-				playerY--;
-				p.setY(playerY);
-				this.getRoom(playerX, playerY).addPlayer(p);
-			} else if (i == 11) {
-				Player p = this.getRoom(playerX, playerY).removePlayer();
-				playerX++;
-				p.setX(playerX);
-				this.getRoom(playerX, playerY).addPlayer(p);
-			} else if (i == 12) {
-				Player p = this.getRoom(playerX, playerY).removePlayer();
-				playerY++;
-				p.setY(playerY);
-				this.getRoom(playerX, playerY).addPlayer(p);
-			} else if (i == 13) {
-				Player p = this.getRoom(playerX, playerY).removePlayer();
-				playerX--;
-				p.setX(playerX);
-				this.getRoom(playerX, playerY).addPlayer(p);
-			} else if (i == 14) {
-				Player p = this.getRoom(playerX, playerY).getPlayer();
-				Enemy e = this.getRoom(playerX, playerY).getEnemy();
-				p.attackEnemy(e);
-				//p.takeDamage(1);
-				if(e.getHealth() > 0)
-				{
-					e.attack(p);
-				}
-				
-				System.out.println(e.toString() + "\n");
-				System.out.print(p.toString() + "\n");
-				
-				
-				if(e.getHealth() <= 0)
-				{
-					e = this.getRoom(playerX, playerY).removeEnemy();
-					System.out.print("Enemy dead \n");
+        Player pMain = this.getRoom(playerX, playerY).getPlayer();
 
-				}
-			if(pMain.getHealth() <= 0)
-			{
-				System.out.print("Game Over. You have been slain. \n");
-				return 0;
-			}
-		}
-			else if (i == 15) {
-				Player p = this.getRoom(playerX, playerY).getPlayer();
-				ArrayList<String> inventory = p.getPouch();
-				int numItems = 1;
-				for(String item: inventory)
-				{
-					System.out.println(numItems + ". " + item);
-					numItems++;
-				}
-				Scanner itemScanner = new Scanner(System.in);
-				String itemSelection = itemScanner.nextLine();
-				
-				int item = p.useItem(itemSelection);
-			}
-				
+        if (pMain.getHealth() > 0) {
+            if (i == 10) {
+                Player p = this.getRoom(playerX, playerY).removePlayer();
+                playerY--;
+                p.setY(playerY);
+                this.getRoom(playerX, playerY).addPlayer(p);
+            } else if (i == 11) {
+                Player p = this.getRoom(playerX, playerY).removePlayer();
+                playerX++;
+                p.setX(playerX);
+                this.getRoom(playerX, playerY).addPlayer(p);
+            } else if (i == 12) {
+                Player p = this.getRoom(playerX, playerY).removePlayer();
+                playerY++;
+                p.setY(playerY);
+                this.getRoom(playerX, playerY).addPlayer(p);
+            } else if (i == 13) {
+                Player p = this.getRoom(playerX, playerY).removePlayer();
+                playerX--;
+                p.setX(playerX);
+                this.getRoom(playerX, playerY).addPlayer(p);
+            } else if (i == 14) {
+                Player p = this.getRoom(playerX, playerY).getPlayer();
+                Enemy e = this.getRoom(playerX, playerY).getEnemy();
+                p.attackEnemy(e);
+                //p.takeDamage(1);
+                if (e.getHealth() > 0) {
+                    e.attack(p);
+                }
+
+                System.out.println(e.toString() + "\n");
+                System.out.print(p.toString() + "\n");
+
+                if (e.getHealth() <= 0) {
+                    e = this.getRoom(playerX, playerY).removeEnemy();
+                    System.out.print("Enemy dead \n");
+
+                }
+                if (pMain.getHealth() <= 0) {
+                    System.out.print("Game Over. You have been slain. \n");
+                    return 0;
+                }
+            } else if (i == 15) {
+                Player p = this.getRoom(playerX, playerY).getPlayer();
+                ArrayList<String> inventory = p.getPouch();
+                int numItems = 1;
+                for (String item : inventory) {
+                    System.out.println(numItems + ". " + item);
+                    numItems++;
+                }
+                Scanner itemScanner = new Scanner(System.in);
+                String itemSelection = itemScanner.nextLine();
+
+                int item = p.useItem(itemSelection);
+            }
 
         }
-		
 
         return i;
     }
@@ -260,18 +275,6 @@ public class Map {
             } else {
                 s = s + "  ";
             }
-
-            /*
-            if (row < this.rooms.length && this.rooms[(row)][i] == null) {
-                s = s + "  ";
-            } else if (row>0 && this.rooms[(row-1)][i] == null) {
-                s = s + "--";
-            } else if (!(row < this.rooms.length)) {
-                s = s + "  ";
-            } else {
-                s = s + "--";
-            }
-             */
         }
 
         return s;
