@@ -12,7 +12,7 @@ public class BossLevel
 	private int bossX;
 	private int bossY;
 	private int playerX = 0;
-	private int playerY = 0;
+	private int playerY = 1;
 	private Player player;
 	private Boss boss;
 	private ArrayList<String> actions = new ArrayList<String>();
@@ -111,11 +111,11 @@ public class BossLevel
 			{
 				if(this.getBossX() == j && this.getBossY() == i)
 				{
-					enemyGird[i][j] = "B";
+					this.enemyGird[i][j] = "B";
 				}
 				else
 				{
-					enemyGird[i][j] = "-";
+					this.enemyGird[i][j] = "-";
 				}
 				
 			}
@@ -148,13 +148,14 @@ public class BossLevel
 		{
 			for(int j = 0; j < playerGrid[i].length; j++)
 			{
-				if(this.getPlayerX() == j && this.getPlayerY() == i)
+				System.out.println(getPlayerX());
+				if(this.getPlayerX() == j && this.getPlayerY() == 1)
 				{
-					playerGrid[i][j] = "P";
+					this.playerGrid[i][j] = "P";
 				}
 				else
 				{
-					playerGrid[i][j] = "-";
+					this.playerGrid[i][j] = "-";
 				}
 				
 			}
@@ -225,22 +226,22 @@ public class BossLevel
 		else
 		{
 			System.out.println("You have missed, The Shadow King can now attack you! You must now try and dodge his attack");
-			System.out.println("Would you like to stay to go to the left, the middle, or the right");
-			String dirrection = dScan.nextLine();
-			dirrection.toLowerCase();
+			System.out.println("Would you like to go to the left, the middle, or the right");
+			String direction = dScan.nextLine();
+			direction.toLowerCase();
 			
-			if(dirrection == "left")
+			if(direction.equals("left"))
 			{
-				setPlayerX(0);
+				this.setPlayerX(0);
 			}
-			if(dirrection == "right")
+			if(direction.equals("right"))
 			{
-				setPlayerX(2);
+				this.setPlayerX(2);
 			
 			}
-			if(dirrection == "middle")
+			if(direction.equals("middle"))
 			{
-				setPlayerX(1);
+				this.setPlayerX(1);
 			}
 
 			this.bossAttack();
@@ -267,6 +268,7 @@ public class BossLevel
 		double randomAttackPosition = Math.random();
 		randomAttackPosition = randomAttackPosition * 2 + 1;
 		int attackLocation = (int)randomAttackPosition;
+		System.out.println("attack " + attackLocation);
 		this.updatePlayerGrid();
 		if(attackLocation == this.getPlayerX())
 		{
