@@ -49,8 +49,8 @@ public class Gamegui extends Application {
 
         //While (GET TEXT GAME RUN VALUE) {
             //refRoom = Copy Constructor for  room player is in.
-            refActions = refRoom.getDoableActions();
-            actionArray = new ArrayList();
+            this.refActions = refRoom.getDoableActions();
+            this.actionArray = new ArrayList();
 
             for (int i = 0; i < refActions.size(); i++) {
                 actionArray.add(new Button(refActions.get(i)));
@@ -60,15 +60,20 @@ public class Gamegui extends Application {
                 if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
                     //Do something about moving north
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
-                    //Do ___
+                    //Do something about moving south
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
-                    //Do ___
+                    //Do something about moving west
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
-                    //Do ___
+                    //Do something about moving east
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
-                    //Do ___
+                    //Do something about attacking
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
-                    //Do ___
+                    //Do something about using an item
+                    //while (Something about making a choice) {
+                        //choice 1:  ...
+                        //choice ...: ...
+                        //Choise n: exit
+                    //}
                 }
             }
             /*
