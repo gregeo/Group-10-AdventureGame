@@ -69,4 +69,11 @@ public class Boss extends Enemy
         String methodReturn = "Boss information (health, attackStrength): (" + health + ";" + attackStrength + ")";
         return methodReturn;
     }
+	
+	public void attack(Player target)
+	{
+		int attack = this.getAttackStrength();
+		System.out.println("Boss attack Strength: " + attackStrength);
+		target.takeDamage(attackStrength);
+    }
 }

@@ -82,7 +82,7 @@ public class TextGame {
 
         Map m = new Map(3, 3);
         System.out.print(m.printMap());
-        Player p = new Player(6, 0, 0);
+        Player p = new Player(30, 0, 0);
 		Enemy enemyRoomOne = new Enemy(0, 0);
 		Enemy enemyRoomTwo = new Enemy(1, 0);
 		Enemy enemyRoomThree = new Enemy(1, 1);
@@ -106,6 +106,7 @@ public class TextGame {
 		int actionResult = 0;
 		Boss boss = new Boss(15, 15);
 		BossLevel bossLevel = new BossLevel(p, boss);
+		int displayCount = 0;
         while (gameRunning) {
 			/*while(!roomsCleared)
 			{
@@ -132,15 +133,25 @@ public class TextGame {
 				
 			if(m.allRoomsCleared())*/
 			{
-				System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+				if(displayCount == 0)
+				{
+					System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+					displayCount++;
+				}
 				System.out.println("The evil shadow king moves in the shadows meaning you never know where he is. When attacking him you must use your best guess to strike your attack and hope he is in that position.");
 				bossLevel.printEnemyGrid();
 				bossLevel.printPlayerGrid();
 				System.out.println("\n \nYou can: " + bossLevel.getActions());
 				action = scanner.nextLine();
 				actionResult = bossLevel.selectedAction(action);
-				if(actionResult == 0)
+				if(actionResult == 2)
 				{
+					System.out.println("You have slain the evil shadow king and are victorious!");
+					gameRunning = false;
+				}
+				if(actionResult == 3)
+				{
+					System.out.println("You have been defeated by the evil shadow king and are defeated!");
 					gameRunning = false;
 				}
 				

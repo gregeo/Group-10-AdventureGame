@@ -12,7 +12,7 @@ public class BossLevel
 	private int bossX;
 	private int bossY;
 	private int playerX = 0;
-	private int playerY = 1;
+	private int playerY = 0;
 	private Player player;
 	private Boss boss;
 	private ArrayList<String> actions = new ArrayList<String>();
@@ -195,7 +195,7 @@ public class BossLevel
 		
 		if(action.contains("attack"))
 		{
-			return this.attack();
+			return this.playerAttack();
 		}
 		if(actions.contains("use item"))
 		{
@@ -204,11 +204,12 @@ public class BossLevel
 		return -1;
 	}
 	
-	public int attack()
+	public int playerAttack()
 	{
-		//this.updateEnemyGrid();
+		this.updateEnemyGrid();
 		Scanner xScan = new Scanner(System.in);
 		Scanner yScan = new Scanner(System.in);
+		Scanner dScan = new Scanner(System.in);
 		System.out.println("Which x coordinate do you want to attack?");
 		int x = xScan.nextInt();
 		System.out.println("Which y coordinate do you want to attack?");
@@ -216,19 +217,66 @@ public class BossLevel
 		boolean hit = false;
 		if(x == this.getBossX() && y == this.getBossY())
 		{
+			System.out.println("Hit!");
 			player.attackEnemy(boss);
 			System.out.println(player.toString());
 			System.out.println(boss.toString());
 		}
+		else
+		{
+			System.out.println("You have missed, The Shadow King can now attack you! You must now try and dodge his attack");
+			System.out.println("Would you like to stay to go to the left, the middle, or the right");
+			String dirrection = dScan.nextLine();
+			dirrection.toLowerCase();
+			
+			if(dirrection == "left")
+			{
+				setPlayerX(0);
+			}
+			if(dirrection == "right")
+			{
+				setPlayerX(2);
+			
+			}
+			if(dirrection == "middle")
+			{
+				setPlayerX(1);
+			}
+
+			this.bossAttack();
+			System.out.println(player.toString());
+			System.out.println(boss.toString());
+
+		}
 		if(boss.getHealth() <= 0)
 		{
-			return 0;
+			return 2;
+		}
+		if(player.getHealth() <= 0)
+		{
+			return 3;
 		}
 		
 		return 1;
 		//System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
 		//target.takeDamage(boss.getAttackStrength());
     }
+	
+	public void bossAttack()
+	{
+		double randomAttackPosition = Math.random();
+		randomAttackPosition = randomAttackPosition * 2 + 1;
+		int attackLocation = (int)randomAttackPosition;
+		this.updatePlayerGrid();
+		if(attackLocation == this.getPlayerX())
+		{
+			boss.attack(player);
+		}
+		else
+		{
+			System.out.println("The Shadow King has missed!");
+		}
+	}
 	
 	public void useItem()
 	{
@@ -244,5 +292,24 @@ public class BossLevel
 		
 		int item = player.useItem(itemSelection);
 	}
+	
+	/*public String playerToString()
+	{
+		int tempPosX = this.posX;
+        int tempPosY = this.posY;
+		int tempHealth = this.health();
+		
+		if(this.health < 0)
+		{
+			tempHealth = 0;
+		}
+      
+        String health = Integer.toString(tempHealth);
+        String posX = Integer.toString(tempPosX);
+        String posY = Integer.toString(tempPosY);
+        String methodReturn = "Your information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
+        return methodReturn;
+	}*/
+	
 }
 	
