@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class Gamegui extends Application {
     private ArrayList<String> refActions;
     private ArrayList<Button> actionArray;
-    private Room refRoom;
+    private Room refRoom = new Room(TextGame.m.getRoom(TextGame.Player.getX(),TextGame.Player.getY()));
     private Boolean gameRun;
 
     public ArrayList<String> getRefActions() {
@@ -68,14 +68,44 @@ public class Gamegui extends Application {
                     });
                     //Do something about moving north
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about moving south
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about moving west
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about moving east
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about attacking
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
+                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //Return move north
+                        }
+                    });
                     //Do something about using an item
                     //while (Something about making a choice) {
                         //choice 1:  ...
