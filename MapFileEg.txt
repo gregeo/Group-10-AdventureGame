@@ -1,0 +1,6 @@
+height,length,playerX,playerY;
+room1X,room1Y,isDoor0,isDoor1,isDoor2,isDoor3,enemy(null if null),item,text;
+.
+.
+.
+roomNX,roomNY,isDoor0,isDoor1,isDoor2,isDoor3,enemy(null if null),item,text;
