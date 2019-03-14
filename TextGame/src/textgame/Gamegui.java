@@ -1,7 +1,6 @@
 package textgame;
 
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +17,7 @@ import javafx.stage.Stage;
 public class Gamegui extends Application {
     private ArrayList<String> refActions;
     private ArrayList<Button> actionArray;
-    private Room refRoom = new Room(TextGame.m.getRoom(TextGame.Player.getX(),TextGame.Player.getY()));
+    private Room refRoom = TextGame.m.getRoom(TextGame.Player.getX(),TextGame.Player.getY());
     private Boolean gameRun;
 
     public ArrayList<String> getRefActions() {
@@ -26,7 +25,7 @@ public class Gamegui extends Application {
         return tempRef;
     }
 
-    public getRefRoom() {
+    public Room getRefRoom() {
         Room tempRoom = this.refRoom;
         return refRoom;
     }
@@ -60,7 +59,7 @@ public class Gamegui extends Application {
 
             for (int i = 0; i < actionArray.size(); i++) {
                 if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
@@ -68,7 +67,7 @@ public class Gamegui extends Application {
                     });
                     //Do something about moving north
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
@@ -76,7 +75,7 @@ public class Gamegui extends Application {
                     });
                     //Do something about moving south
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
@@ -84,7 +83,7 @@ public class Gamegui extends Application {
                     });
                     //Do something about moving west
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
@@ -92,7 +91,7 @@ public class Gamegui extends Application {
                     });
                     //Do something about moving east
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
@@ -100,7 +99,7 @@ public class Gamegui extends Application {
                     });
                     //Do something about attacking
                 } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
-                    ActionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //Return move north
