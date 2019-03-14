@@ -1,141 +1,100 @@
 package textgame;
 
+import java.awt.Insets;
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBuilder;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+//import javafx.scene.control.ButtonBuilder;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Gamegui extends Application {
-    private ArrayList<String> refActions;
-    private ArrayList<Button> actionArray;
-    private Room refRoom = TextGame.m.getRoom(TextGame.Player.getX(),TextGame.Player.getY());
-    private Boolean gameRun;
 
-    public ArrayList<String> getRefActions() {
-        ArrayList<String> tempRef = this.refActions;
-        return tempRef;
-    }
-
-    public Room getRefRoom() {
-        Room tempRoom = this.refRoom;
-        return refRoom;
-    }
-
-    public Boolean getGameRun() {
-        Boolean tempGameRun = this.gameRun;
-        return tempGameRun;
-    }
-
-    public void setGameRun(Boolean runValue) {
-        this.gameRun = runValue;
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        Group root = new Group();
-        Canvas canvas = new Canvas(500, 500);
-        BorderPane posRoot = new BorderPane();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        VBox doableActions = new VBox();
+        TextField textField = new TextField();
 
-        //While (GET TEXT GAME RUN VALUE) {
-            //refRoom = Copy Constructor for  room player is in.
-            this.refActions = refRoom.getDoableActions();
-            this.actionArray = new ArrayList();
+        HBox hbox = new HBox(textField);
 
-            for (int i = 0; i < refActions.size(); i++) {
-                actionArray.add(new Button(refActions.get(i)));
-            }
+        // primaryStage.setScene(scene);
+        Text text = new Text();
 
-            for (int i = 0; i < actionArray.size(); i++) {
-                if (actionArray.get(i).getText().equalsIgnoreCase("MOVE NORTH")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about moving north
-                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE SOUTH")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about moving south
-                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE WEST")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about moving west
-                } else if (actionArray.get(i).getText().equalsIgnoreCase("MOVE EAST")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about moving east
-                } else if (actionArray.get(i).getText().equalsIgnoreCase("ATTACK ENEMY")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about attacking
-                } else if (actionArray.get(i).getText().equalsIgnoreCase("USE ITEM")) {
-                    actionArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //Return move north
-                        }
-                    });
-                    //Do something about using an item
-                    //while (Something about making a choice) {
-                        //choice 1:  ...
-                        //choice ...: ...
-                        //Choise n: exit
-                    //}
-                }
-            }
-            /*
-            Button move = new Button("MOVE");
-            Button attack = new Button("ATTACK");
-            doableActions.getChildren().add(move);
-            doableActions.getChildren().add(attack);
-            */
+        //setting the position of the text 
+        text.setX(5);
+        text.setY(20);
 
-            posRoot.setLeft(doableActions);
+        Map m = new Map(3, 3);
+        Player p = new Player(30, 0, 0);
+        Enemy enemyRoomOne = new Enemy(0, 0);
+        Enemy enemyRoomTwo = new Enemy(1, 0);
+        Enemy enemyRoomThree = new Enemy(1, 1);
+        boolean b1[] = {false, true, false, false};
+        Room r1 = new Room(b1, enemyRoomOne, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat. Then out of the darkness a skeleton knight is coming towards you!");
+        boolean b2[] = {false, false, true, true};
+        Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
+        boolean b3[] = {true, false, false, false};
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
 
-            gc.strokeRect(380, 10, 115, 115);
-            gc.strokeRect(390, 20, 25, 25);
-            gc.strokeRect(420, 20, 25, 25);
-            gc.strokeRect(420, 50, 25, 25);
-            gc.strokeLine(100, 0, 100, 500);
+        m.addRoom(r1, 0, 0);
+        m.addRoom(r2, 1, 0);
+        m.addRoom(r3, 1, 1);
 
-            root.getChildren().add(posRoot);
-            root.getChildren().add(canvas);
+        text.setText("The king has scoured the land for help with a dark evil: The Shadow King.\n"
+                + "The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.\n"
+                + "Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...\n "
+                + "Upon leaving the town, he is assailed by goblins!\n"
+                + "He must fight to find his way to the dungeon that the Shadow King inhabits.\n"
+                + "riving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n"
+                + "Save the princess and the kingdom!\n" + m.printMap());
 
-            Scene scene = new Scene(root, 500, 500);
-            primaryStage.setScene(scene);
+        //Creating a Group object  
+        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
 
-            primaryStage.setTitle("Dungeon Hero");
-            primaryStage.show();
-        //}
+        final ComboBox comboBox = new ComboBox(options);
+        GridPane grid = new GridPane();
+        grid.setVgap(4);
+        grid.setHgap(10);
+        grid.add(comboBox, 1, 0);
+        grid.add(text, 2, 0);
+
+        Scene scene = new Scene(grid, 600, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setTitle("Dungeon Hero");
+        primaryStage.show();
+        
+        comboBox.addEventHandler(EventType.ROOT, event -> {
+            //System.out.println(event.getEventType().getName());
+            System.out.println(event.toString());
+            
+        });
+        
     }
+    
+    
+
 }
