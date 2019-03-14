@@ -187,6 +187,10 @@ public class BossLevel
 		{
 			actions.add("Attack");
 		}
+		if(player.getPouch().size() == 0)
+		{
+			actions.remove("Use Item");
+		}
 		return actions;
 	}
 	
@@ -198,8 +202,9 @@ public class BossLevel
 		{
 			return this.playerAttack();
 		}
-		if(actions.contains("use item"))
+		if(action.contains("use item"))
 		{
+			System.out.println("here");
 			this.useItem();
 		}
 		return -1;

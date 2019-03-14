@@ -24,50 +24,6 @@ public class TextGame {
     public static void main(String[] args) {
 
 		Scanner keyboard = new Scanner(System.in);
-		/*
->>>>>>> 85693c6dcb0e23245e1adcc5bd5f60f21a4cad1a
-		//game story
-		System.out.println("Dungeon Hero!");
-		
-		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
-		System.out.println("The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.");
-		System.out.println(" Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
-		System.out.println("Upon leaving the town, he is assailed by goblins!");
-		System.out.println("He must fight to find his way to the dungeon that the Shadow King inhabits.");
-		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
-		System.out.println("Save the princess and the kingdom!");
-
-		
-		//create map object
-        Map m = new Map(4,4);
-        
-		//print map 
-        System.out.print(m.printMap());
-        
-		//game loop
-		//not finished
-		while(true)
-		{
-			Room current = m.getRoom(0 , 0);
-			ArrayList<String> doableActions = current.getDoableActions();
-			for (int i = 0; i < doableActions.size(); i++) {
-				String tempLine = doableActions.get(i);
-				System.out.println(tempLine);
-			}
-			String response = keyboard.nextLine();
-
-			if (response = 1) {
-
-			} else if (response = 2) {
-
-			} else if (response = 3) {
-
-			} else if (response = 4) {
-
-			}
-			
-			
-		}*/
         
         //hard coded testing commands for this class
 		System.out.println("Dungeon Hero!");
@@ -91,7 +47,7 @@ public class TextGame {
         boolean b2[] = {false, false, true, true};
         Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion" , p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a troll warrior! ...");
 
         m.addRoom(r1, 0, 0);
 		m.addRoom(r2, 1, 0);
