@@ -5,6 +5,7 @@
  */
 package textgame;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -15,9 +16,6 @@ import java.util.ArrayList;
  */
 public class Map {
 
-    public static void main(String[] args) {
-
-    }
     //declare and initialize class members
     private Room rooms[][];
     private int playerX;
@@ -53,6 +51,54 @@ public class Map {
         rooms = new Room[length][height];
         this.playerX = playerX;
         this.playerY = playerY;
+    }
+
+    public Map(Player p) {//
+        String mapDataText;
+        try {
+            FileSaveLoad file = new FileSaveLoad("", "");
+            mapDataText = file.getContent();
+            Scanner mapScanner = new Scanner(mapDataText);
+            mapScanner.useDelimiter(";");
+            String mapSettings = mapScanner.next();
+            Scanner settingScanner = new Scanner(mapSettings);
+            settingScanner.useDelimiter(",");
+
+            rooms = new Room[(int) settingScanner.next().charAt(0)][(int) settingScanner.next().charAt(0)];
+            this.playerX = (int) settingScanner.next().charAt(0);
+            this.playerY = (int) settingScanner.next().charAt(0);
+            
+            
+            ArrayList<String> roomSettings = new ArrayList<>();
+            while (mapScanner.hasNext()) {
+                roomSettings.add(mapScanner.next());
+            }
+            for (String s : roomSettings) {
+                Scanner roomScanner = new Scanner(s);
+                roomScanner.useDelimiter(",");
+                int roomX = (int) roomScanner.next().charAt(0);
+                int roomY = (int) roomScanner.next().charAt(0);
+                boolean doorArr[] = new boolean[4];
+                for (int i = 0; i < 4; i++) {
+                    if (roomScanner.next().equalsIgnoreCase("true")) {
+                        doorArr[i] = true;
+                    } else {
+                        doorArr[i] = false;
+                    }
+                }
+                Enemy enemy = new Enemy(0, 0);
+                if (roomScanner.next().equalsIgnoreCase("")) {
+                    enemy = null;
+                } else {
+                    enemy = new Enemy(roomX, roomY);
+                }
+                Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
+                this.addRoom(r1, roomX, roomY);
+            }
+        } catch (IOException e) {
+            System.out.println("error loading game map file in map class \n" + e);
+        }
+
     }
 
     public int getPlayerX() {
@@ -123,10 +169,11 @@ public class Map {
         return true;
 
     }
-/**
- * 
- * 
- */
+
+    /**
+     *
+     *
+     */
     public void fixRoomDoors() {//untested
         int roomY = 0;
         for (Room[] room1d : rooms) {
@@ -147,8 +194,6 @@ public class Map {
         }
 
     }
-    
-    
 
     /**
      * This method completes the action chosen by the player for a movement on

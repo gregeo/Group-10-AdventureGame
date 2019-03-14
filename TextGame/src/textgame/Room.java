@@ -32,6 +32,8 @@ public class Room {
 	 *
 	 * @return new Room object with specified class members
      */
+
+
     public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player, String text) {
         //call three parameter constructor
 		this(isDoor, enemyRef, player, text);
