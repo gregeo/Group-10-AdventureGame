@@ -53,7 +53,7 @@ public class Map {
         this.playerY = playerY;
     }
 
-    public Map(Player p) {//
+    public Map(Player p) {
         String mapDataText;
         try {
             FileSaveLoad file = new FileSaveLoad("", "");
