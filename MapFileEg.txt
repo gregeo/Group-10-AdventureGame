@@ -1,6 +1,6 @@
-height,length,playerX,playerY;
-room1X,room1Y,isDoor0,isDoor1,isDoor2,isDoor3,enemy(null if null),item,text;
+length,height,playerX,playerY;
+room1X,room1Y,isDoor0,isDoor1,isDoor2,isDoor3,enemy?,item,text;//note: null if null
 .
 .
 .
-roomNX,roomNY,isDoor0,isDoor1,isDoor2,isDoor3,enemy(null if null),item,text;
+roomNX,roomNY,isDoor0,isDoor1,isDoor2,isDoor3,enemy?,item,text;

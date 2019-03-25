@@ -3,6 +3,7 @@ package textgame;
 import java.awt.Insets;
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -26,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.swing.event.ChangeListener;
 
 public class Gamegui extends Application {
 
@@ -74,7 +77,7 @@ public class Gamegui extends Application {
         //Creating a Group object  
         ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
 
-        final ComboBox comboBox = new ComboBox(options);
+        final ChoiceBox comboBox = new ChoiceBox(options);
         GridPane grid = new GridPane();
         grid.setVgap(4);
         grid.setHgap(10);
@@ -86,10 +89,21 @@ public class Gamegui extends Application {
         primaryStage.show();
         primaryStage.setTitle("Dungeon Hero");
         primaryStage.show();
+        /*
+        ComboBox.valueProperty().addListener(new ChangeListener<String>(){
+            @Override public void changed(ObservableValue ov, String t, String t1){
+                
+            }
+            
         
+        });
+*/
         comboBox.addEventHandler(EventType.ROOT, event -> {
-            //System.out.println(event.getEventType().getName());
-            System.out.println(event.toString());
+           System.out.println(event.getTarget());
+          //if(event.getEventType() == Event.ACTION_EVENT ){
+          //comboBox.
+               
+          //}
             
         });
         
