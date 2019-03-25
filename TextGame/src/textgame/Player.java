@@ -5,8 +5,10 @@
  */
 package textgame;
 import java.util.ArrayList;
+
 /**
- *
+ * A class representing the main character in the game
+ * 
  */
 public class Player {
 	

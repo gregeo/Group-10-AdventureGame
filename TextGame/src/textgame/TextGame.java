@@ -12,9 +12,8 @@ import java.util.Scanner;
 import textgame.Map;
 
 /**
- *
- * a cmain method to run the game 
- * there will likly be a private print out method for ese of reading
+ * The client code for running the text version of the game
+ * 
  */
 public class TextGame {
 
@@ -55,51 +54,72 @@ public class TextGame {
         //System.out.println(m.toString(0, 0));
         //System.out.println(m.printMap());
 
+		//declare and initialize variables for the game loop
         Scanner scanner = new Scanner(System.in);
         boolean gameRunning = true;
 		boolean roomsCleared = false;
 		String action = "";
 		int actionResult = 0;
+		int displayCount = 0;
+		
+		//create boss and boss map objects
 		Boss boss = new Boss(15, 15);
 		BossLevel bossLevel = new BossLevel(p, boss);
-		int displayCount = 0;
-        while (gameRunning) {
+		
+		//game loop for both the room and boss stage
+        while (gameRunning) 
+		{	
+			//loop until all the enemies are cleared in the rooms
 			while(!roomsCleared)
 			{
+				//print map and information about room for the player 
 				System.out.println(m.printMap());
 				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
 				System.out.println("you can: " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
 				action = scanner.nextLine();
+				
+				//check user input for the action they have chosen
 				if (action.equalsIgnoreCase("end")) {
 					break;
 				} else {
 					//System.out.println(action);
 					int i = m.runAction(action);
+					
+					//if run actions returns 0 the player has died
 					if(i == 0)
 					{
 						break;
 					}
 
 				}
+				//check if the room's have been cleared 
 				roomsCleared = m.allRoomsCleared();
 			}
 			if (action.equalsIgnoreCase("end")) {
 					break;
 				} 
 				
+			//if all of the rooms have been cleared start the boss level
 			if(m.allRoomsCleared())
 			{
+				//print the instructions for the level
 				if(displayCount == 0)
 				{
 					System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
 					displayCount++;
 				}
+				
+				//print the player and enemy grid out for the player
 				System.out.println("The evil shadow king moves in the shadows meaning you never know where he is. When attacking him you must use your best guess to strike your attack and hope he is in that position.");
 				bossLevel.printEnemyGrid();
 				bossLevel.printPlayerGrid();
+				
+				//print the actions available to the player for the level
 				System.out.println("\n \nYou can: " + bossLevel.getActions());
 				action = scanner.nextLine();
 				actionResult = bossLevel.selectedAction(action);
+				
+				//check action result to see if the player has won or lost to break out of the loop
 				if(actionResult == 2)
 				{
 					System.out.println("You have slain the evil shadow king and are victorious!");

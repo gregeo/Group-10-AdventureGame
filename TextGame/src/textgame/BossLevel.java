@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class used to run the boss fight stage of the game
+ * Creates the map and runs the actions selected by the user for the battle
+ * 
+ */
 public class BossLevel
 {
 	private String[][] enemyGird = new String[3][3];

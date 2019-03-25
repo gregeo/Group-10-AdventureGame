@@ -8,7 +8,7 @@ package textgame;
 import java.util.ArrayList;
 
 /**
- * a class that will run a room and its decision making
+ * A class that represents a room and handles all of the decision making in the room
  *
  */
 public class Room {

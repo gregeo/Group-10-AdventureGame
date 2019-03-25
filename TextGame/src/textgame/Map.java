@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * a class to contain a room[][] array and methods to work a game map
+ * A class to contain a room[][] array and methods to work a game map
  *
  */
 public class Map {
@@ -53,9 +53,22 @@ public class Map {
         this.playerY = playerY;
     }
 
+	
+	 /**
+     * This constructor creates a new map object from a text file provided with the information specified for a particular type of game
+     *
+     * @param p the players object 
+     *
+     * @return a new map taken from a textfile
+     */
     public Map(Player p) {
+		//file name
         String mapDataText;
+		
+		//try statement to read the text file provided 
         try {
+			
+			//creating scanners and file loaders to set up the reading of the file
             FileSaveLoad file = new FileSaveLoad("", "");
             mapDataText = file.getContent();
             Scanner mapScanner = new Scanner(mapDataText);
@@ -64,21 +77,29 @@ public class Map {
             Scanner settingScanner = new Scanner(mapSettings);
             settingScanner.useDelimiter(",");
 
+			//determine the number of rooms to be created and where the player starts 
             rooms = new Room[(int) settingScanner.next().charAt(0)][(int) settingScanner.next().charAt(0)];
             this.playerX = (int) settingScanner.next().charAt(0);
             this.playerY = (int) settingScanner.next().charAt(0);
             
             
+			//array list to hold the room settings
             ArrayList<String> roomSettings = new ArrayList<>();
+			
+			//while loop to add room settings to the list 
             while (mapScanner.hasNext()) {
                 roomSettings.add(mapScanner.next());
             }
+			
+			//for each loop to initialize the class members of the room 
             for (String s : roomSettings) {
                 Scanner roomScanner = new Scanner(s);
                 roomScanner.useDelimiter(",");
                 int roomX = (int) roomScanner.next().charAt(0);
                 int roomY = (int) roomScanner.next().charAt(0);
                 boolean doorArr[] = new boolean[4];
+				
+				//create the direction of doors available based on the array provided in the text file 
                 for (int i = 0; i < 4; i++) {
                     if (roomScanner.next().equalsIgnoreCase("true")) {
                         doorArr[i] = true;
@@ -86,29 +107,45 @@ public class Map {
                         doorArr[i] = false;
                     }
                 }
+				
+				//check if there is an enemy in the room
                 Enemy enemy = new Enemy(0, 0);
                 if (roomScanner.next().equalsIgnoreCase("")) {
                     enemy = null;
                 } else {
                     enemy = new Enemy(roomX, roomY);
                 }
+				
+				//create the room with the specified parameters from the text file
                 Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
                 this.addRoom(r1, roomX, roomY);
             }
+			//catch statement in place to handle any file error
         } catch (IOException e) {
             System.out.println("error loading game map file in map class \n" + e);
         }
 
     }
 
+	/**
+     * Method to get the player's x-coordinate
+     *
+	 * @return playerX the player's x-coordinate on the map
+	*/
     public int getPlayerX() {
         return playerX;
     }
 
+	/**
+     * Method to get the player's y-coordinate
+     *
+	 * @return playerY the player's y-coordinate on the map
+	*/
     public int getPlayerY() {
         return playerY;
     }
 
+	
     /**
      * This method adds a new room to the map, by adding it to the 2d array
      * rooms
@@ -129,14 +166,14 @@ public class Map {
         return -1;
     }
 
-    /*
+    /**
      * This method gets the room in the specified position
      *
      * @param x the rooms horizontal position
      * @param y the rooms vertical position on the map
      *
      * @return the room object in that position
-     */
+    */
     public Room getRoom(int x, int y) {
         //check if the room is on the map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
@@ -146,10 +183,9 @@ public class Map {
     }
 
     /**
-     *
-     * converts the two domentional room map to 1 dimenton then returns it
-     *
-     * @return a one dimentiaonal list
+     * Method to put all of the rooms into a list and return them
+     * 
+     * @return roomListTemp a one dimensional list of all of the room objects 
      */
     public ArrayList<Room> getAllRooms() {
         ArrayList<Room> roomListTemp = new ArrayList<Room>();
@@ -160,6 +196,13 @@ public class Map {
         return roomListTemp;
     }
 
+	 /**
+     * Method to check if all of the enemies have been killed in the room
+     * return true if enemies all equal null
+	 * return false if still enemies
+	 *
+     * @return boolean based on checks 
+     */
     public boolean allRoomsCleared() {
         for (Room room : roomList) {
             if (room.getEnemy() != null) {
@@ -212,6 +255,14 @@ public class Map {
         //else they chose a different command 
         Player pMain = this.getRoom(playerX, playerY).getPlayer();
 
+		/* if the player isn't dead run the action return by doAction method
+		   
+		   if i is between 10 and 13 update the player's x or y coordinate to represent the direction and remove them from the current room and add them to the new room
+		   
+		   if i is 14 call the attack methods for both the player and enemy 
+		   
+		   if i is 15 apply the item's ability to the player and remove it from the inventory of the player
+		*/
         if (pMain.getHealth() > 0) {
             if (i == 10) {
                 Player p = this.getRoom(playerX, playerY).removePlayer();
@@ -238,6 +289,8 @@ public class Map {
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
                 p.attackEnemy(e);
                 //p.takeDamage(1);
+				
+				//if enemy isn't dead
                 if (e.getHealth() > 0) {
                     e.attack(p);
                 }
@@ -245,23 +298,32 @@ public class Map {
                 System.out.println(e.toString() + "\n");
                 System.out.print(p.toString() + "\n");
 
+				//if enemy is dead, remove from room
                 if (e.getHealth() <= 0) {
                     e = this.getRoom(playerX, playerY).removeEnemy();
                     System.out.print("Enemy dead \n");
 
                 }
+				
+				//if player is dead return 0 to end game
                 if (pMain.getHealth() <= 0) {
                     System.out.print("Game Over. You have been slain. \n");
-                    return 0;
+					return 0;
                 }
             } else if (i == 15) {
+				
+				//get the palyer's inventory
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 ArrayList<String> inventory = p.getPouch();
                 int numItems = 1;
+				
+				//print the items in the inventory for the player to choose from
                 for (String item : inventory) {
                     System.out.println(numItems + ". " + item);
                     numItems++;
                 }
+				
+				//check which item they have chosen and call the useItem method
                 Scanner itemScanner = new Scanner(System.in);
                 String itemSelection = itemScanner.nextLine();
 
@@ -269,7 +331,8 @@ public class Map {
             }
 
         }
-
+		
+		//return the action index
         return i;
     }
 

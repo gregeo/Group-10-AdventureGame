@@ -8,7 +8,7 @@ package textgame;
 import java.lang.Math;
 
 /**
- *a class to handle specific enemy
+ * A class used to represent an enemy in a room for a player to fight
  *
  * 
  */

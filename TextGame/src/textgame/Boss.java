@@ -1,6 +1,13 @@
 
 package textgame;
 
+
+/**
+ * Class representing the boss which inherits from the Enemy class 
+ * Runs all of the attack and taking damage functions for the boss
+ * 
+ */
+ 
 public class Boss extends Enemy
 {
 	//private int health;
