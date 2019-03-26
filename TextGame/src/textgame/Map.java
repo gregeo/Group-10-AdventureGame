@@ -14,7 +14,8 @@ import java.util.ArrayList;
  * A class to contain a room[][] array and methods to work a game map
  *
  */
-public class Map {
+public class Map 
+{
 
     //declare and initialize class members
     private Room rooms[][];
@@ -31,7 +32,8 @@ public class Map {
      *
      * @return a new map with a specified length and height
      */
-    public Map(int length, int height) {
+    public Map(int length, int height)
+	{
         this(length, height, 0, 0);
     }
 
@@ -47,7 +49,8 @@ public class Map {
      *
      * @return a new map with a specified length and height
      */
-    public Map(int length, int height, int playerX, int playerY) {
+    public Map(int length, int height, int playerX, int playerY)
+	{
         rooms = new Room[length][height];
         this.playerX = playerX;
         this.playerY = playerY;
@@ -61,13 +64,14 @@ public class Map {
      *
      * @return a new map taken from a textfile
      */
-    public Map(Player p) {
+    public Map(Player p)
+	{
 		//file name
         String mapDataText;
 		
 		//try statement to read the text file provided 
-        try {
-			
+        try 
+		{
 			//creating scanners and file loaders to set up the reading of the file
             FileSaveLoad file = new FileSaveLoad("", "");
             mapDataText = file.getContent();
@@ -87,12 +91,14 @@ public class Map {
             ArrayList<String> roomSettings = new ArrayList<>();
 			
 			//while loop to add room settings to the list 
-            while (mapScanner.hasNext()) {
+            while (mapScanner.hasNext()) 
+			{
                 roomSettings.add(mapScanner.next());
             }
 			
 			//for each loop to initialize the class members of the room 
-            for (String s : roomSettings) {
+            for (String s : roomSettings)
+				{
                 Scanner roomScanner = new Scanner(s);
                 roomScanner.useDelimiter(",");
                 int roomX = (int) roomScanner.next().charAt(0);
@@ -100,19 +106,26 @@ public class Map {
                 boolean doorArr[] = new boolean[4];
 				
 				//create the direction of doors available based on the array provided in the text file 
-                for (int i = 0; i < 4; i++) {
-                    if (roomScanner.next().equalsIgnoreCase("true")) {
+                for (int i = 0; i < 4; i++) 
+				{
+                    if (roomScanner.next().equalsIgnoreCase("true"))
+					{
                         doorArr[i] = true;
-                    } else {
+                    } 
+					else
+					{
                         doorArr[i] = false;
                     }
                 }
 				
 				//check if there is an enemy in the room
                 Enemy enemy = new Enemy(0, 0);
-                if (roomScanner.next().equalsIgnoreCase("")) {
+                if (roomScanner.next().equalsIgnoreCase(""))
+				{
                     enemy = null;
-                } else {
+                } 
+				else 
+				{
                     enemy = new Enemy(roomX, roomY);
                 }
 				
@@ -121,7 +134,9 @@ public class Map {
                 this.addRoom(r1, roomX, roomY);
             }
 			//catch statement in place to handle any file error
-        } catch (IOException e) {
+        } 
+		catch (IOException e)
+		{
             System.out.println("error loading game map file in map class \n" + e);
         }
 
@@ -132,7 +147,8 @@ public class Map {
      *
 	 * @return playerX the player's x-coordinate on the map
 	*/
-    public int getPlayerX() {
+    public int getPlayerX()
+	{
         return playerX;
     }
 
@@ -141,7 +157,8 @@ public class Map {
      *
 	 * @return playerY the player's y-coordinate on the map
 	*/
-    public int getPlayerY() {
+    public int getPlayerY()
+	{
         return playerY;
     }
 
@@ -156,9 +173,11 @@ public class Map {
      *
      * @return a 1 or -1 used to show if the room has been added
      */
-    public int addRoom(Room room, int x, int y) {
+    public int addRoom(Room room, int x, int y)
+	{
         //check if valid room placement on map
-        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
+        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) 
+		{
             rooms[x][y] = room;
             roomList.add(room);
             return 1;
@@ -174,9 +193,11 @@ public class Map {
      *
      * @return the room object in that position
     */
-    public Room getRoom(int x, int y) {
+    public Room getRoom(int x, int y) 
+	{
         //check if the room is on the map
-        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) {
+        if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) 
+		{
             return rooms[x][y];
         }
         return null;
@@ -187,10 +208,12 @@ public class Map {
      * 
      * @return roomListTemp a one dimensional list of all of the room objects 
      */
-    public ArrayList<Room> getAllRooms() {
+    public ArrayList<Room> getAllRooms() 
+	{
         ArrayList<Room> roomListTemp = new ArrayList<Room>();
 
-        for (Room rm : roomList) {
+        for (Room rm : roomList) 
+		{
             roomListTemp.add(rm);
         }
         return roomListTemp;
@@ -203,9 +226,12 @@ public class Map {
 	 *
      * @return boolean based on checks 
      */
-    public boolean allRoomsCleared() {
-        for (Room room : roomList) {
-            if (room.getEnemy() != null) {
+    public boolean allRoomsCleared() 
+	{
+        for (Room room : roomList) 
+		{
+            if (room.getEnemy() != null)
+				{
                 return false;
             }
         }
@@ -219,16 +245,25 @@ public class Map {
      */
     public void fixRoomDoors() {//untested
         int roomY = 0;
-        for (Room[] room1d : rooms) {
+        for (Room[] room1d : rooms) 
+		{
             int roomX = 0;
-            for (Room r : room1d) {
-                if (r.getIsDoor()[0] == true && roomX - 1 >= 0 && this.getRoom(roomX, roomY) == null) {
+            for (Room r : room1d) 
+			{
+                if (r.getIsDoor()[0] == true && roomX - 1 >= 0 && this.getRoom(roomX, roomY) == null)
+				{
                     r.getIsDoor()[0] = false;
-                } else if (r.getIsDoor()[1] == true && roomY + 1 < this.rooms.length && this.getRoom(roomX, roomY) == null) {
+                } 
+				else if (r.getIsDoor()[1] == true && roomY + 1 < this.rooms.length && this.getRoom(roomX, roomY) == null)
+				{
                     r.getIsDoor()[1] = false;
-                } else if (r.getIsDoor()[2] == true && roomX + 1 < this.rooms[0].length && this.getRoom(roomX, roomY) == null) {
+                } 
+				else if (r.getIsDoor()[2] == true && roomX + 1 < this.rooms[0].length && this.getRoom(roomX, roomY) == null)
+				{
                     r.getIsDoor()[2] = false;
-                } else if (r.getIsDoor()[3] == true && roomY - 1 >= 0 && this.getRoom(roomX, roomY) == null) {
+                } 
+				else if (r.getIsDoor()[3] == true && roomY - 1 >= 0 && this.getRoom(roomX, roomY) == null)
+				{
                     r.getIsDoor()[3] = false;
                 }
                 roomX++;
@@ -247,7 +282,8 @@ public class Map {
      * @return a value of i relating to the direction the player moved for
      * testing purposes
      */
-    public int runAction(String input) {
+    public int runAction(String input)
+	{
         //get the action the player chose
         int i = rooms[playerX][playerY].doAction(input);
 
@@ -263,35 +299,46 @@ public class Map {
 		   
 		   if i is 15 apply the item's ability to the player and remove it from the inventory of the player
 		*/
-        if (pMain.getHealth() > 0) {
-            if (i == 10) {
+        if (pMain.getHealth() > 0)
+		{
+			if (i == 10) 
+			{
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerY--;
                 p.setY(playerY);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } else if (i == 11) {
+            } 
+			else if (i == 11) 
+			{
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerX++;
                 p.setX(playerX);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } else if (i == 12) {
+            } 
+			else if (i == 12)
+			{
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerY++;
                 p.setY(playerY);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } else if (i == 13) {
+            } 
+			else if (i == 13)
+			{
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerX--;
                 p.setX(playerX);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } else if (i == 14) {
+            } 
+			else if (i == 14) 
+			{
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
                 p.attackEnemy(e);
                 //p.takeDamage(1);
 				
 				//if enemy isn't dead
-                if (e.getHealth() > 0) {
+                if (e.getHealth() > 0)
+				{
                     e.attack(p);
                 }
 
@@ -299,26 +346,31 @@ public class Map {
                 System.out.print(p.toString() + "\n");
 
 				//if enemy is dead, remove from room
-                if (e.getHealth() <= 0) {
+                if (e.getHealth() <= 0)
+				{
                     e = this.getRoom(playerX, playerY).removeEnemy();
                     System.out.print("Enemy dead \n");
 
                 }
 				
 				//if player is dead return 0 to end game
-                if (pMain.getHealth() <= 0) {
+                if (pMain.getHealth() <= 0)
+				{
                     System.out.print("Game Over. You have been slain. \n");
 					return 0;
                 }
-            } else if (i == 15) {
+            } 
+			else if (i == 15) 
+			{
 				
-				//get the palyer's inventory
+				//get the player's inventory
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 ArrayList<String> inventory = p.getPouch();
                 int numItems = 1;
 				
 				//print the items in the inventory for the player to choose from
-                for (String item : inventory) {
+                for (String item : inventory)
+				{
                     System.out.println(numItems + ". " + item);
                     numItems++;
                 }
@@ -341,9 +393,11 @@ public class Map {
      *
      * @return the string variable corresponding to the map
      */
-    public String printMap() {
+    public String printMap()
+	{
         String s = "";
-        for (int row = 0; row < (rooms.length * 2) + 1; row++) {
+        for (int row = 0; row < (rooms.length * 2) + 1; row++)
+		{
             s = s + this.printRow(row) + "\n";
         }
         return s;
@@ -356,11 +410,17 @@ public class Map {
      *
      * @return the string variable corresponding to row on the map
      */
-    private String printRow(int rowNumber) {
+    private String printRow(int rowNumber)
+	{
         String s = "";
-        if (rowNumber % 2 == 1) {
+		
+		//algorithm to print the rows of rooms to create a grid as opposed to a long line of rooms
+        if (rowNumber % 2 == 1) 
+		{
             s = s + this.printCellInter(rooms[0].length, rowNumber / 2);
-        } else {
+        } 
+		else
+		{
             s = s + this.printLine(rooms[0].length, rowNumber / 2);
         }
 
@@ -374,13 +434,19 @@ public class Map {
      *
      * @return the string variable corresponding to a line on the map
      */
-    private String printLine(int numberOfNodes, int row) {
+    private String printLine(int numberOfNodes, int row) 
+	{
         String s = "";
-        for (int i = 0; i < (numberOfNodes); i++) {
-            if (row < this.rooms[0].length && this.rooms[(i)][row] != null
-                    || (row > 0 && this.rooms[(i)][row - 1] != null)) {
+		
+		//algorithm to build the lines that separate the individual rooms 
+        for (int i = 0; i < (numberOfNodes); i++)
+		{
+            if (row < this.rooms[0].length && this.rooms[(i)][row] != null || (row > 0 && this.rooms[(i)][row - 1] != null)) 
+			{
                 s = s + "--";
-            } else {
+            }
+			else 
+			{
                 s = s + "  ";
             }
         }
@@ -399,22 +465,33 @@ public class Map {
     private String printCellInter(int numberOfNodes, int row) {
         String s = "";
         boolean wasLastRoom = false;
-        for (int i = 0; i < numberOfNodes; i++) {
-            if (this.rooms[i][row] == null) {
-
-                if (wasLastRoom) {
+		
+		//algorithm to create the lines that make up the cells which represent the rooms
+        for (int i = 0; i < numberOfNodes; i++) 
+		{
+            if (this.rooms[i][row] == null) 
+			{
+                if (wasLastRoom)
+				{
                     s = s + "|";
                     wasLastRoom = false;
-                } else {
+                } 
+				else
+				{
                     s = s + " ";
                 }
                 s = s + " ";
-            } else {
+            } 
+			else 
+			{
                 s = s + "|";
                 wasLastRoom = true;
-                if (this.playerX == i && this.playerY == row) {
+                if (this.playerX == i && this.playerY == row)
+				{
                     s = s + "p";
-                } else {
+                } 
+				else
+				{
                     s = s + " ";
                 }
             }
@@ -432,10 +509,16 @@ public class Map {
      *
      * @return the information about the room to the user
      */
-    public String toString(int row, int column) {
-        if (rooms[0].length - 1 > row && rooms.length - 1 > column && column >= 0 && row >= 0 && rooms[column][row] != null) {
+    public String toString(int row, int column)
+	{
+		
+		//algorithm to to wok out which room to print
+        if (rooms[0].length - 1 > row && rooms.length - 1 > column && column >= 0 && row >= 0 && rooms[column][row] != null)
+		{
             return rooms[column][row].toString();
-        } else {
+        } 
+		else
+		{
             return "no room exists there";
         }
     }

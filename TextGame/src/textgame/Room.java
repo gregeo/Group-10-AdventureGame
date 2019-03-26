@@ -11,10 +11,11 @@ import java.util.ArrayList;
  * A class that represents a room and handles all of the decision making in the room
  *
  */
-public class Room {
+public class Room 
+{
 	
-	//declare and intialize class members 
-    private boolean[] isDoor;//denoted nesw
+	//declare and initialize class members 
+    private boolean[] isDoor;//denoted new
     private Enemy enemyRef;
     private String item;
     private ArrayList<String> doableActions;
@@ -32,12 +33,11 @@ public class Room {
 	 *
 	 * @return new Room object with specified class members
      */
-
-
-    public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player, String text) {
+    public Room(boolean[] isDoor, Enemy enemyRef, String item, Player player, String text)
+	{
         //call three parameter constructor
 		this(isDoor, enemyRef, player, text);
-		//intialize item
+		//initialize item
         this.item = item;
 
     }
@@ -45,13 +45,14 @@ public class Room {
     /**
      * constructor for a room with only an item and doors
      *
-     * @param isDoor boolean array to show which dirrections have doors
-     * @param item item represeted as a just a string
+     * @param isDoor boolean array to show which directions have doors
+     * @param item item represented as a just a string
      * @param player The player object in that room 
 	 *
 	 * @return new Room object with specified class members
      */
-    public Room(boolean[] isDoor, String item, Player player, String text) {
+    public Room(boolean[] isDoor, String item, Player player, String text) 
+	{
         //call two parameter constructor to set doable actions
 		this(isDoor, player, text);
 		//intialize item 
@@ -60,15 +61,16 @@ public class Room {
     }
 
     /**
-     * constructor for a room with only enemies and doors
-     *
-     * @param isDoor boolean array to show which directions have doors
-     * @param enemyRef enemy object representing the enemy in the room 
-     * @param player The player object in that room 
-	 *
-	 * @return a new Room object with specified class members
-     */
-    public Room(boolean[] isDoor, Enemy enemyRef, Player player, String text) {
+	* constructor for a room with only enemies and doors
+	*
+	* @param isDoor boolean array to show which directions have doors
+	* @param enemyRef enemy object representing the enemy in the room 
+	* @param player The player object in that room 
+	*
+	* @return a new Room object with specified class members
+    */
+    public Room(boolean[] isDoor, Enemy enemyRef, Player player, String text)
+	{
 		//call two parameter constructor to set doable actions 
         this(isDoor, player, text);
 		//initialize enemy in room 
@@ -85,32 +87,40 @@ public class Room {
 	 *
 	 * @return a new Room object with specified class members
      */
-    public Room(boolean[] isDoor, Player player,String text) {
+    public Room(boolean[] isDoor, Player player,String text) 
+	{
 		
 		//create a new arrayList for doable actions
         doableActions = new ArrayList<>();
 		
 		//check if the number of doors is correct intialize the doors array 
-        if (isDoor.length == 4) {
+        if (isDoor.length == 4)
+		{
             this.isDoor = isDoor;
-        } else {
+        } 
+		else 
+		{
             System.out.println("isDoor is the wrong sise :(  " + isDoor.length);
         }
 		
 		//add actions to doableActions based on if there is a door in that direction 
-        if (isDoor[0]) {
+        if (isDoor[0]) 
+		{
             doableActions.add("move north");
         }
-        if (isDoor[1]) {
+        if (isDoor[1]) 
+		{
             doableActions.add("move east");
         }
-        if (isDoor[2]) {
+        if (isDoor[2]) 
+		{
             doableActions.add("move south");
         }
-        if (isDoor[3]) {
+        if (isDoor[3])
+		{
             doableActions.add("move west");
         }
-		//intialize player and add "search room" to doable actions because that is always an option
+		//initialize player and add "search room" to doable actions because that is always an option
         this.player = player;
         this.text = text;
         doableActions.add("search room");
@@ -124,19 +134,29 @@ public class Room {
 	 *
      * @return a number used for testing if the method has completed the intented task 
      */
-    public int doAction(String input) {
+    public int doAction(String input)
+	{
         input = input.toLowerCase();
 
-		//call corresponding method for the user's action choice 
-        if (input.contains("move")) {
+		//call corresponding method for the user's action choice  
+        if (input.contains("move")) 
+		{
             return this.move(input);
-        } else if (input.contains("attack")) {
+        }
+		else if (input.contains("attack")) 
+		{
             return this.attackEnemy();
-        } else if (input.contains("search")) {
+        }
+		else if (input.contains("search")) 
+		{
             this.search();
-        } else if (input.contains("use")) {
+        }
+		else if (input.contains("use")) 
+		{
             return this.useItem();
-        } else {
+        }
+		else 
+		{
             System.out.println("oops not a valid command");
             return -1;
         }

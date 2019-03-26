@@ -10,7 +10,8 @@ import java.util.ArrayList;
  * A class representing the main character in the game
  * 
  */
-public class Player {
+public class Player 
+{
 	
 	//declare class members 
     private int health;
@@ -19,7 +20,13 @@ public class Player {
 	private int attackStrength = 2;
     private ArrayList<String> pouch;
 	
-	
+	/**
+	* Copy constructor to create a copy object of another player 
+	*
+	* @param playerToCopy player object to make a copy of
+	*
+	* @return A copy of a player object
+	*/
 	public Player(Player playerToCopy)
 	{
 		this.health = playerToCopy.health;
@@ -31,7 +38,8 @@ public class Player {
 	*
 	* @return new player object with an inventory list
 	*/
-	public Player() {
+	public Player() 
+	{
         this.pouch = new ArrayList<String>();
     }
 
@@ -44,7 +52,8 @@ public class Player {
 
 	* @return a player object with health and postion on map specified 
 	*/
-    public Player(int health, int x, int y) {
+    public Player(int health, int x, int y)
+	{
         this.health = health;
         this.posX = x;
         this.posY = y;
@@ -57,7 +66,8 @@ public class Player {
 	* @param x The player's x position
 	* @param x The player's y position 
 	*/
-    public void setInitPos(int x, int y) {
+    public void setInitPos(int x, int y)
+	{
         this.posX = x;
         this.posY = y;
     }
@@ -67,7 +77,8 @@ public class Player {
 	*
 	* @param health player's health
 	*/
-    public void setHealth(int health) {
+    public void setHealth(int health) 
+	{
         this.health = health;
     }
     
@@ -76,17 +87,19 @@ public class Player {
 	*
 	* @return player's x position
 	*/
-    public int getPosX() {
+    public int getPosX()
+	{
         int returnX = this.posX;
         return returnX;
     }
 
 	/**
-	* method to get a players x postion
+	* method to get a players x position
 	*
 	* @return player's y position
 	*/
-    public int getPosY() {
+    public int getPosY() 
+	{
         int returnY = this.posY;
         return returnY;
     }
@@ -96,7 +109,8 @@ public class Player {
 	*
 	* @return player's health
 	*/
-    public int getHealth() {
+    public int getHealth() 
+	{
         int returnHealth = this.health;
         return returnHealth;
     }
@@ -106,23 +120,37 @@ public class Player {
 	*
 	* @param x distance to move
 	*/
-    public void moveX(int x) {
-        if (x >= 1) {
+    public void moveX(int x)
+	{
+		//checks to make sure move is legal
+        if (x >= 1)
+		{
             this.posX += 1;
         }
-        else if (x <= 0) {
+        else if (x <= 0) 
+		{
             this.posX -= 1;
         }
-        else {
+        else
+		{
             System.out.println("INVALID VALUE");
         }
     }
 	
+	
+	/**
+	* setter method to set player's x position on the map
+	*
+	*/
 	public void setX(int x)
 	{
 		this.posX = x;
 	}
 	
+	/**
+	* setter method to set player's y position on the map
+	*
+	*/
 	public void setY(int y)
 	{
 		this.posY = y;
@@ -134,14 +162,19 @@ public class Player {
 	*
 	* @param y distance to move
 	*/
-    public void moveY(int y) {
-        if (y >= 1) {
+    public void moveY(int y) 
+	{
+		//checks to make sure move is legal
+        if (y >= 1) 
+		{
             this.posY += 1;
         }
-        else if (y <= 0) {
+        else if (y <= 0) 
+		{
             this.posY -= 1;
         }
-        else {
+        else
+		{
             System.out.println("INVALID VALUE");
         }
     }
@@ -149,11 +182,11 @@ public class Player {
 	/**
 	* method to attack an enemy
 	*
-	* needs work
-	*
-	* @param current enemy in the room
+	* @param target enemy in the room
 	*/
-    public void attackEnemy(Enemy target) {
+    public void attackEnemy(Enemy target) 
+	{
+		//call the takeDamage method in the enemy class and send the player's attackStrength as an argument 
 		System.out.println("Player's attack Strength: " + this.attackStrength);
 		System.out.println(target.toString());
         target.takeDamage(attackStrength);
@@ -164,7 +197,8 @@ public class Player {
 	*
 	* @param dmgTaken amount of health to subtract from the player's health
 	*/
-    public void takeDamage(int dmgTaken) {
+    public void takeDamage(int dmgTaken) 
+	{
         this.health -= dmgTaken;
     }
 
@@ -173,7 +207,8 @@ public class Player {
 	*
 	* @param toTake name of item 
 	*/
-    public void pickUpItem(String toTake) {
+    public void pickUpItem(String toTake) 
+	{
         System.out.println("you found: " + toTake + ". It's added to your inventory");
         this.pouch.add(toTake);
     }
@@ -188,19 +223,23 @@ public class Player {
     public int useItem(String itemToUse)
 	{
   
-		//find the item they would like to use and remove it from their inventory 
-        for (int i = 0; i < this.pouch.size(); i++) {
+		//find the item they would like to use and loop through the arraylist and remove the that item from the inventory 
+        for (int i = 0; i < this.pouch.size(); i++) 
+		{
             String tempItem = this.pouch.get(i);
-            if (itemToUse.equals(tempItem)) {
+            if (itemToUse.equals(tempItem)) 
+			{
                 this.pouch.remove(i);
                 break;
             }
         }
 		
+		//if the item is a heal potion add 2 points to the player's health
 		if(itemToUse.equals("heal potion"))
 		{
 			this.setHealth(this.getHealth() + 2);
 		}
+		//if the item is an attack potion add 2 points to the player's attack strength 
 		if(itemToUse.equals("attack potion"))
 		{
 			this.attackStrength += 2;
@@ -209,17 +248,23 @@ public class Player {
         return -1;
     }
 
-	
+	/**
+	* method to get a player's inventory
+	*
+	* @return array list of a player's inventory 
+	*/
 	public ArrayList<String> getPouch()
 	{
 		return this.pouch;
 	}	
+	
 	/**
 	* toString method for player's information
 	*
 	* @return methodReturn player's information (position and health)
 	*/
-    public String toString() {
+    public String toString() 
+	{
 		int tempPosX = this.posX;
         int tempPosY = this.posY;
 		int tempHealth = this.health;
