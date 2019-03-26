@@ -59,6 +59,19 @@ public class Player
         this.posY = y;
         this.pouch = new ArrayList<String>();
     }
+	
+	/**
+	* constructor for a player with a specified x and y position as a arguments and a pre set health 
+	*
+	* @param x The player's x position
+	* @param x The player's y position
+	*
+	* @return a player object with health and postion on map specified 
+	*/
+	public Player(int x, int y)
+	{
+		this(30, x, y);
+	}
 
 	/**
 	* method to set a players intial postion on the 

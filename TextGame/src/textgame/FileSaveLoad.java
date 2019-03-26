@@ -12,8 +12,7 @@ import java.io.IOException;
  * Class used to read a text file for the map
  * 
  */
-public class FileSaveLoad 
-{
+public class FileSaveLoad{
 	//declare class members
     private final String fileLocation;
     private String content;
