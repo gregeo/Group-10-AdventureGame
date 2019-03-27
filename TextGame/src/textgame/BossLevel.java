@@ -225,7 +225,7 @@ public class BossLevel
 		{
 			for(int j = 0; j < playerGrid[i].length; j++)
 			{
-				System.out.println(getPlayerX());
+				//System.out.println(getPlayerX());
 				if(this.getPlayerX() == j && this.getPlayerY() == 1)
 				{
 					this.playerGrid[i][j] = "P";
@@ -279,7 +279,7 @@ public class BossLevel
 		{
 			actions.remove("Use Item");
 		}
-		ArayList<String> rActions = this.actions;
+		ArrayList<String> rActions = this.actions;
 		return rActions;
 	}
 	
