@@ -106,7 +106,8 @@ public class BossLevel
 	*/
 	public int getBossX()
 	{
-		return this.bossX;
+		int rBossX = this.bossX;
+		return rBossX;
 	}
 	
 	
@@ -117,7 +118,8 @@ public class BossLevel
 	*/
 	public int getBossY()
 	{
-		return this.bossY;
+		int rBossY = this.bossY;
+		return rBossY;
 	}
 	
 	/**
@@ -145,7 +147,8 @@ public class BossLevel
 	*/
 	public int getPlayerX()
 	{
-		return this.playerX;
+		int rPlayerX = this.playerX;
+		return rPlayerX;
 	}
 	
 	/**
@@ -155,7 +158,8 @@ public class BossLevel
 	*/
 	public int getPlayerY()
 	{
-		return this.playerY;
+		int rPlayerY = this.playerY;
+		return rPlayerY;
 	}
 	
 	/**
@@ -275,7 +279,8 @@ public class BossLevel
 		{
 			actions.remove("Use Item");
 		}
-		return actions;
+		ArayList<String> rActions = this.actions;
+		return rActions;
 	}
 	
 	/**

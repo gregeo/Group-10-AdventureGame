@@ -236,7 +236,8 @@ public class Room
 	* @return the enemy in the room
 	*/
     public Enemy getEnemy() {
-        return this.enemyRef;
+        Enemy rEnemyRef = this.enemyRef;
+        return rEnemyRef;
     }
 
 	/**
@@ -245,7 +246,8 @@ public class Room
 	* @return all of the doors in the room
 	*/
     public boolean[] getIsDoor() {
-        return this.isDoor;
+        boolean[] rIsDoor = this.isDoor;
+        return rIsDoor;
     }
 
 	/**
@@ -254,7 +256,8 @@ public class Room
 	* @return the item in the room or null if there is no item
 	*/
     public String getItem() {
-        return this.item;
+        String rItem = this.item;
+        return rItem;
     }
 	
 	/**
@@ -274,8 +277,9 @@ public class Room
 			{
 				if(s.contains("move"))
 				{
-					doableActions.remove(s);
-					return this.doableActions;
+                    doableActions.remove(s);
+                    ArrayList<String> rDoableActions = this.doableActions;
+					return rDoableActions;
 				}
 			}
 					
@@ -318,7 +322,8 @@ public class Room
 		if(doableActions.contains("Use Item"))
 		{
 			//doableActions.remove("Use Item");
-			return this.doableActions;
+			ArrayList<String> rDoableActions = this.doableActions;
+			return rDoableActions;
 		}
 		/*if(player.getPouch().size() != 0)
 		{
@@ -327,7 +332,8 @@ public class Room
 		
 		
 		
-        return this.doableActions;
+        ArrayList<String> rDoableActions = this.doableActions;
+		return rDoableActions;
     }
 
 	/**
@@ -336,7 +342,8 @@ public class Room
 	* @return the current room object's description
 	*/
     public String getText() {
-        return text;
+        String rText = this.text;
+        return rText;
     }
     
     
@@ -413,7 +420,8 @@ public class Room
 	
 	public Player getPlayer()
 	{
-		return this.player;
+        Player rPlayer = this.player;
+		return rPlayer;
 	}
 	
 	public Enemy removeEnemy(){

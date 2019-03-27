@@ -149,7 +149,8 @@ public class Map
 	*/
     public int getPlayerX()
 	{
-        return playerX;
+        int rPlayerX = this.playerX;
+        return rPlayerX;
     }
 
 	/**
@@ -159,7 +160,8 @@ public class Map
 	*/
     public int getPlayerY()
 	{
-        return playerY;
+        int rPLayerY = this.playerY;
+        return rPlayerY;
     }
 
 	
@@ -198,6 +200,7 @@ public class Map
         //check if the room is on the map
         if (rooms.length - 1 > y && rooms[0].length - 1 > x && x >= 0 && y >= 0) 
 		{
+            Room rRooms = new Room(this.rooms);
             return rooms[x][y];
         }
         return null;

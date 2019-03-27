@@ -69,21 +69,25 @@ public class Boss extends Enemy
 		if(this.getHealth() >= 10 && this.getHealth() <= 15)
 		{
 			setAttackStrength(15);
-			return this.attackStrength;
+			int rAttackStrength;
+			return rAttackStrength;
 		}
 		if(this.getHealth() >= 5 && this.getHealth() < 10)
 		{
 			setAttackStrength(10);
-			return this.attackStrength;
+			int rAttackStrength;
+			return rattackStrength;
 		}
 		if(this.getHealth() >= 0 && this.getHealth() < 5)
 		{
 			setAttackStrength(5);
-			return this.attackStrength;
+			int rAttackStrength;
+			return rAttackStrength;
 		}
 		else
 		{
-			return this.attackStrength;
+			int rAttackStrength;
+			return rAttackStrength;
 		}
 	}
 
