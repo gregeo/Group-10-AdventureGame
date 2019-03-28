@@ -1,15 +1,15 @@
 package textgame;
+
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
-import demo1.Player;
+import textgame.Player;
 
 public class PlayerTest {
     @Test
     public void test_getPosY_works() {
-        Player p = new Player();
-        p.setInitPos(1, 0);
+        Player p = new Player(1, 0);
         assertEquals("getPosY() should return the y position", new Integer(0), p.getPosY());
     }
 

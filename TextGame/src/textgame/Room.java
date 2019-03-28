@@ -127,6 +127,15 @@ public class Room
 
     }
 
+    public Room (Room toCopy) {
+        this.isDoor = toCopy.getIsDoor();
+        this.enemyRef = toCopy.getEnemy();
+        this.item = toCopy.getItem();
+        this.doableActions = toCopy.getDoableActions();
+        this.player = toCopy.getPlayer();
+        this.text = toCopy.getText;
+    }
+
     /**
      * Method to carry out the players chosen action in the room 
 	 *
