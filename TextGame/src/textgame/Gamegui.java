@@ -61,7 +61,7 @@ public class Gamegui extends Application {
         boolean b2[] = {false, false, true, true};
         Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big\n long corridor. You see lots of chests to the side, hopefully with lots of items.\n However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could\n pick up. Then out of the darkness appears a roll warrior! ...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could\n pick up. Then out of the darkness appears a troll warrior! ...");
 
         //add all of the rooms to the map
         m.addRoom(r1, 0, 0);
