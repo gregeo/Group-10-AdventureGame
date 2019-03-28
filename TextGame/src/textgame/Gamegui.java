@@ -1,5 +1,8 @@
 package textgame;
 
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.beans.value.ChangeListener;
@@ -9,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -18,6 +22,9 @@ import javafx.stage.Stage;
  *
  */
 public class Gamegui extends Application {
+
+    ListView<String> optionsDrop;
+    MultipleSelectionModel<String> optionModel;
 
     public static void main(String[] args) {
         //main method to launch the GUI
@@ -50,11 +57,11 @@ public class Gamegui extends Application {
         Enemy enemyRoomTwo = new Enemy(1, 0);
         Enemy enemyRoomThree = new Enemy(1, 1);
         boolean b1[] = {false, true, false, false};
-        Room r1 = new Room(b1, enemyRoomOne, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel something brush up against your leg and hope it's just a rat. Then out of the darkness a skeleton knight is coming towards you!");
+        Room r1 = new Room(b1, enemyRoomOne, "heal potion", p, "A suspiciously quiet room, you look around the cold dark stone room and feel\n something brush up against your leg and hope it's just a rat. Then out of the\n darkness a skeleton knight is coming towards you!");
         boolean b2[] = {false, false, true, true};
-        Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big long corridor. You see lots of chests to the side, hopefully with lots of items. However guarded by a group of goblins!");
+        Room r2 = new Room(b2, enemyRoomTwo, "attack potion", p, "You enter a well it room with fire torches all the way down the the big\n long corridor. You see lots of chests to the side, hopefully with lots of items.\n However guarded by a group of goblins!");
         boolean b3[] = {true, false, false, false};
-        Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
+        Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could\n pick up. Then out of the darkness appears a roll warrior! ...");
 
         //add all of the rooms to the map
         m.addRoom(r1, 0, 0);
@@ -69,6 +76,7 @@ public class Gamegui extends Application {
                 + "He must fight to find his way to the dungeon that the Shadow King inhabits.\n"
                 + "riving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n"
                 + "Save the princess and the kingdom!\n" + m.printMap());
+        text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
         grid.add(text, 2, 0);
 //end text box setup
 //begin menu setup
@@ -88,13 +96,25 @@ public class Gamegui extends Application {
 //end menu setup
 //start new menu setup
         ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
-        ListView<String> optionsDrop = new ListView<String>(options);
-        MultipleSelectionModel<String> optionModel = optionsDrop.getSelectionModel();
+        optionsDrop = new ListView<String>(options);
+        optionsDrop.setEditable(true);
+        optionsDrop.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        optionModel = optionsDrop.getSelectionModel();
 
         optionModel.selectedItemProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
-                System.out.println(newVal);
+                int i = m.runAction(newVal);
+                text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
 
+                ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
+                optionsDrop.getItems().clear();
+                optionsDrop.setItems(options);
+                //optionsDrop.refresh();
+                optionModel.clearSelection();
+                optionModel = optionsDrop.getSelectionModel();
+                //event.consume();
+
+                
             }
 
         });
@@ -103,7 +123,16 @@ public class Gamegui extends Application {
 //end new Menu setup
         primaryStage.show();
 
-        /*
+    }
+
+    public void sneek(ObservableList<String> options) {
+        optionsDrop = new ListView<String>(options);
+        optionModel = optionsDrop.getSelectionModel();
+    }
+
+}
+
+/*
         ComboBox.valueProperty().addListener(new ChangeListener<String>(){
             @Override public void changed(ObservableValue ov, String t, String t1){
                 
@@ -113,7 +142,7 @@ public class Gamegui extends Application {
         });
         
         
-         */
+ */
 
  /*
         
@@ -128,7 +157,4 @@ public class Gamegui extends Application {
           //}
             
         });
-         */
-    }
-
-}
+ */
