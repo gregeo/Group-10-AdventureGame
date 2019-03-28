@@ -330,7 +330,7 @@ public class BossLevel
 		if(x == this.getBossX() && y == this.getBossY())
 		{
 			System.out.println("Hit!");
-			player.attackEnemy(boss);
+			player.attack(boss);
 			System.out.println(player.toString());
 			System.out.println(boss.toString());
 		}

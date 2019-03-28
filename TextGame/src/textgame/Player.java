@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * A class representing the main character in the game
  * 
  */
-public class Player 
+public class Player extends Character 
 {
 	
 	//declare class members 
@@ -54,9 +54,10 @@ public class Player
 	*/
     public Player(int health, int x, int y)
 	{
+		super(x, y);
         this.health = health;
-        this.posX = x;
-        this.posY = y;
+        //this.posX = x;
+        //this.posY = y;
         this.pouch = new ArrayList<String>();
     }
 	
@@ -197,7 +198,7 @@ public class Player
 	*
 	* @param target enemy in the room
 	*/
-    public void attackEnemy(Enemy target) 
+    public void attack(Character target) 
 	{
 		//call the takeDamage method in the enemy class and send the player's attackStrength as an argument 
 		System.out.println("Player's attack Strength: " + this.attackStrength);

@@ -336,7 +336,7 @@ public class Map
 			{
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
-                p.attackEnemy(e);
+                p.attack(e);
                 //p.takeDamage(1);
 				
 				//if enemy isn't dead

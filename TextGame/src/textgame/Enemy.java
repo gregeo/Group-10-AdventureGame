@@ -12,7 +12,7 @@ import java.lang.Math;
  *
  * 
  */
-public class Enemy 
+public class Enemy extends Character
 {
 	
 	//declare class members
@@ -54,8 +54,9 @@ public class Enemy
 	*/
 	public Enemy(int posX, int posY)
 	{
+		super(posX, posY);
 		setHealth();
-		setInitPos(posX, posY);
+		//setInitPos(posX, posY);
 		
 	}
 	
@@ -73,7 +74,6 @@ public class Enemy
 	/**
 	* method to set an enemy's intial health
 	*
-	* 
 	*/
     public void setHealth()
 	{
@@ -155,7 +155,7 @@ public class Enemy
 	*
 	* @param target The player object that damage will be assigned to 
 	*/
-    public void attack(Player target) 
+    public void attack(Character target) 
 	{
 		//generate a random number between 1 and 3 for the enemy's attack strenght and call the target's takeDamage method sending this random number 
         double randomAttack = Math.random();
