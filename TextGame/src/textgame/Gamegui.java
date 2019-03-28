@@ -1,71 +1,50 @@
 package textgame;
 
-import java.awt.Insets;
-import java.util.ArrayList;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-//import javafx.scene.control.ButtonBuilder;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javax.swing.event.ChangeListener;
-
 
 /**
-* class to represent the GUI portion of the game
-*
-*/
-public class Gamegui extends Application
- {
+ * class to represent the GUI portion of the game
+ *
+ */
+public class Gamegui extends Application {
 
-    public static void main(String[] args) 
-	{
-		//main method to launch the GUI
+    public static void main(String[] args) {
+        //main method to launch the GUI
         launch(args);
     }
 
-	
-	/**
-	* overridden method from the Application class to create our interface
-	*
-	* @param primaryStage stage used to add all of our features to 
-	*/
+    /**
+     * overridden method from the Application class to create our interface
+     *
+     * @param primaryStage Primery stage that will contain a grid containing
+     * text and a drop menu
+     */
     @Override
-    public void start(Stage primaryStage) 
-	{
-		//declare widgets for the interface
-        TextField textField = new TextField();
-        HBox hbox = new HBox(textField);
-		// primaryStage.setScene(scene);
-        Text text = new Text();
-
-        //setting the position of the text 
-        text.setX(5);
-        text.setY(20);
-
-		
-		//create all of the objects needed to run the game
-        Map m = new Map(3, 3);
+    public void start(Stage primaryStage) {
+//begin grid pane(root node setup)
+        GridPane grid = new GridPane();//root node
+        grid.setVgap(4);
+        grid.setHgap(10);
+//end grid pane(root node setup)
+//begin scene setup
+        Scene scene = new Scene(grid, 800, 300);
+        primaryStage.setScene(scene);//set the scene and title and show the primary stage
+        primaryStage.setTitle("Dungeon Hero");
+//end scene setup
+// begin text box setup
+        Text text = new Text();//will hold description and map
+        Map m = new Map(3, 3);//create map... to be converted to a file load system
         Player p = new Player(30, 0, 0);
         Enemy enemyRoomOne = new Enemy(0, 0);
         Enemy enemyRoomTwo = new Enemy(1, 0);
@@ -77,13 +56,12 @@ public class Gamegui extends Application
         boolean b3[] = {true, false, false, false};
         Room r3 = new Room(b3, enemyRoomThree, "attack potion", p, "You enter the armory of the dungeon, and see lots of weapons you could pick up. Then out of the darkness appears a roll warrior! ...");
 
-		//add all of the rooms to the map
+        //add all of the rooms to the map
         m.addRoom(r1, 0, 0);
         m.addRoom(r2, 1, 0);
         m.addRoom(r3, 1, 1);
 
-		
-		//set the text to include the story on the interface for the user and print the map
+        //set the text to include the story on the interface for the user and print the map
         text.setText("The king has scoured the land for help with a dark evil: The Shadow King.\n"
                 + "The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.\n"
                 + "Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...\n "
@@ -91,30 +69,40 @@ public class Gamegui extends Application
                 + "He must fight to find his way to the dungeon that the Shadow King inhabits.\n"
                 + "riving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n"
                 + "Save the princess and the kingdom!\n" + m.printMap());
-
-        //Creating a Group object  
-        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
-
-		
-		//create a comboBox for the actions and a grid pane to organize the interface
-        final ChoiceBox comboBox = new ChoiceBox(options);
-        GridPane grid = new GridPane();
-		
-		//adjust the allignemnt of the widgets
-        grid.setVgap(4);
-        grid.setHgap(10);
-        grid.add(comboBox, 1, 0);
         grid.add(text, 2, 0);
+//end text box setup
+//begin menu setup
+/*
+        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
 
-		
-		//add the grid to the scene
-        Scene scene = new Scene(grid, 600, 300);
-		
-		//set the scene and title and show the primary stage
-        primaryStage.setScene(scene);
+        //create a comboBox for the actions and a grid pane to organize the interface
+        final ChoiceBox comboBox = new ChoiceBox(options);
+
+        comboBox.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent ae) {
+                System.out.println(ae);
+            }
+        });
+        grid.add(comboBox, 1, 0);
+         */
+//end menu setup
+//start new menu setup
+        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
+        ListView<String> optionsDrop = new ListView<String>(options);
+        MultipleSelectionModel<String> optionModel = optionsDrop.getSelectionModel();
+
+        optionModel.selectedItemProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
+                System.out.println(newVal);
+
+            }
+
+        });
+        grid.add(optionsDrop, 1, 0);
+
+//end new Menu setup
         primaryStage.show();
-        primaryStage.setTitle("Dungeon Hero");
-        primaryStage.show();
+
         /*
         ComboBox.valueProperty().addListener(new ChangeListener<String>(){
             @Override public void changed(ObservableValue ov, String t, String t1){
@@ -123,19 +111,24 @@ public class Gamegui extends Application
             
         
         });
-*/
+        
+        
+         */
+
+ /*
+        
 		//anonymous class to handle the choice of action
         comboBox.addEventHandler(EventType.ROOT, event -> {
-           System.out.println(event.getTarget());
+          // System.out.println(event.getTarget());
+          //System.out.println(event.getSource());
+
           //if(event.getEventType() == Event.ACTION_EVENT ){
           //comboBox.
                
           //}
             
         });
-        
+         */
     }
-    
-    
 
 }
