@@ -141,11 +141,13 @@ public class Room
 		//call corresponding method for the user's action choice  
         if (input.contains("move")) 
 		{
-            return this.move(input);
+            int rValue = this.move(input);
+            return rValue;
         }
 		else if (input.contains("attack")) 
 		{
-            return this.attackEnemy();
+            int rValue = this.attackEnemy();
+            return rValue;
         }
 		else if (input.contains("search")) 
 		{
@@ -153,7 +155,8 @@ public class Room
         }
 		else if (input.contains("use")) 
 		{
-            return this.useItem();
+            int rValue = this.useItem();
+            return rValue;
         }
 		else 
 		{
