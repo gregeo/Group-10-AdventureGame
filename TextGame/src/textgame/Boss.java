@@ -3,7 +3,7 @@ package textgame;
 
 
 /**
- * Class representing the boss which inherits from the Enemy class 
+ * Class representing the boss which inherits from the Enemy class which further inherits from the abstract character Class 
  * Runs all of the attack and taking damage functions for the boss
  * 
  */
@@ -96,7 +96,7 @@ public class Boss extends Enemy
 	*
 	* @param dmg the damage to be taken away from the boss's health
 	*/
-	public void takeDamage(int dmg) 
+	/*public void takeDamage(int dmg) 
 	{
 		//if the damage is positive and the tempHealth is not negative or 0 set tempHealth to be the new health
 		//else the boss is dead and set health to 0
@@ -112,7 +112,7 @@ public class Boss extends Enemy
 				this.setNonRandomHealth(0);
 			}
         }
-    }
+    }*/
 
 	/**
 	* overridden toString method to print the boss's information

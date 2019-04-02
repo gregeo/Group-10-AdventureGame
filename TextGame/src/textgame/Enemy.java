@@ -8,7 +8,7 @@ package textgame;
 import java.lang.Math;
 
 /**
- * A class used to represent an enemy in a room for a player to fight
+ * A child class from abstract character class used to represent an enemy in a room for a player to fight 
  *
  * 
  */
@@ -55,27 +55,16 @@ public class Enemy extends Character
 	public Enemy(int posX, int posY)
 	{
 		super(posX, posY);
-		setHealth();
+		setRandomHealth();
 		//setInitPos(posX, posY);
 		
 	}
-	
-	/**
-	* method to set an enemy's initial position
-	*
-	* @param x The enemy's x position
-	* @param x The enemy's y position 
-	*/
-    public void setInitPos(int x, int y) 
-	{
-        this.posX = x;
-        this.posY = y;
-    }
+
 	/**
 	* method to set an enemy's intial health
 	*
 	*/
-    public void setHealth()
+    public void setRandomHealth()
 	{
         double randomHealth = Math.random();
 		randomHealth = randomHealth * 6 + 1;
@@ -88,32 +77,11 @@ public class Enemy extends Character
 	*
 	* @param health enemy's health
 	*/
-	public void setNonRandomHealth(int health)
+	public void setHealth(int health)
 	{
 		this.health = health;
 	}
 
-	/**
-	* method to get an enemy's x position
-	*
-	* @return enemy's x position
-	*/
-    public int getPosX()
-	{
-        int tempPosX = this.posX;
-        return tempPosX;
-    }
-
-	/**
-	* method to get an enemy's y position
-	*
-	* @return enemy's x position
-	*/
-    public int getPosY() 
-	{
-        int tempPosY = this.posY;
-        return tempPosY;
-    }
 
 	/**
 	* method to get an enemy's health
@@ -126,29 +94,6 @@ public class Enemy extends Character
         return tempHealth;
     }
 
-	/**
-	* method to assign damage to enemy
-	*
-	* @param dmg amount of health to subtract from the enemy's health
-	*/
-    public void takeDamage(int dmg) 
-	{
-		
-		//if the tempHealth is not negative, set that to be the new health of the enemy
-		//else the tempHealth is negative enemy is dead and is set to 0
-        if (dmg >= 0) {
-            int tempHealth = this.health - dmg;
-			
-			if(tempHealth >= 0)
-			{
-				this.health = tempHealth;
-			}
-			else
-			{
-				this.health = 0;
-			}
-        }
-    }
 
 	/**
 	* Method to carry out the enemy's attack
