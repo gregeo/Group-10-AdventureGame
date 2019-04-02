@@ -133,7 +133,7 @@ public class Room
         this.item = toCopy.getItem();
         this.doableActions = toCopy.getDoableActions();
         this.player = toCopy.getPlayer();
-        this.text = toCopy.getText;
+        this.text = toCopy.getText();
     }
 
     /**
