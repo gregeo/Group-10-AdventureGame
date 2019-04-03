@@ -380,7 +380,7 @@ public class Map
 				
 				//check which item they have chosen and call the useItem method
                 Scanner itemScanner = new Scanner(System.in);
-                String itemSelection = itemScanner.nextLine();
+                int itemSelection = itemScanner.nextInt();
 
                 int item = p.useItem(itemSelection);
             }
@@ -505,13 +505,13 @@ public class Map
     }
 
     /**
-     * Our own toString method for this class to print a room on the map
-     *
-     * @param row row of room to print
-     * @param column column of room to print
-     *
-     * @return the information about the room to the user
-     */
+	 * Our own toString method for this class to print a room on the map
+	 *
+	 * @param row row of room to print
+	 * @param column column of room to print
+	 *
+	 * @return the information about the room to the user
+	*/
     public String toString(int row, int column)
 	{
 		
@@ -525,5 +525,20 @@ public class Map
             return "no room exists there";
         }
     }
+	
+	 /**
+	 * Method to get the story and put in to  one string variable
+	 *
+	 * @return string variable containing the story
+	 */
+	public String getStory()
+	{
+		String story = "Dungeon Hero!\n" + "The king has scoured the land for help with a dark evil: The Shadow King.\n" + "The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.\n"
+		+ "Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...\n" +
+		"Upon leaving the town, he is assailed by goblins!\n" +
+		"He must fight to find his way to the dungeon that the Shadow King inhabits.\n" +  "There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n" + "\nSave the princess and the kingdom!";
+		
+		return story;
+	}
 
 }

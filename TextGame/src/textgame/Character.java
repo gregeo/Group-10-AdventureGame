@@ -1,24 +1,61 @@
 package textgame;
 
+
+/**
+	* Abstract class representing the basic functions and properties for an entity in the game
+*/
 public abstract class Character
 {
+	//declare class members 
 	private int posX; 
 	private int posY;
 	
+	/**
+	* Empty constructor for a character
+	*
+	* @return A character object with no set class members
+	*/
 	public Character()
 	{
 		
 	}
+	
+	/**
+	* Constructor to create an object of type character with a specified x and y coordinate
+	*
+	* @param posX character's x position on the map
+	* @param posY character's y position on the map
+	*
+	* @return An object of character type with a specified x and y coordinate 
+	*/
 	public Character(int x, int y)
 	{
 		this.posX = x;
 		this.posY = y;
 	}
+	
+	
+	/**
+	* Abstract method to get a character's health
+	*
+	* @return health character's health class member
+	*/
 	public abstract int getHealth();
 	
+	/**
+	* Abstract method for attacking that all child classes will implement in different ways 
+	*
+	* @param target A character type object that the current object will deal damage to
+	*/
 	public abstract void attack(Character chr1);
 	
-	public abstract void setHealth(int tempHealth);
+	
+	/**
+	* Abstract method to set a character's health
+	*
+	* @param newHealth players new health value 
+	*/
+	public abstract void setHealth(int newHealth);
 	
 	
 	/**

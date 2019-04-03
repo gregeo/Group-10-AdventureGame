@@ -23,19 +23,10 @@ public class TextGame {
     public static void main(String[] args) {
 
 		Scanner keyboard = new Scanner(System.in);
-        
-        //hard coded testing commands for this class
-		System.out.println("Dungeon Hero!");
-		
-		System.out.println("The king has scoured the land for help with a dark evil: The Shadow King.");
-		System.out.println("The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.");
-		System.out.println(" Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...");
-		System.out.println("Upon leaving the town, he is assailed by goblins!");
-		System.out.println("He must fight to find his way to the dungeon that the Shadow King inhabits.");
-		System.out.println("There, he must get past traps, pick locks, and fight to progress, before arriving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n");
-		System.out.println("Save the princess and the kingdom!");
+	
 
         Map m = new Map(3, 3);
+		System.out.println(m.getStory());
         System.out.print(m.printMap());
         Player p = new Player(30, 0, 0);
 		Enemy enemyRoomOne = new Enemy(0, 0);
@@ -51,8 +42,6 @@ public class TextGame {
         m.addRoom(r1, 0, 0);
 		m.addRoom(r2, 1, 0);
         m.addRoom(r3, 1, 1);
-        //System.out.println(m.toString(0, 0));
-        //System.out.println(m.printMap());
 
 		//declare and initialize variables for the game loop
         Scanner scanner = new Scanner(System.in);
@@ -75,7 +64,7 @@ public class TextGame {
 				//print map and information about room for the player 
 				System.out.println(m.printMap());
 				System.out.println(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText());
-				System.out.println("you can: " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
+				System.out.println("\nThese are your possible actions (please type the action you would like to take): " + m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
 				action = scanner.nextLine();
 				
 				//check user input for the action they have chosen

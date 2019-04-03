@@ -127,6 +127,13 @@ public class Room
 
     }
 
+	/**
+     * Copy constructor to create a copy of a room
+     *
+	 * @param toCopy room object to be copied
+	 *
+	 * @return a new Room object with specified class members
+     */
     public Room (Room toCopy) {
         this.isDoor = toCopy.getIsDoor();
         this.enemyRef = toCopy.getEnemy();
@@ -187,9 +194,9 @@ public class Room
     }
 
     /**
-     * Method to carr out the movement action 
+     * Method to carry out the movement action 
 	 *
-     * @param actionToDo User's movement dirrection
+     * @param actionToDo User's movement direction
 	 *
      * @return dir the direction the user want's the player to go
      */
@@ -228,7 +235,7 @@ public class Room
      * Method to search the room for any items 
 	 *
 	 *
-     * @return an int value used for testing to check if intented result was done
+     * @return an int value used for testing to check if intended result was done
      */
     private int search() {
         if (item != null) {
@@ -279,10 +286,14 @@ public class Room
 	*/
     public ArrayList<String> getDoableActions() 
 	{
+		//if the player's pouch is not empty and "use item" isn't already in the list add it
 		if(player.getPouch().size() != 0 && !doableActions.contains("Use Item"))
 		{
 			doableActions.add("Use Item");
 		}
+		
+		//if the enemy isn't dead 
+		//removing all instances of duplication of moves 
 		if(enemyRef != null)
 		{
 			for(String s: doableActions)
@@ -296,6 +307,9 @@ public class Room
 			}
 					
 		}
+		
+		//if enemy is dead
+		//add all possible directions to move based on door boolean array
 		if(enemyRef == null)
 		{
 			if (isDoor[0]) {
@@ -324,6 +338,8 @@ public class Room
 				}			
 			}
 		}
+		
+		//if player's pouch is empty remove "use item" from list
 		if(player.getPouch().size() == 0)
 		{
 			if(doableActions.contains("Use Item"))
@@ -331,16 +347,13 @@ public class Room
 				doableActions.remove("Use Item");
 			}
 		}
+		
 		if(doableActions.contains("Use Item"))
 		{
 			//doableActions.remove("Use Item");
 			ArrayList<String> rDoableActions = this.doableActions;
 			return rDoableActions;
 		}
-		/*if(player.getPouch().size() != 0)
-		{
-			doableActions.add("Use Item");
-		}*/
 		
 		
 		
@@ -373,26 +386,26 @@ public class Room
             s = s + "enemy in room: \n \t";
             s = s + this.enemyRef.toString() + "\n";
         } else {
-            s = s + "no enemy in room \n";
+            s = s + "No enemy in room \n";
         }
 
 		//check if item in room
         if (this.item != null) {
-            s = s + "item in room: \n \t" + this.item + "\n";
+            s = s + "Item in room: \n \t" + this.item + "\n";
 
         } else {
-            s = s + "no item in room \n";
+            s = s + "No item in room \n";
         }
 		
 		//return all actions possible in the room
-        s = s + "doable actions in room \n \t ";
+        s = s + "Doable actions in room \n \t ";
         for (String a : doableActions) {
             s = s + a + "\n";
         }
 		
 		//check for player in room
         if (this.player != null) {
-            s = s + "contains player : \n\t" + this.player.toString();
+            s = s + "Contains player : \n\t" + this.player.toString();
         }
 		
 		//check for all of the doors in the room and which direction they are in
@@ -401,7 +414,7 @@ public class Room
             s = s + b + " ";
         }
         s = s + "\n";
-        s = s + "meaning there is a door on the: ";
+        s = s + "Meaning there is a door on the: ";
         if (this.isDoor[0]) {
             s = s + "north ";
         }
@@ -430,12 +443,22 @@ public class Room
            
     }
 	
+	/**
+	* Method to get the current player object from the room 
+	*
+	* @return a player object in this room
+	*/
 	public Player getPlayer()
 	{
         Player rPlayer = this.player;
 		return rPlayer;
 	}
 	
+	/**
+	* Method to remove the enemy object from the room 
+	*
+	* @return a reference to the enemy equaling null
+	*/
 	public Enemy removeEnemy(){
         Enemy e = this.enemyRef;
         this.enemyRef = null;

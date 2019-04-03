@@ -430,7 +430,7 @@ public class BossLevel
 		
 		//ask the user which item they want to use
 		Scanner itemScanner = new Scanner(System.in);
-		String itemSelection = itemScanner.nextLine();
+		int itemSelection = itemScanner.nextInt();
 		
 		//call the useItem method in the player class to carry out the specific action of the item
 		int item = player.useItem(itemSelection);

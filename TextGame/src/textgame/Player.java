@@ -162,7 +162,7 @@ public class Player extends Character
 	*/
     public void pickUpItem(String toTake) 
 	{
-        System.out.println("you found: " + toTake + ". It's added to your inventory");
+        System.out.println("You found: " + toTake + ". It has been added to your inventory");
         this.pouch.add(toTake);
     }
 
@@ -173,16 +173,17 @@ public class Player extends Character
 	*
 	* @return int value used for testing
 	*/
-    public int useItem(String itemToUse)
+    public int useItem(int itemChosen)
 	{
-  
+		String itemToUse = "";
 		//find the item they would like to use and loop through the arraylist and remove the that item from the inventory 
-        for (int i = 0; i < this.pouch.size(); i++) 
+        for (int i = 1; i < this.pouch.size() + 1; i++) 
 		{
-            String tempItem = this.pouch.get(i);
-            if (itemToUse.equals(tempItem)) 
+            int tempItem = i;
+            if (itemChosen == i) 
 			{
-                this.pouch.remove(i);
+				itemToUse = pouch.get(i - 1);
+                this.pouch.remove(i - 1);
                 break;
             }
         }
