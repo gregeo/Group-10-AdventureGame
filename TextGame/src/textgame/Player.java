@@ -7,7 +7,7 @@ package textgame;
 import java.util.ArrayList;
 
 /**
- * A class representing the main character in the game
+ * A child class from the abstract Character class representing the main character in the game
  * 
  */
 public class Player extends Character 
@@ -73,19 +73,7 @@ public class Player extends Character
 	{
 		this(30, x, y);
 	}
-
-	/**
-	* method to set a players intial postion on the 
-	*
-	* @param x The player's x position
-	* @param x The player's y position 
-	*/
-    public void setInitPos(int x, int y)
-	{
-        this.posX = x;
-        this.posY = y;
-    }
-
+	
 	/**
 	* method to set a players health
 	*
@@ -96,28 +84,6 @@ public class Player extends Character
         this.health = health;
     }
     
-	/**
-	* method to get a players x postion
-	*
-	* @return player's x position
-	*/
-    public int getPosX()
-	{
-        int returnX = this.posX;
-        return returnX;
-    }
-
-	/**
-	* method to get a players x position
-	*
-	* @return player's y position
-	*/
-    public int getPosY() 
-	{
-        int returnY = this.posY;
-        return returnY;
-    }
-	
 	/**
 	* method to get a players health 
 	*
@@ -152,24 +118,7 @@ public class Player extends Character
     }
 	
 	
-	/**
-	* setter method to set player's x position on the map
-	*
-	*/
-	public void setX(int x)
-	{
-		this.posX = x;
-	}
 	
-	/**
-	* setter method to set player's y position on the map
-	*
-	*/
-	public void setY(int y)
-	{
-		this.posY = y;
-	}
-
 	
 	/**
 	* method to move player vertically
@@ -206,16 +155,6 @@ public class Player extends Character
         target.takeDamage(attackStrength);
     }
 	
-	/**
-	* method to assign damage to player
-	*
-	* @param dmgTaken amount of health to subtract from the player's health
-	*/
-    public void takeDamage(int dmgTaken) 
-	{
-        this.health -= dmgTaken;
-    }
-
 	/**
 	* method for player to pick up item and add to their inventory
 	*
