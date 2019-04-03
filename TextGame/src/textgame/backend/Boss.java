@@ -1,5 +1,7 @@
 
-package textgame;
+package textgame.backend;
+
+import textgame.backend.Player;
 
 
 /**

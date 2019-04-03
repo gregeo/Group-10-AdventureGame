@@ -1,7 +1,7 @@
 /*
  *  todo: add logger support
  */
-package textgame;
+package textgame.backend;
 
 import java.io.File;
 import java.io.FileReader;

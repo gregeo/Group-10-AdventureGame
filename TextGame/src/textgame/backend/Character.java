@@ -1,4 +1,4 @@
-package textgame;
+package textgame.backend;
 
 
 /**

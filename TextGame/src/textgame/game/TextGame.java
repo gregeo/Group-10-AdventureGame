@@ -5,11 +5,17 @@
  */
 
 
-package textgame;
+package textgame.game;
 
+import textgame.backend.Enemy;
+import textgame.backend.BossLevel;
+import textgame.backend.Boss;
+import textgame.backend.Room;
+import textgame.backend.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
-import textgame.Map;
+import textgame.backend.Map;
+import textgame.backend.Map;
 
 /**
  * The client code for running the text version of the game

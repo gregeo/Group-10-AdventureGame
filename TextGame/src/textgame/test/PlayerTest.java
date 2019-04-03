@@ -1,10 +1,10 @@
-package textgame;
+package textgame.test;
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
-import textgame.Player;
+import textgame.backend.Player;
 
 public class PlayerTest {
     @Test

@@ -1,5 +1,7 @@
-package textgame;
+package textgame.GUI;
 
+import textgame.backend.Room;
+import textgame.backend.Player;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +18,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import textgame.backend.Enemy;
+import textgame.backend.Map;
 
 /**
  * class to represent the GUI portion of the game

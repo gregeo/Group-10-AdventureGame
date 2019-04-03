@@ -1,5 +1,7 @@
-package textgame;
+package textgame.backend;
 
+import textgame.backend.Boss;
+import textgame.backend.Player;
 import java.util.Random;
 import java.util.Arrays;
 import java.util.ArrayList;
