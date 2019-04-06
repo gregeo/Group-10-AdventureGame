@@ -323,47 +323,10 @@ public class BossLevel
 		//update the enemy's grid to put the boss into a new position
 		this.updateEnemyGrid();
 		
-		//ask the user for the cell they would like to attack
-		//using do while loops to ensure correct input
-		Scanner xScan = new Scanner(System.in);
-		Scanner yScan = new Scanner(System.in);
+		
 		Scanner dScan = new Scanner(System.in);
-		int x = 0;
-		int y = 0;
-		boolean validInputX = false;
-		boolean validInputY = false;
-		do 
-		{
-			System.out.println("Which x coordinate do you want to attack? (Please enter a number between 1 and 3)");
-			while (!xScan.hasNextInt()) 
-			{
-				System.out.println("Invalid , please try again.");
-				xScan.next(); 
-			}
-			
-			x = xScan.nextInt();
-			x = x - 1;
-			validInputX = true;
-			
-		} while (validInputX == false);
-		
-		do 
-		{
-			System.out.println("Which y coordinate do you want to attack? (Please enter a number between 1 and 3)");
-			while (!yScan.hasNextInt()) 
-			{
-				System.out.println("Invalid , please try again.");
-				yScan.next(); 
-			}
-			
-			y = yScan.nextInt();
-			y = y - 1;
-			validInputY = true;
-			
-		} while (validInputY == false);
-		
-		
-		
+		int x = chooseCoordinateToAttack();
+		int y = chooseCoordinateToAttack();
 	
 		boolean hit = false;
 		
@@ -378,11 +341,12 @@ public class BossLevel
 		//else the player has missed and the boss now get's to attack the player
 		else
 		{
-			//ask the player which way they want to pivot to defend
+			//if the user has entered a coordinate value outside of the grid, tell them this is there fault and that they should be more careful with their attacks
 			if(x > 2 || y > 2)
 			{
 				System.out.println("Your attack was outside of the grid. Make sure to enter a number between 1 and 3! The Shadow King will now take advantage of your error!\n");
 			}
+			//tell the player they have missed but there attack was on the grid
 			else
 			{
 				System.out.println("You have missed, The Shadow King can now attack you! You must now try and dodge his attack\n");
@@ -392,6 +356,8 @@ public class BossLevel
 			String direction = "";
 			System.out.println("Would you like to go to the left, the middle, or to the right");
 	
+			//while loop used to handle user error
+			//makes sure the user only selects one of the three options
 			while(!validDirection)
 			{
 				direction = dScan.nextLine();
@@ -445,6 +411,36 @@ public class BossLevel
 		//System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
 		//target.takeDamage(boss.getAttackStrength());
 		
+	}
+	
+	/**
+	* private method to obtain the coordinate the user wishes to attack, with user error handling implmented
+	* 
+	* @return coordinate an int value the player has chosen to attack on the grid 
+	*/
+	private int chooseCoordinateToAttack()
+	{
+		Scanner coordScan = new Scanner(System.in); 
+		boolean validInput = false;
+		int coordinate = 0;
+		//do while loop to get the proper coordinate from the user, does not handle user error of firing outside of the grid (part of the difficulty of the game)
+		do 
+		{
+			System.out.println("Which y coordinate do you want to attack? (Please enter a number between 1 and 3)");
+			while (!coordScan.hasNextInt()) 
+			{
+				System.out.println("Invalid , please try again.");
+				coordScan.next(); 
+			}
+			
+			coordinate = coordScan.nextInt();
+			//subtract one from user value to able to index the array properly
+			coordinate = coordinate - 1;
+			validInput = true;
+			
+		} while (validInput == false);
+		
+		return coordinate;
 	}
 	
 	/**
