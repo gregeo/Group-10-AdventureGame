@@ -151,7 +151,7 @@ public class Player extends Character
 	{
 		//call the takeDamage method in the enemy class and send the player's attackStrength as an argument 
 		System.out.println("Player's attack Strength: " + this.attackStrength);
-		System.out.println(target.toString());
+		//System.out.println(target.toString());
         target.takeDamage(attackStrength);
     }
 	
@@ -191,11 +191,13 @@ public class Player extends Character
 		//if the item is a heal potion add 2 points to the player's health
 		if(itemToUse.equals("heal potion"))
 		{
+			System.out.println("Two extra health points have been added to your health");
 			this.setHealth(this.getHealth() + 2);
 		}
 		//if the item is an attack potion add 2 points to the player's attack strength 
 		if(itemToUse.equals("attack potion"))
 		{
+			System.out.println("Two extra attack points have been added to your attack strength");
 			this.attackStrength += 2;
 		}
     

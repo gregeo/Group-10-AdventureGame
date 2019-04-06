@@ -339,6 +339,8 @@ public class Map
 			{
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
+				System.out.println("\nBefore battle: " + e.toString());
+                System.out.println("Before battle: " + p.toString() + "\n");
                 p.attack(e);
                 //p.takeDamage(1);
 				
@@ -348,8 +350,8 @@ public class Map
                     e.attack(p);
                 }
 
-                System.out.println(e.toString() + "\n");
-                System.out.print(p.toString() + "\n");
+                System.out.println("\nAfter battle: " + e.toString());
+                System.out.print("After battle: " + p.toString() + "\n");
 
 				//if enemy is dead, remove from room
                 if (e.getHealth() <= 0)
@@ -382,9 +384,23 @@ public class Map
                 }
 				
 				//check which item they have chosen and call the useItem method
-                Scanner itemScanner = new Scanner(System.in);
-                int itemSelection = itemScanner.nextInt();
-
+				boolean validInput = false;
+				Scanner itemScanner = new Scanner(System.in);
+				int itemSelection = 0;
+				
+				do 
+				{
+					System.out.println("Please type the number of the item you would like to use. (If you do not want to use any of your items, type any number not in the list to return to the game)");
+					while (!itemScanner.hasNextInt()) 
+					{
+						System.out.println("Invalid input, please try again.");
+						itemScanner.next(); 
+					}
+					itemSelection = itemScanner.nextInt();
+					validInput = true;
+					
+				} while (validInput == false);
+				
                 int item = p.useItem(itemSelection);
             }
 

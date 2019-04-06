@@ -305,6 +305,11 @@ public class BossLevel
 			System.out.println("here");
 			this.useItem();
 		}
+		else
+		{
+			System.out.println("oops not a valid command");
+            return -1;
+        }
 		return -1;
 	}
 	
@@ -319,13 +324,47 @@ public class BossLevel
 		this.updateEnemyGrid();
 		
 		//ask the user for the cell they would like to attack
+		//using do while loops to ensure correct input
 		Scanner xScan = new Scanner(System.in);
 		Scanner yScan = new Scanner(System.in);
 		Scanner dScan = new Scanner(System.in);
-		System.out.println("Which x coordinate do you want to attack?");
-		int x = xScan.nextInt();
-		System.out.println("Which y coordinate do you want to attack?");
-		int y = yScan.nextInt();
+		int x = 0;
+		int y = 0;
+		boolean validInputX = false;
+		boolean validInputY = false;
+		do 
+		{
+			System.out.println("Which x coordinate do you want to attack? (Please enter a number between 1 and 3)");
+			while (!xScan.hasNextInt()) 
+			{
+				System.out.println("Invalid , please try again.");
+				xScan.next(); 
+			}
+			
+			x = xScan.nextInt();
+			x = x - 1;
+			validInputX = true;
+			
+		} while (validInputX == false);
+		
+		do 
+		{
+			System.out.println("Which y coordinate do you want to attack? (Please enter a number between 1 and 3)");
+			while (!yScan.hasNextInt()) 
+			{
+				System.out.println("Invalid , please try again.");
+				yScan.next(); 
+			}
+			
+			y = yScan.nextInt();
+			y = y - 1;
+			validInputY = true;
+			
+		} while (validInputY == false);
+		
+		
+		
+	
 		boolean hit = false;
 		
 		//if the player has guessed the cell the boss is in player will deal damage to the boss
@@ -340,10 +379,32 @@ public class BossLevel
 		else
 		{
 			//ask the player which way they want to pivot to defend
-			System.out.println("You have missed, The Shadow King can now attack you! You must now try and dodge his attack");
-			System.out.println("Would you like to go to the left, the middle, or the right");
-			String direction = dScan.nextLine();
-			direction.toLowerCase();
+			if(x > 2 || y > 2)
+			{
+				System.out.println("Your attack was outside of the grid. Make sure to enter a number between 1 and 3! The Shadow King will now take advantage of your error!\n");
+			}
+			else
+			{
+				System.out.println("You have missed, The Shadow King can now attack you! You must now try and dodge his attack\n");
+			}
+			
+			boolean validDirection = false;
+			String direction = "";
+			System.out.println("Would you like to go to the left, the middle, or to the right");
+	
+			while(!validDirection)
+			{
+				direction = dScan.nextLine();
+				while(!((direction.equals ("left")) || (direction.equals("right")) || (direction.equals("middle"))))
+				{
+					System.out.println("Invalid choice. Please try again, entering 'left', 'middle' or 'right'");
+					direction = dScan.next();
+					
+				}
+				validDirection = true;
+			}
+			
+		
 			
 			//move the player to the position on the grid corresponding to their choice of direction
 			if(direction.equals("left"))
@@ -359,6 +420,7 @@ public class BossLevel
 			{
 				this.setPlayerX(1);
 			}
+	
 
 			//run the boss's attack on the player
 			this.bossAttack();
@@ -382,7 +444,8 @@ public class BossLevel
 		return 1;
 		//System.out.println("Enemies attack Strength: " + boss.getAttackStrength());
 		//target.takeDamage(boss.getAttackStrength());
-    }
+		
+	}
 	
 	/**
 	* method to carry out the boss's attack against the player 

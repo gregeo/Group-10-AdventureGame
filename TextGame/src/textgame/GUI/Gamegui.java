@@ -38,7 +38,7 @@ public class Gamegui extends Application {
     /**
      * overridden method from the Application class to create our interface
      *
-     * @param primaryStage Primery stage that will contain a grid containing
+     * @param primaryStage Primary stage that will contain a grid containing
      * text and a drop menu
      */
     @Override
