@@ -94,29 +94,6 @@ public class Boss extends Enemy
 	}
 
 	/**
-	* method to assign damage to the boss
-	*
-	* @param dmg the damage to be taken away from the boss's health
-	*/
-	/*public void takeDamage(int dmg) 
-	{
-		//if the damage is positive and the tempHealth is not negative or 0 set tempHealth to be the new health
-		//else the boss is dead and set health to 0
-        if (dmg >= 0) 
-		{
-            int tempHealth = this.getHealth() - dmg;
-			if(tempHealth >= 0)
-			{
-				this.setNonRandomHealth(tempHealth);
-			}
-			else
-			{
-				this.setNonRandomHealth(0);
-			}
-        }
-    }*/
-
-	/**
 	* overridden toString method to print the boss's information
 	*
 	* @return a single string value with all of the information associated with boss

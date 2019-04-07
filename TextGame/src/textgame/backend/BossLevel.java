@@ -453,7 +453,7 @@ public class BossLevel
 		double randomAttackPosition = Math.random();
 		randomAttackPosition = randomAttackPosition * 2 + 1;
 		int attackLocation = (int)randomAttackPosition;
-		System.out.println("attack " + attackLocation);
+		//System.out.println("attack " + attackLocation);
 		
 		//update the palyer's grid to account for the defense pivot they have done
 		this.updatePlayerGrid();
@@ -461,13 +461,13 @@ public class BossLevel
 		//if the boss has hit deal the damage to the player
 		if(attackLocation == this.getPlayerX())
 		{
-			System.out.println("You have been hit!");
+			System.out.println("You have been hit!\n");
 			boss.attack(player);
 		}
 		//else the boss has missed and nothing happens
 		else
 		{
-			System.out.println("The Shadow King has missed!");
+			System.out.println("The Shadow King has missed!\n");
 		}
 	}
 	

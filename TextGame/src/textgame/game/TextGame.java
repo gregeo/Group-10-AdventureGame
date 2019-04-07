@@ -100,12 +100,12 @@ public class TextGame {
 				//print the instructions for the level
 				if(displayCount == 0)
 				{
-					System.out.println("You have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
+					System.out.println("\nYou have cleared all of the rooms of the evil Shadow King's minions, he has grown tired of your presence and will now face you in a battle");
 					displayCount++;
 				}
 				
 				//print the player and enemy grid out for the player
-				System.out.println("The evil shadow king moves in the shadows meaning you never know where he is. When attacking him you must use your best guess to strike your attack and hope he is in that position.");
+				System.out.println("\nThe evil shadow king moves in the shadows meaning you never know where he is. When attacking him you must use your best guess to strike your attack and hope he is in that position.\n");
 				bossLevel.printEnemyGrid();
 				bossLevel.printPlayerGrid();
 				
