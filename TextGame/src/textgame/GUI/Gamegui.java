@@ -1,5 +1,6 @@
 package textgame.GUI;
 
+import java.util.ArrayList;
 import textgame.backend.Room;
 import textgame.backend.Player;
 import java.util.Scanner;
@@ -109,16 +110,18 @@ public class Gamegui extends Application {
             public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
                 int i = m.runAction(newVal);
                 text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
-
-                ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());
+                ArrayList hh = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
+                hh.add(" ");
+                ObservableList<String> options = FXCollections.observableArrayList(hh);
+                optionModel.clearSelection();
+                optionsDrop.cacheProperty().setValue(Boolean.FALSE);
                 optionsDrop.getItems().clear();
                 optionsDrop.setItems(options);
                 //optionsDrop.refresh();
-                optionModel.clearSelection();
                 optionModel = optionsDrop.getSelectionModel();
-                //event.consume();
+                optionsDrop.getSelectionModel().select(-1);
 
-                
+                //event.consume();
             }
 
         });
