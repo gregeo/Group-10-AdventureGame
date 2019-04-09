@@ -5,20 +5,24 @@
  */
 package textgame.backend;
 
+import java.io.FileReader;
 import textgame.backend.Enemy;
 import textgame.backend.Room;
 import textgame.backend.Player;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * A class to contain a room[][] array and methods to work a game map
  *
  */
-public class Map 
-{
+public class Map {
 
     //declare and initialize class members
     private Room rooms[][];
@@ -35,8 +39,7 @@ public class Map
      *
      * @return a new map with a specified length and height
      */
-    public Map(int length, int height)
-	{
+    public Map(int length, int height) {
         this(length, height, 0, 0);
     }
 
@@ -52,105 +55,103 @@ public class Map
      *
      * @return a new map with a specified length and height
      */
-    public Map(int length, int height, int playerX, int playerY)
-	{
+    public Map(int length, int height, int playerX, int playerY) {
         rooms = new Room[length][height];
         this.playerX = playerX;
         this.playerY = playerY;
     }
 
-	
-	 /**
-     * This constructor creates a new map object from a text file provided with the information specified for a particular type of game
+    /**
+     * This constructor creates a new map object from a text file provided with
+     * the information specified for a particular type of game
      *
-     * @param p the players object 
+     * @param p the players object
      *
      * @return a new map taken from a textfile
      */
-    public Map(Player p)
-	{
-		//file name
-        String mapDataText;
-		
-		//try statement to read the text file provided 
-        try 
-		{
-			//creating scanners and file loaders to set up the reading of the file
-            FileSaveLoad file = new FileSaveLoad("", "");
-            mapDataText = file.getContent();
-            Scanner mapScanner = new Scanner(mapDataText);
-            mapScanner.useDelimiter(";");
-            String mapSettings = mapScanner.next();
-            Scanner settingScanner = new Scanner(mapSettings);
-            settingScanner.useDelimiter(",");
+    public Map(Player p, String fileName) {
+        String current = "";
+        current = new java.io.File("").getAbsolutePath();
 
-			//determine the number of rooms to be created and where the player starts 
-            rooms = new Room[(int) settingScanner.next().charAt(0)][(int) settingScanner.next().charAt(0)];
-            this.playerX = (int) settingScanner.next().charAt(0);
-            this.playerY = (int) settingScanner.next().charAt(0);
-            
-            
-			//array list to hold the room settings
-            ArrayList<String> roomSettings = new ArrayList<>();
-			
-			//while loop to add room settings to the list 
-            while (mapScanner.hasNext()) 
-			{
-                roomSettings.add(mapScanner.next());
-            }
-			
-			//for each loop to initialize the class members of the room 
-            for (String s : roomSettings)
-				{
-                Scanner roomScanner = new Scanner(s);
-                roomScanner.useDelimiter(",");
-                int roomX = (int) roomScanner.next().charAt(0);
-                int roomY = (int) roomScanner.next().charAt(0);
-                boolean doorArr[] = new boolean[4];
-				
-				//create the direction of doors available based on the array provided in the text file 
-                for (int i = 0; i < 4; i++) 
-				{
-                    if (roomScanner.next().equalsIgnoreCase("true"))
-					{
-                        doorArr[i] = true;
-                    } 
-					else
-					{
-                        doorArr[i] = false;
-                    }
-                }
-				
-				//check if there is an enemy in the room
-                Enemy enemy = new Enemy(0, 0);
-                if (roomScanner.next().equalsIgnoreCase(""))
-				{
-                    enemy = null;
-                } 
-				else 
-				{
-                    enemy = new Enemy(roomX, roomY);
-                }
-				
-				//create the room with the specified parameters from the text file
-                Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
-                this.addRoom(r1, roomX, roomY);
-            }
-			//catch statement in place to handle any file error
-        } 
-		catch (IOException e)
-		{
-            System.out.println("error loading game map file in map class \n" + e);
+
+//file name
+        String mapDataText = "";
+
+        current = current + "\\" + fileName + ".txt";
+        System.out.print(current);
+        String temporaryContent = "";
+        
+        try {
+            temporaryContent = new String(Files.readAllBytes(Paths.get(current)));
+        } catch (IOException ex) {
+        System.out.print("error loading file");
         }
 
-    }
+        System.out.print(" map data: " + temporaryContent);
+        Scanner mapScanner = new Scanner(temporaryContent);
 
-	/**
-     * Method to get the player's x-coordinate
-     *
-	 * @return playerX the player's x-coordinate on the map
-	*/
-    public int getPlayerX()
+        mapScanner.useDelimiter(";");
+        
+        String mapSettings = mapScanner.next();
+        Scanner settingScanner = new Scanner(mapSettings);
+        settingScanner.useDelimiter(",");
+
+
+        rooms = new Room[(int) settingScanner.next().charAt(0)][(int) settingScanner.next().charAt(0)];
+        this.playerX = (int) settingScanner.next().charAt(0);
+        this.playerY = (int) settingScanner.next().charAt(0);
+
+        //array list to hold the room settings
+        ArrayList<String> roomSettings = new ArrayList<>();
+
+        //while loop to add room settings to the list 
+        while (mapScanner.hasNext()) {
+            roomSettings.add(mapScanner.next());
+        }
+
+        //for each loop to initialize the class members of the room 
+        for (String s : roomSettings) {
+            Scanner roomScanner = new Scanner(s);
+            roomScanner.useDelimiter(",");
+            int roomX = (int) roomScanner.next().charAt(0);
+            int roomY = (int) roomScanner.next().charAt(0);
+            boolean doorArr[] = new boolean[4];
+
+            //create the direction of doors available based on the array provided in the text file 
+            for (int i = 0; i < 4; i++) {
+                if (roomScanner.next().equalsIgnoreCase("true")) {
+                    doorArr[i] = true;
+                } else {
+                    doorArr[i] = false;
+                }
+            }
+
+            //check if there is an enemy in the room
+            Enemy enemy = new Enemy(0, 0);
+            if (roomScanner.next().equalsIgnoreCase("")) {
+                enemy = null;
+            } else {
+                enemy = new Enemy(roomX, roomY);
+            }
+
+            //create the room with the specified parameters from the text file
+            Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
+            this.addRoom(r1, roomX, roomY);
+        }
+        //catch statement in place to handle any file error
+    //}
+    //{
+    // System.out.println("error loading game map file in map class \n" + e);
+    //}
+
+}
+
+/**
+ * Method to get the player's x-coordinate
+ *
+ * @return playerX the player's x-coordinate on the map
+ */
+public int getPlayerX()
 	{
         int rPlayerX = this.playerX;
         return rPlayerX;
