@@ -2,9 +2,9 @@
 to run version 0.3.0 of the game:
 go to:
 Group-10-AdventureGame/TextGame/src/textgame/
-compile: javac Map.java TextGame.java Room.java Player.java Enemy.java
-and run: java -cp ../ textgame.Map
-or  java -cp ../ textgame.Gamegui    for gui
+compile: all .java files
+and run: java -cp ../ textgame.TextGame
+or  java -cp ../ textgame.Gamegui for gui
 
 
   
