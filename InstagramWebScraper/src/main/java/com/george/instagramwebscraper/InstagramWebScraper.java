@@ -52,3 +52,4 @@ public class InstagramWebScraper {
             Logger.getLogger(InstagramWebScraper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+}
