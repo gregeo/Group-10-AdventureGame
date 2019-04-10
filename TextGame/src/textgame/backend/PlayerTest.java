@@ -8,7 +8,7 @@ import textgame.*;
 
 public class PlayerTest {
     @Test
-    public void test_getPosY_works() {
+    public void test_charGetPosY_works() {
         Player p = new Player(1, 0);
         assertEquals("getPosY() should return the y position", 0, p.getPosY());
     }

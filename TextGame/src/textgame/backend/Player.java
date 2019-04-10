@@ -29,9 +29,9 @@ public class Player extends Character
 	*/
 	public Player(Player playerToCopy)
 	{
-		this.health = playerToCopy.health;
-		this.pouch = playerToCopy.pouch;
-		this.attackStrength = playerToCopy.attackStrength;
+		this(playerToCopy.getHealth(), playerToCopy.getPosX(), playerToCopy.getPosY());
+		this.pouch = playerToCopy.getPouch();
+		this.attackStrength = playerToCopy.getAttackStrength();
 	}
 	/**
 	* constructor to create a player's inventory and no position 
@@ -93,7 +93,12 @@ public class Player extends Character
 	{
         int returnHealth = this.health;
         return returnHealth;
-    }
+	}
+	
+	public int getAttackStrength() {
+		int rAttackStrength = this.attackStrength;
+		return rAttackStrength;
+	}
 
 	/**
 	* method to move player horizontally
