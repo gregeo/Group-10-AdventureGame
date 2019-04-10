@@ -94,6 +94,10 @@ public class Player extends Character
         int returnHealth = this.health;
         return returnHealth;
 	}
+
+	public void setAttackStrength(int str) {
+		this.attackStrength = str;
+	}
 	
 	public int getAttackStrength() {
 		int rAttackStrength = this.attackStrength;
@@ -155,7 +159,7 @@ public class Player extends Character
     public void attack(Character target) 
 	{
 		//call the takeDamage method in the enemy class and send the player's attackStrength as an argument 
-		System.out.println("Player's attack Strength: " + this.attackStrength);
+		System.out.println("Player's attack Strength: " + getAttackStrength());
 		//System.out.println(target.toString());
         target.takeDamage(attackStrength);
     }

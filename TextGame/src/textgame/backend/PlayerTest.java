@@ -1,6 +1,8 @@
 package textgame.backend;
 
 import static org.junit.Assert.*;
+
+import java.beans.Transient;
 import java.util.ArrayList;
 import org.junit.Test;
 
@@ -25,6 +27,20 @@ public class PlayerTest {
         Player p = new Player();
         p.setHealth(5);
         assertEquals("getHealth() should return the current health", 5, p.getHealth());
+    }
+
+    @Test
+    public void test_getAttackStrength_works() {
+        Player p = new Player();
+        p.setAttackStrength(5);
+        assertEquals("getAttackStrength should return attackStrength value", 5, p.getAttackStrength());
+    }
+
+    @Test
+    public void test_setHealth_works() {
+        Player p = new Player(0, 0);
+        p.setHealth(50);
+        assertEquals("setHealth should change Player's health", 50, p.getHealth());
     }
 
     @Test
