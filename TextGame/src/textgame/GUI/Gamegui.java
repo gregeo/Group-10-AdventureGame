@@ -69,8 +69,16 @@ public class Gamegui extends Application {
         //is.close();
         VBox root = new VBox();
         Text titletext = new Text("DUNGEON HERO");
+        Text desctext = new Text("The king has scoured the land for help with a dark evil: The Shadow King.\n"
+                + "The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.\n"
+                + "Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...\n "
+                + "Upon leaving the town, he is assailed by goblins!\n"
+                + "He must fight to find his way to the dungeon that the Shadow King inhabits.\n"
+                + "riving at the boss room where the 'Evil Shadow King' is waiting, and the princess needs to be saved!\n"
+                + "Save the princess and the kingdom!\n");
         titletext.setFont(Font.font("Verdana", 50));
         titletext.setFill(Color.RED);
+        desctext.setFont(Font.font("Verdana", 12));
         root.setAlignment(Pos.TOP_CENTER);
         root.setPadding(new Insets(100, 0, 0, 0));
         //root.setFill(Color.BLACK);
@@ -87,7 +95,7 @@ public class Gamegui extends Application {
 
         VBox game = new VBox();
 
-        root.getChildren().addAll(titletext, button);
+        root.getChildren().addAll(titletext, desctext,button);
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -141,6 +149,7 @@ public class Gamegui extends Application {
         }
 
         options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
+
         optionsDrop = new ListView<String>(options);
         optionsDrop.setEditable(true);
         optionsDrop.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -151,21 +160,25 @@ public class Gamegui extends Application {
 
             public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
                 int i = m.runAction(newVal);
-                text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
-                ArrayList hh = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
-                //hh.add(" ");
-                ObservableList<String> options = FXCollections.observableArrayList(hh);
-                optionModel.clearSelection();
-                ////optionsDrop.cacheProperty().setValue(Boolean.FALSE);
-                //optionsDrop.getItems().clear();
-                optionsDrop.setItems(options);
-                ////optionsDrop.refresh();
-                optionModel = optionsDrop.getSelectionModel();
-                //optionsDrop.getSelectionModel().select(-1);
-
-                //event.consume();
-                optionsDrop.getSelectionModel().select(-1);
-                optionModel.clearSelection();
+                options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
+                //text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
+                //ArrayList hh = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
+                //options = FXCollections.observableArrayList(hh);
+                //optionModel.clearSelection();
+                ListView<String> optionsDrop = new ListView<String>(options);
+                optionsDrop.setEditable(true);
+                optionsDrop.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+                MultipleSelectionModel<String> optionModel = optionsDrop.getSelectionModel();
+                optionModel.selectedItemProperty().addListener(this);
+                // optionModel = optionsDrop.getSelectionModel();
+                //optionModel.clearSelection();
+                GridPane nextgrid = new GridPane();//root node
+                nextgrid.setVgap(4);
+                nextgrid.setHgap(10);
+                Scene scene2 = new Scene(nextgrid, 800, 300);
+                nextgrid.add(text, 2, 0);
+                nextgrid.add(optionsDrop, 1, 0);
+                primaryStage.setScene(scene2);
             }
 
         });
