@@ -190,7 +190,15 @@ public class Room
 	*/
     private int attackEnemy()
 	{
-		int reference = 14;
+		int reference = 0;
+		if(this.enemyRef != null)
+		{	
+			reference = 14;
+		}
+		else
+		{
+			reference = -1;
+		}
 		return reference;
     }
 

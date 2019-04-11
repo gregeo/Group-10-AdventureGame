@@ -327,7 +327,7 @@ public int getPlayerX()
             }else if (i == 14){
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
-		System.out.println("\nBefore battle: " + e.toString());
+				System.out.println("\nBefore battle: " + e.toString());
                 this.combatPrintOut += "\nBefore battle: " + e.toString();
                 System.out.println("Before battle: " + p.toString() + "\n");
                 this.combatPrintOut += "Before battle: " + p.toString() + "\n";
