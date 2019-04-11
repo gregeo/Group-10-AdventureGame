@@ -29,6 +29,7 @@ public class Map {
     private int playerX;
     private int playerY;
     private ArrayList<Room> roomList = new ArrayList<Room>();
+    private String combatPrintOut;
 
     /**
      * This constructor creates a new map object that represents a map with a
@@ -59,6 +60,7 @@ public class Map {
         rooms = new Room[length][height];
         this.playerX = playerX;
         this.playerY = playerY;
+        this.combatPrintOut = "";
     }
 
     /**
@@ -138,11 +140,7 @@ public class Map {
             Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
             this.addRoom(r1, roomX, roomY);
         }
-        //catch statement in place to handle any file error
-    //}
-    //{
-    // System.out.println("error loading game map file in map class \n" + e);
-    //}
+
 
 }
 
@@ -289,11 +287,10 @@ public int getPlayerX()
      * @return a value of i relating to the direction the player moved for
      * testing purposes
      */
-    public int runAction(String input)
-	{
+    public int runAction(String input){
         //get the action the player chose
         int i = rooms[playerX][playerY].doAction(input);
-
+        this.combatPrintOut = "";
         //if doAction returns one of these values the player chose to move
         //else they chose a different command 
         Player pMain = this.getRoom(playerX, playerY).getPlayer();
@@ -306,80 +303,72 @@ public int getPlayerX()
 		   
 		   if i is 15 apply the item's ability to the player and remove it from the inventory of the player
 		*/
-        if (pMain.getHealth() > 0)
-		{
-			if (i == 10) 
-			{
+        if (pMain.getHealth() > 0){
+            if (i == 10){
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerY--;
                 p.setY(playerY);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } 
-			else if (i == 11) 
-			{
+            }else if (i == 11){
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerX++;
                 p.setX(playerX);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } 
-			else if (i == 12)
-			{
+            }else if (i == 12){
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerY++;
                 p.setY(playerY);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } 
-			else if (i == 13)
-			{
+            }else if (i == 13){
                 Player p = this.getRoom(playerX, playerY).removePlayer();
                 playerX--;
                 p.setX(playerX);
                 this.getRoom(playerX, playerY).addPlayer(p);
-            } 
-			else if (i == 14) 
-			{
+            }else if (i == 14){
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 Enemy e = this.getRoom(playerX, playerY).getEnemy();
-				System.out.println("\nBefore battle: " + e.toString());
+		System.out.println("\nBefore battle: " + e.toString());
+                this.combatPrintOut += "\nBefore battle: " + e.toString();
                 System.out.println("Before battle: " + p.toString() + "\n");
+                this.combatPrintOut += "Before battle: " + p.toString() + "\n";
                 p.attack(e);
                 //p.takeDamage(1);
 				
-				//if enemy isn't dead
+		//if enemy isn't dead
                 if (e.getHealth() > 0)
 				{
                     e.attack(p);
                 }
 
                 System.out.println("\nAfter battle: " + e.toString());
+                this.combatPrintOut += "\nAfter battle: " + e.toString();
                 System.out.print("After battle: " + p.toString() + "\n");
+                this.combatPrintOut += "After battle: " + p.toString() + "\n";
 
-				//if enemy is dead, remove from room
+		//if enemy is dead, remove from room
                 if (e.getHealth() <= 0)
 				{
                     e = this.getRoom(playerX, playerY).removeEnemy();
                     System.out.print("Enemy dead \n");
-
+                    this.combatPrintOut += "Enemy dead \n";
                 }
 				
-				//if player is dead return 0 to end game
+		//if player is dead return 0 to end game
                 if (pMain.getHealth() <= 0)
 				{
                     System.out.print("Game Over. You have been slain. \n");
+                    this.combatPrintOut += "Game Over. You have been slain. \n";
 					return 0;
                 }
-            } 
-			else if (i == 15) 
-			{
+            }else if (i == 15){
 				
-				//get the player's inventory
+		//get the player's inventory
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 ArrayList<String> inventory = p.getPouch();
                 int numItems = 1;
 				
-				//print the items in the inventory for the player to choose from
-                for (String item : inventory)
-				{
+                //print the items in the inventory for the player to choose from
+                for (String item : inventory){
                     System.out.println(numItems + ". " + item);
                     numItems++;
                 }
@@ -389,25 +378,27 @@ public int getPlayerX()
 				Scanner itemScanner = new Scanner(System.in);
 				int itemSelection = 0;
 				
-				do 
-				{
+				do{
 					System.out.println("Please type the number of the item you would like to use. (If you do not want to use any of your items, type any number not in the list to return to the game)");
-					while (!itemScanner.hasNextInt()) 
-					{
+					while(!itemScanner.hasNextInt()){
 						System.out.println("Invalid input, please try again.");
 						itemScanner.next(); 
 					}
 					itemSelection = itemScanner.nextInt();
 					validInput = true;
 					
-				} while (validInput == false);
+				}while (validInput == false);
 				
                 int item = p.useItem(itemSelection);
+            }
+            if(i != 14){
+                        this.combatPrintOut = "";
+
             }
 
         }
 		
-		//return the action index
+        //return the action index
         return i;
     }
 
@@ -433,17 +424,13 @@ public int getPlayerX()
      *
      * @return the string variable corresponding to row on the map
      */
-    private String printRow(int rowNumber)
-	{
+    private String printRow(int rowNumber){
         String s = "";
 		
 		//algorithm to print the rows of rooms to create a grid as opposed to a long line of rooms
-        if (rowNumber % 2 == 1) 
-		{
+        if(rowNumber % 2 == 1){
             s = s + this.printCellInter(rooms[0].length, rowNumber / 2);
-        } 
-		else
-		{
+        }else{
             s = s + this.printLine(rooms[0].length, rowNumber / 2);
         }
 
@@ -457,19 +444,14 @@ public int getPlayerX()
      *
      * @return the string variable corresponding to a line on the map
      */
-    private String printLine(int numberOfNodes, int row) 
-	{
+    private String printLine(int numberOfNodes, int row){
         String s = "";
 		
 		//algorithm to build the lines that separate the individual rooms 
-        for (int i = 0; i < (numberOfNodes); i++)
-		{
-            if (row < this.rooms[0].length && this.rooms[(i)][row] != null || (row > 0 && this.rooms[(i)][row - 1] != null)) 
-			{
+        for (int i = 0; i < (numberOfNodes); i++){
+            if (row < this.rooms[0].length && this.rooms[(i)][row] != null || (row > 0 && this.rooms[(i)][row - 1] != null)){
                 s = s + "--";
-            }
-			else 
-			{
+            }else{
                 s = s + "  ";
             }
         }
@@ -490,31 +472,21 @@ public int getPlayerX()
         boolean wasLastRoom = false;
 		
 		//algorithm to create the lines that make up the cells which represent the rooms
-        for (int i = 0; i < numberOfNodes; i++) 
-		{
-            if (this.rooms[i][row] == null) 
-			{
-                if (wasLastRoom)
-				{
+        for (int i = 0; i < numberOfNodes; i++){
+            if (this.rooms[i][row] == null){
+                if (wasLastRoom){
                     s = s + "|";
                     wasLastRoom = false;
-                } 
-				else
-				{
+                }else{
                     s = s + " ";
                 }
                 s = s + " ";
-            } 
-			else 
-			{
+            }else{
                 s = s + "|";
                 wasLastRoom = true;
-                if (this.playerX == i && this.playerY == row)
-				{
+                if (this.playerX == i && this.playerY == row){
                     s = s + "p";
-                } 
-				else
-				{
+                }else{
                     s = s + " ";
                 }
             }
@@ -532,16 +504,12 @@ public int getPlayerX()
 	 *
 	 * @return the information about the room to the user
 	*/
-    public String toString(int row, int column)
-	{
+    public String toString(int row, int column){
 		
 		//algorithm to to wok out which room to print
-        if (rooms[0].length - 1 > row && rooms.length - 1 > column && column >= 0 && row >= 0 && rooms[column][row] != null)
-		{
+        if (rooms[0].length - 1 > row && rooms.length - 1 > column && column >= 0 && row >= 0 && rooms[column][row] != null){
             return rooms[column][row].toString();
-        } 
-		else
-		{
+        }else{
             return "no room exists there";
         }
     }
@@ -551,8 +519,7 @@ public int getPlayerX()
 	 *
 	 * @return string variable containing the story
 	 */
-	public String getStory()
-	{
+	public String getStory(){
 		String story = "Dungeon Hero!\n" + "The king has scoured the land for help with a dark evil: The Shadow King.\n" + "The hero, 'The chosen one' has answered the call to save the princess and to receive large sum of wealth.\n"
 		+ "Venturing far and wide, he has finally arrived at the nearby town, and begins searching for answers...\n" +
 		"Upon leaving the town, he is assailed by goblins!\n" +
@@ -560,5 +527,11 @@ public int getPlayerX()
 		
 		return story;
 	}
+
+    public String getCombatPrintOut() {
+        return combatPrintOut;
+    }
+        
+        
 
 }

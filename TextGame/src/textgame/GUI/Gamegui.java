@@ -161,21 +161,17 @@ public class Gamegui extends Application {
             public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
                 int i = m.runAction(newVal);
                 options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
-                //text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
-                //ArrayList hh = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
-                //options = FXCollections.observableArrayList(hh);
-                //optionModel.clearSelection();
                 ListView<String> optionsDrop = new ListView<String>(options);
                 optionsDrop.setEditable(true);
                 optionsDrop.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                 MultipleSelectionModel<String> optionModel = optionsDrop.getSelectionModel();
                 optionModel.selectedItemProperty().addListener(this);
-                // optionModel = optionsDrop.getSelectionModel();
-                //optionModel.clearSelection();
+
                 GridPane nextgrid = new GridPane();//root node
                 nextgrid.setVgap(4);
                 nextgrid.setHgap(10);
                 Scene scene2 = new Scene(nextgrid, 800, 300);
+                text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap() + m.getCombatPrintOut());
                 nextgrid.add(text, 2, 0);
                 nextgrid.add(optionsDrop, 1, 0);
                 primaryStage.setScene(scene2);
