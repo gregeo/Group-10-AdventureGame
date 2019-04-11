@@ -82,38 +82,4 @@ public class StartScreen extends Application{
 		primaryStage.show();
 	}
 }
-	/*public void MenuButton(String name){
-			Text text;
-
-			text = new Text(name);
-			text.setFont(Font.font("Verdana", 15));
-			text.setFill(Color.WHITE);
-
-			Rectangle box = new Rectangle(300, 100);
-			box.setFill(Color.BLACK);
-			//box.setEffect(new GaussianBlur(3,5));
-
-			box.setAlignment(Pos.BOT_CENTER);
-			getChildren().addAll(box, text);
-
-			setOnMouseEntered(event -> {
-				//box.setTranslateX(10);
-				//test.SetTranslateX(10);
-				box.setFill(Color.WHITE);
-				text.setFill(Color.RED);
-			});
-
-			setOnMouseExited(event -> {
-				//box.setTranslateX(0);
-				//test.setTranslateX(0);
-				box.setFill(Color.BlACK);
-				text.setFill(Color.WHITE);
-			});
-
-			DropShadow drop = new DropShadow(50, Color.WHITE);
-			drop.setInput(new Glow());
-
-			setOnMousePressed(event -> setEffect(drop));
-			setonMouseReleased(event -> setEffect(null));
-
-		*/
+	

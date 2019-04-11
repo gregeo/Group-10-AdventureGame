@@ -12,11 +12,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import textgame.backend.Enemy;
@@ -30,7 +37,19 @@ public class Gamegui extends Application {
 
     ListView<String> optionsDrop;
     MultipleSelectionModel<String> optionModel;
+    ObservableList<String> options;
+    Map m;
+    Text text;
 
+    /*
+    public Gamegui(ListView<String> optionsDrop, MultipleSelectionModel<String> optionModel, ObservableList<String> options, Map m, Text text) {
+        this.optionsDrop = optionsDrop;
+        this.optionModel = optionModel;
+        this.options = options;
+        this.m = m;
+        this.text = text;
+    }
+     */
     public static void main(String[] args) {
         //main method to launch the GUI
         launch(args);
@@ -44,19 +63,47 @@ public class Gamegui extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+
+        //InputStream is = file.newInputStream(path.get("Desktop/black/black.jpg"));
+        //Image ing = new Image(is);
+        //is.close();
+        VBox root = new VBox();
+        Text titletext = new Text("DUNGEON HERO");
+        titletext.setFont(Font.font("Verdana", 50));
+        titletext.setFill(Color.RED);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setPadding(new Insets(100, 0, 0, 0));
+        //root.setFill(Color.BLACK);
+
+        //ImageView ingView = newImageView(ing);
+        //ingView.setFitWidth(800);
+        //ingView.setFitHeight(600);
+        HBox button = new HBox();
+        button.setAlignment(Pos.BOTTOM_CENTER);
+        Button buttons = new Button("START");
+        button.getChildren().add(buttons);
+
+        Scene scene = new Scene(root, 800, 600);
+
+        VBox game = new VBox();
+
+        root.getChildren().addAll(titletext, button);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
 //begin grid pane(root node setup)
         GridPane grid = new GridPane();//root node
         grid.setVgap(4);
         grid.setHgap(10);
 //end grid pane(root node setup)
 //begin scene setup
-        Scene scene = new Scene(grid, 800, 300);
-        primaryStage.setScene(scene);//set the scene and title and show the primary stage
+        Scene scene2 = new Scene(grid, 800, 300);
         primaryStage.setTitle("Dungeon Hero");
 //end scene setup
 // begin text box setup
-        Text text = new Text();//will hold description and map
-        Map m = new Map(3, 3);//create map... to be converted to a file load system
+        text = new Text();//will hold description and map
+        m = new Map(3, 3);//create map... to be converted to a file load system
         Player p = new Player(30, 0, 0);
         Enemy enemyRoomOne = new Enemy(0, 0);
         Enemy enemyRoomTwo = new Enemy(1, 0);
@@ -85,83 +132,53 @@ public class Gamegui extends Application {
         grid.add(text, 2, 0);
 //end text box setup
 //begin menu setup
-/*
-        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
 
-        //create a comboBox for the actions and a grid pane to organize the interface
-        final ChoiceBox comboBox = new ChoiceBox(options);
-
-        comboBox.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent ae) {
-                System.out.println(ae);
-            }
-        });
-        grid.add(comboBox, 1, 0);
-         */
 //end menu setup
 //start new menu setup
-        ObservableList<String> options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
+        ArrayList list = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
+        for (int i = 0; i < 10; i++) {
+            //list.add(" ");
+        }
+
+        options = FXCollections.observableArrayList(m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions());//gets a list of doable actions for th
         optionsDrop = new ListView<String>(options);
         optionsDrop.setEditable(true);
         optionsDrop.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         optionModel = optionsDrop.getSelectionModel();
 
         optionModel.selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+
             public void changed(ObservableValue<? extends String> changed, String oldVal, String newVal) {
                 int i = m.runAction(newVal);
                 text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
                 ArrayList hh = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
-                hh.add(" ");
+                //hh.add(" ");
                 ObservableList<String> options = FXCollections.observableArrayList(hh);
                 optionModel.clearSelection();
-                optionsDrop.cacheProperty().setValue(Boolean.FALSE);
-                optionsDrop.getItems().clear();
+                ////optionsDrop.cacheProperty().setValue(Boolean.FALSE);
+                //optionsDrop.getItems().clear();
                 optionsDrop.setItems(options);
-                //optionsDrop.refresh();
+                ////optionsDrop.refresh();
                 optionModel = optionsDrop.getSelectionModel();
-                optionsDrop.getSelectionModel().select(-1);
+                //optionsDrop.getSelectionModel().select(-1);
 
                 //event.consume();
+                optionsDrop.getSelectionModel().select(-1);
+                optionModel.clearSelection();
             }
 
         });
         grid.add(optionsDrop, 1, 0);
+
+        buttons.setOnAction(click -> {
+            //FadeTransition ft = new FadeTransition(Duration.second(0.5), this);
+            primaryStage.setScene(scene2);
+        });
 
 //end new Menu setup
         primaryStage.show();
 
     }
 
-    public void sneek(ObservableList<String> options) {
-        optionsDrop = new ListView<String>(options);
-        optionModel = optionsDrop.getSelectionModel();
-    }
-
 }
-
-/*
-        ComboBox.valueProperty().addListener(new ChangeListener<String>(){
-            @Override public void changed(ObservableValue ov, String t, String t1){
-                
-            }
-            
-        
-        });
-        
-        
- */
-
- /*
-        
-		//anonymous class to handle the choice of action
-        comboBox.addEventHandler(EventType.ROOT, event -> {
-          // System.out.println(event.getTarget());
-          //System.out.println(event.getSource());
-
-          //if(event.getEventType() == Event.ACTION_EVENT ){
-          //comboBox.
-               
-          //}
-            
-        });
- */
