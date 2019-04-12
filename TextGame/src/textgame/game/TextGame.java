@@ -12,9 +12,7 @@ import textgame.backend.BossLevel;
 import textgame.backend.Boss;
 import textgame.backend.Room;
 import textgame.backend.Player;
-import java.util.ArrayList;
 import java.util.Scanner;
-import textgame.backend.Map;
 import textgame.backend.Map;
 
 /**

@@ -5,9 +5,6 @@
  */
 package textgame.backend;
 
-import textgame.backend.Character;
-import java.lang.Math;
-
 /**
  * A child class from abstract character class used to represent an enemy in a room for a player to fight 
  *
@@ -25,8 +22,6 @@ public class Enemy extends Character
 	* Copy constructor to create a copy object of another enemy 
 	*
 	* @param enemyToCopy enemy object to make a copy of
-	*
-	* @return A copy of an enemy object
 	*/
 	public Enemy(Enemy enemyToCopy)
 	{
@@ -37,8 +32,6 @@ public class Enemy extends Character
 	* Constructor to create a new enemy object with a specified health value
 	*
 	* @param health enemy's health
-	*
-	* @return A new enemy object with a specified health
 	*/
 	public Enemy(int health)
 	{	
@@ -49,9 +42,7 @@ public class Enemy extends Character
 	* Constructor to create a new enemy object with a specified x and y coordinate
 	*
 	* @param posX enemy's x position on the map
-	* @param posY enemy's y position on the map
-	*
-	* @return A new enemy object with a specified x and y coordinate 
+	* @param posY enemy's y position on the map 
 	*/
 	public Enemy(int posX, int posY)
 	{
@@ -69,8 +60,8 @@ public class Enemy extends Character
 	{
         double randomHealth = Math.random();
 		randomHealth = randomHealth * 6 + 1;
-		int health = (int)randomHealth;
-		this.health = health;
+		int newHealth = (int)randomHealth;
+		this.health = newHealth;
     }
 	
 	/**
@@ -78,6 +69,7 @@ public class Enemy extends Character
 	*
 	* @param health enemy's health
 	*/
+    @Override
 	public void setHealth(int health)
 	{
 		this.health = health;
@@ -89,6 +81,7 @@ public class Enemy extends Character
 	*
 	* @return enemy's health 
 	*/
+    @Override
     public int getHealth() 
 	{
         int tempHealth = this.health;
@@ -101,6 +94,7 @@ public class Enemy extends Character
 	*
 	* @param target The player object that damage will be assigned to 
 	*/
+    @Override
     public void attack(Character target) 
 	{
 		//generate a random number between 1 and 3 for the enemy's attack strenght and call the target's takeDamage method sending this random number 
@@ -116,15 +110,16 @@ public class Enemy extends Character
 	*
 	* @return methodReturn enemy's information (position and health)
 	*/
+    @Override
     public String toString()
 	{
 		int tempHealth = this.health;
         int tempPosX = this.posX;
         int tempPosY = this.posY;
-        String health = Integer.toString(tempHealth);
-        String posX = Integer.toString(tempPosX);
-        String posY = Integer.toString(tempPosY);
-        String methodReturn = "Enemy information (health, x, y): (" + health + ";" + posX + ";" + posY + ")";
+        String healthOut = Integer.toString(tempHealth);
+        String posXOut = Integer.toString(tempPosX);
+        String posYOut = Integer.toString(tempPosY);
+        String methodReturn = "Enemy information (health, x, y): (" + healthOut + ";" + posXOut + ";" + posYOut + ")";
         return methodReturn;
     }
 }
