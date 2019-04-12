@@ -5,8 +5,6 @@
  */
 package textgame.backend;
 
-import textgame.backend.Player;
-
 /**
  *a class to handle spesific enemys
  *

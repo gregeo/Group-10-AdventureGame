@@ -51,10 +51,8 @@ public class Map {
      *
      * @param length the length of the map
      * @param height the height of the map
-     * @param playerx the players x position on the map
-     * @param playery the players y position on the map
-     *
-     * @return a new map with a specified length and height
+     * @param playerX the players x position on the map
+     * @param playerY the players y position on the map
      */
     public Map(int length, int height, int playerX, int playerY) {
         rooms = new Room[length][height];
@@ -62,87 +60,6 @@ public class Map {
         this.playerY = playerY;
         this.combatPrintOut = "";
     }
-
-    /**
-     * This constructor creates a new map object from a text file provided with
-     * the information specified for a particular type of game
-     *
-     * @param p the players object
-     *
-     * @return a new map taken from a textfile
-     */
-    public Map(Player p, String fileName) {
-        String current = "";
-        current = new java.io.File("").getAbsolutePath();
-
-
-//file name
-        String mapDataText = "";
-
-        current = current + "\\" + fileName + ".txt";
-        System.out.print(current);
-        String temporaryContent = "";
-        
-        try {
-            temporaryContent = new String(Files.readAllBytes(Paths.get(current)));
-        } catch (IOException ex) {
-        System.out.print("error loading file");
-        }
-
-        System.out.print(" map data: " + temporaryContent);
-        Scanner mapScanner = new Scanner(temporaryContent);
-
-        mapScanner.useDelimiter(";");
-        
-        String mapSettings = mapScanner.next();
-        Scanner settingScanner = new Scanner(mapSettings);
-        settingScanner.useDelimiter(",");
-
-
-        rooms = new Room[(int) settingScanner.next().charAt(0)][(int) settingScanner.next().charAt(0)];
-        this.playerX = (int) settingScanner.next().charAt(0);
-        this.playerY = (int) settingScanner.next().charAt(0);
-
-        //array list to hold the room settings
-        ArrayList<String> roomSettings = new ArrayList<>();
-
-        //while loop to add room settings to the list 
-        while (mapScanner.hasNext()) {
-            roomSettings.add(mapScanner.next());
-        }
-
-        //for each loop to initialize the class members of the room 
-        for (String s : roomSettings) {
-            Scanner roomScanner = new Scanner(s);
-            roomScanner.useDelimiter(",");
-            int roomX = (int) roomScanner.next().charAt(0);
-            int roomY = (int) roomScanner.next().charAt(0);
-            boolean doorArr[] = new boolean[4];
-
-            //create the direction of doors available based on the array provided in the text file 
-            for (int i = 0; i < 4; i++) {
-                if (roomScanner.next().equalsIgnoreCase("true")) {
-                    doorArr[i] = true;
-                } else {
-                    doorArr[i] = false;
-                }
-            }
-
-            //check if there is an enemy in the room
-            Enemy enemy = new Enemy(0, 0);
-            if (roomScanner.next().equalsIgnoreCase("")) {
-                enemy = null;
-            } else {
-                enemy = new Enemy(roomX, roomY);
-            }
-
-            //create the room with the specified parameters from the text file
-            Room r1 = new Room(doorArr, enemy, roomScanner.next(), p, roomScanner.next());
-            this.addRoom(r1, roomX, roomY);
-        }
-
-
-}
 
 /**
  * Method to get the player's x-coordinate
@@ -215,7 +132,7 @@ public int getPlayerX()
      */
     public ArrayList<Room> getAllRooms() 
 	{
-        ArrayList<Room> roomListTemp = new ArrayList<Room>();
+        ArrayList<Room> roomListTemp = new ArrayList<>();
 
         for (Room rm : roomList) 
 		{
@@ -361,6 +278,8 @@ public int getPlayerX()
 					return 0;
                 }
             }else if (i == 15){
+                
+                /*
 				
 				//get the player's inventory
                 Player p = this.getRoom(playerX, playerY).getPlayer();
@@ -390,6 +309,7 @@ public int getPlayerX()
 				}while (validInput == false);
 				
                 int item = p.useItem(itemSelection);
+                */
             }
             if(i != 14){
                         this.combatPrintOut = "";
