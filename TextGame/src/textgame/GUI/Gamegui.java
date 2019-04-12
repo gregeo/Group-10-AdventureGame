@@ -100,16 +100,16 @@ public class Gamegui extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-//begin grid pane(root node setup)
+		//begin grid pane(root node setup)
         GridPane grid = new GridPane();//root node
         grid.setVgap(4);
         grid.setHgap(10);
-//end grid pane(root node setup)
-//begin scene setup
+		//end grid pane(root node setup)
+		//begin scene setup
         Scene scene2 = new Scene(grid, 800, 300);
         primaryStage.setTitle("Dungeon Hero");
-//end scene setup
-// begin text box setup
+		//end scene setup
+		// begin text box setup
         text = new Text();//will hold description and map
         m = new Map(3, 3);//create map... to be converted to a file load system
         Player p = new Player(30, 0, 0);
@@ -138,11 +138,11 @@ public class Gamegui extends Application {
                 + "Save the princess and the kingdom!\n" + m.printMap());
         text.setText(m.getRoom(m.getPlayerX(), m.getPlayerY()).getText() + "\n" + m.printMap());
         grid.add(text, 2, 0);
-//end text box setup
-//begin menu setup
+		//end text box setup
+		//begin menu setup
 
-//end menu setup
-//start new menu setup
+		//end menu setup
+		//start new menu setup
         ArrayList list = m.getRoom(m.getPlayerX(), m.getPlayerY()).getDoableActions();
         for (int i = 0; i < 10; i++) {
             //list.add(" ");

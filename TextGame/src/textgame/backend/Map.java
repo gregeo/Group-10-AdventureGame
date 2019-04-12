@@ -334,7 +334,7 @@ public int getPlayerX()
                 p.attack(e);
                 //p.takeDamage(1);
 				
-		//if enemy isn't dead
+				//if enemy isn't dead
                 if (e.getHealth() > 0)
 				{
                     e.attack(p);
@@ -345,7 +345,7 @@ public int getPlayerX()
                 System.out.print("After battle: " + p.toString() + "\n");
                 this.combatPrintOut += "After battle: " + p.toString() + "\n";
 
-		//if enemy is dead, remove from room
+				//if enemy is dead, remove from room
                 if (e.getHealth() <= 0)
 				{
                     e = this.getRoom(playerX, playerY).removeEnemy();
@@ -353,7 +353,7 @@ public int getPlayerX()
                     this.combatPrintOut += "Enemy dead \n";
                 }
 				
-		//if player is dead return 0 to end game
+				//if player is dead return 0 to end game
                 if (pMain.getHealth() <= 0)
 				{
                     System.out.print("Game Over. You have been slain. \n");
@@ -362,7 +362,7 @@ public int getPlayerX()
                 }
             }else if (i == 15){
 				
-		//get the player's inventory
+				//get the player's inventory
                 Player p = this.getRoom(playerX, playerY).getPlayer();
                 ArrayList<String> inventory = p.getPouch();
                 int numItems = 1;
@@ -528,6 +528,11 @@ public int getPlayerX()
 		return story;
 	}
 
+	/**
+	 * Method to get the combat result as a string
+	 *
+	 * @return string variable containing the combat
+	 */
     public String getCombatPrintOut() {
         return combatPrintOut;
     }
